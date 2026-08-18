@@ -129,7 +129,7 @@
     <li> and the zh text in the dictionary.
 
   PHOTO (in place)
-    portrait.jpg sits in the repo root, 600 px square, and renders at 132 px
+    portrait.jpg sits in the repo root, 640 px square, and renders at 132 px
     (88 px on a phone) with rounded corners and edges softened into the page
     background. To swap it, replace the file and keep the square crop: head
     and shoulders, eyes on the upper third, at least 600 px a side. The frame
@@ -297,7 +297,7 @@
     }
     .portrait::after {
       content: ""; position: absolute; inset: 0; border-radius: 16px;
-      box-shadow: inset 0 0 14px 7px var(--bg);
+      box-shadow: inset 0 0 10px 4px var(--bg);
       pointer-events: none;
     }
     h1 {
@@ -510,7 +510,7 @@
 
     <header>
       <div class="head">
-        <span class="portrait"><img src="/portrait.jpg" alt="Li-Ning Wang" width="600" height="600"></span>
+        <span class="portrait"><img src="/portrait.jpg" alt="Li-Ning Wang" width="640" height="640"></span>
         <div>
           <h1>Li-Ning Wang</h1>
           <p class="tagline" data-i18n="tagline">Independent researcher at Niaur, Taipei. I study whether AI models&rsquo; self-reports can be trusted, and how interaction conditions shape model behavior.</p>
