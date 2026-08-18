@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!--
+  Research notes · lining-wang.com/notes.html
+  Built 2026-08-18. Matches index.html v7.5 conventions:
+    IBM Plex Sans · no em dashes in copy · 48rem shell / 34rem reading measure
+    line-height 1.6 · light blocks · dash list markers · built-in dark mode
+    no animation · full text server-side (no JS needed to read)
+
+  DIFFERENT FROM index.html ON PURPOSE:
+    No <dialog> overlays. Each note is full text with its own #anchor, so a note
+    can be linked and cited. A dialog has no URL, and these are meant to be cited.
+    No note numbering on the page. The notes are not a sequence, and numbering
+    would have to be redone every time one is inserted. Numbers live in filenames.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Research notes · Li-Ning Wang</title>
+<meta name="description" content="Working notes on model self-report, self-monitoring, and interaction framing. Negative results included.">
+<link rel="canonical" href="https://lining-wang.com/notes.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#faf9f7;
+  --block:#ffffff;
+  --ink:#1c1b19;
+  --muted:#6b6862;
+  --rule:#e4e1db;
+  --accent:#2f4858;
+  --shell:48rem;
+  --measure:34rem;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#16181a;
+    --block:#1e2124;
+    --ink:#e8e6e3;
+    --muted:#9b9791;
+    --rule:#2e3236;
+    --accent:#8fb3c7;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:"IBM Plex Sans","Helvetica Neue",Arial,sans-serif;
+  font-size:1rem;
+  line-height:1.6;
+  font-weight:400;
+}
+.shell{max-width:var(--shell);margin:0 auto;padding:3rem 1.5rem 5rem}
+a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+a:hover{border-bottom-color:var(--accent)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+.back{font-size:0.875rem;color:var(--muted);border:0;display:inline-block;margin-bottom:2.5rem}
+.back:hover{color:var(--accent);border:0}
+
+.eyebrow{font-size:0.875rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted);margin:0 0 0.5rem}
+h1{font-size:1.375rem;font-weight:600;margin:0 0 0.75rem;letter-spacing:-0.01em}
+.standfirst{max-width:var(--measure);color:var(--muted);margin:0 0 3rem}
+
+.toc{
+  background:var(--block);
+  border:1px solid var(--rule);
+  padding:1.25rem 1.5rem;
+  margin:0 0 3rem;
+}
+.toc p{font-size:0.875rem;letter-spacing:0.04em;text-transform:uppercase;color:var(--muted);margin:0 0 0.75rem}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:0 0 0.5rem;padding-left:1rem;position:relative}
+.toc li:last-child{margin-bottom:0}
+.toc li::before{content:"–";position:absolute;left:0;color:var(--muted)}
+.toc a{border:0}
+.toc a:hover{border-bottom:1px solid var(--accent)}
+.toc .when{color:var(--muted);font-size:0.875rem}
+
+.note{
+  background:var(--block);
+  border:1px solid var(--rule);
+  padding:2rem 1.75rem;
+  margin:0 0 2rem;
+  scroll-margin-top:1.5rem;
+}
+.note h2{font-size:1.375rem;font-weight:600;margin:0 0 1.25rem;letter-spacing:-0.01em;max-width:var(--measure)}
+.note h3{font-size:1rem;font-weight:600;margin:2rem 0 0.5rem;max-width:var(--measure)}
+.note p{max-width:var(--measure);margin:0 0 1rem}
+.note ul{max-width:var(--measure);list-style:none;margin:0 0 1rem;padding:0}
+.note li{margin:0 0 0.5rem;padding-left:1rem;position:relative}
+.note li::before{content:"–";position:absolute;left:0;color:var(--muted)}
+
+/* The status strip. Every note carries one. It says what the note is and what
+   it is not, before the reader spends time on it. */
+.status{
+  border-left:2px solid var(--rule);
+  padding-left:1rem;
+  margin:0 0 1.75rem;
+  max-width:var(--measure);
+}
+.status dl{margin:0;display:grid;grid-template-columns:7.5rem 1fr;gap:0.25rem 1rem}
+.status dt{font-size:0.875rem;color:var(--muted)}
+.status dd{margin:0;font-size:0.875rem}
+
+.holds{
+  max-width:var(--measure);
+  border-top:1px solid var(--rule);
+  margin-top:2rem;
+  padding-top:1rem;
+  font-size:0.875rem;
+  color:var(--muted);
+}
+.holds p{max-width:none;margin:0}
+
+footer{
+  max-width:var(--measure);
+  margin-top:3rem;
+  padding-top:1.5rem;
+  border-top:1px solid var(--rule);
+  font-size:0.875rem;
+  color:var(--muted);
+}
+footer p{margin:0 0 0.5rem}
+
+@media (max-width:34rem){
+  .shell{padding:2rem 1.125rem 3.5rem}
+  .note{padding:1.5rem 1.125rem}
+  .status dl{grid-template-columns:1fr;gap:0}
+  .status dt{margin-top:0.5rem}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<a class="back" href="/">Back to index</a>
+
+<p class="eyebrow">Research notes</p>
+<h1>Working notes</h1>
+<p class="standfirst">Short write-ups of things I have run or watched, published as they stand rather than when they are finished. Negative results and corrections to my own hypotheses are included, and are labelled as such.</p>
+
+<nav class="toc" aria-label="Notes on this page">
+  <p>On this page</p>
+  <ul>
+    <li><a href="#open-ended">Open-ended prompts elicit continuation, not self-observation</a> <span class="when">Jun 2026, negative result</span></li>
+  </ul>
+</nav>
+
+<article class="note" id="open-ended">
+
+  <div class="status">
+    <dl>
+      <dt>Status</dt><dd>Negative result. The hypothesis it corrects was my own.</dd>
+      <dt>When</dt><dd>Two calibration rounds, June 2026</dd>
+      <dt>Responses</dt><dd>50 (20 in round one, 30 in round two)</dd>
+      <dt>Language</dt><dd>Traditional Chinese</dd>
+      <dt>Model</dt><dd>Claude Opus 4</dd>
+      <dt>Layer</dt><dd>Framing only, single turn. Conditions were described in a system prompt, not made true.</dd>
+      <dt>Replication</dt><dd>Reran August 2026 in English on a later model generation. The June pattern did not return.</dd>
+    </dl>
+  </div>
+
+  <h2>Open-ended prompts elicit continuation, not self-observation</h2>
+
+  <p>I was testing a hypothesis of my own and it turned out to be wrong. The correction is more useful than the hypothesis was, so it is written down here.</p>
+
+  <h3>What I was looking for</h3>
+
+  <p>A model finishes a task, and then, unasked, adds a passage about what it just did. Not "let me know if you want changes", but something second-order: an unprompted report on its own processing, arriving after the task response is already complete. I count it as a text unit, so I call it a second block.</p>
+
+  <p>My working hypothesis was that this appears when the prompt has no completion condition. I had one case that pointed that way. Early in a conversation I had shown a model a half-finished description of a board with blind holes drilled to uneven depths, seemingly at random. It was not a question and there was nothing to finish. The second block appeared there.</p>
+
+  <p>So I built a calibration to find out whether the absence of a completion condition was doing the work.</p>
+
+  <h3>Round one: twenty responses, and the stimulus got there first</h3>
+
+  <p>Round one used closed tasks. Describe a mug. Rewrite this sentence. Twenty responses, almost no second blocks.</p>
+
+  <p>The available reading was that my framing manipulation had done nothing. That reading is wrong, and seeing why took me a while. Those tasks are closed. They carry a completion condition and a ready script, so the model executes and stops. No gap opens for anything else to appear in.</p>
+
+  <p>Round one therefore did not test the framing manipulation at all. It tested closedness, and closedness settled the matter before the other variable had a turn. Had I recorded that null as "no second block under the low-stakes condition", I would have charged the stimulus's effect to the manipulation's account. Two variables, one number.</p>
+
+  <h3>Round two: thirty responses, and my prediction ran backwards</h3>
+
+  <p>Round two used three fragments with no completion condition, ordered on purpose by how much metaphorical room each one offered:</p>
+
+  <ul>
+    <li>s1, a dandelion landed on concrete. Moderate room. A situational symbol, half an invitation to lift off.</li>
+    <li>s2, the shopping list in my hand, half wet. Little room. Small and plain.</li>
+    <li>s3, a book lying open at page 165. Plainest of the three, and carrying one oddly specific anchor in that number.</li>
+  </ul>
+
+  <p>I bet that s1 would elicit the most second blocks and s3 the fewest, on the reasoning that metaphorical room is what invites a model past the task.</p>
+
+  <p>s1 came back as lyrical passages, sometimes resolving into something about acceptance. That part matched.</p>
+
+  <p>s3 came back as lyrical passages too, no less often than s1.</p>
+
+  <p>The plainest fragment elicited just as much. But what it elicited was not a model turning to look at itself. It was a model continuing the fragment, as though handed an unfinished poem.</p>
+
+  <p>That is the correction. An absent completion condition does elicit something. What it elicits by default is an ascent into abstraction: the model climbs from the concrete item to that item's condition or significance and settles there, and the concrete case dissolves on the way up. No part of that movement is self-reference.</p>
+
+  <h3>The dependent variable was too coarse to see this</h3>
+
+  <p>Reading the thirty responses, at least three separate actions had been landing in one bin:</p>
+
+  <ul>
+    <li>continuing the fragment upward into a lyrical resolution</li>
+    <li>turning to the reader and asking what they meant by it</li>
+    <li>praising the image</li>
+  </ul>
+
+  <p>Each arrives after the task response. Each looks like "something extra". None is a second-order report on the model's own processing. A coder tracking one binary label scores all three as hits and the count inflates, which is what mine was doing.</p>
+
+  <p>The stimulus family also carries a pull I had not accounted for. An unfinished poetic fragment reads as an invitation to co-create, and in that mode the model produces continuation and questions. Whatever self-observation might otherwise surface is covered over by them.</p>
+
+  <h3>What this does not show</h3>
+
+  <p>It shows nothing about the framing manipulation. Both rounds were single-turn and framing-layer: the two conditions were described in a system prompt, not made true. Differences between the two poles are not evidence about consequences and I do not report them.</p>
+
+  <p>It shows nothing about inner states.</p>
+
+  <p>"Ascent into abstraction" is my label for a movement I can see in the text. It is not a mechanism and I do not have one.</p>
+
+  <p>The ordering by metaphorical room was my own judgment about three sentences, made after writing them, not a measured scale. Whether "page 165" offers metaphorical room is exactly the sort of call I made by eye, and the ordering could be wrong.</p>
+
+  <p>The load-bearing comparison is eyeballed. "s3 drifted no less often than s1" is my impression from reading the responses, not a count. To hold that claim properly I would have to count them, and I have not.</p>
+
+  <h3>When I ran it again</h3>
+
+  <p>In August 2026 I put the same three fragments through a rebuilt harness, in English, on a later model generation. The June pattern did not come back. The book fragment produced facts about pagination and requests for the image it assumed was missing, rather than lyrical continuation. Language and model version changed together in that run, so I cannot attribute the difference to either one.</p>
+
+  <p>What did survive is the shape of the problem rather than the finding. The coding scheme still could not separate the actions, for the same reason it could not in June.</p>
+
+  <h3>What it changed</h3>
+
+  <p>The dependent variable had to be split, and the split that matters runs between two things that a single label hides.</p>
+
+  <p>One is a report the model marks itself: the text says "I notice that I", and the self-reference sits on the surface where anyone, or a script, can find it. The other is self-reference carried by a passage that contains no marker at all, and possibly without the model knowing it is there, so that only a reader picks it out.</p>
+
+  <p>My coding scheme covers the first. It has no column for the second. Any null result I report on this variable is therefore a null on the half that can be coded automatically, and I intend to say so each time rather than let the number stand for more than it covers.</p>
+
+  <div class="holds">
+    <p>Materials: stimuli, condition text, and response sets are held and can be shared on request. The August harness is a single-file rebuild and is not yet public.</p>
+  </div>
+
+</article>
+
+<footer>
+  <p>Li-Ning Wang. Independent researcher, Taipei.</p>
+  <p>Last updated 18 August 2026.</p>
+</footer>
+
+</div>
+</body>
+</html>
