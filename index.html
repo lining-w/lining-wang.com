@@ -3,6 +3,52 @@
   lining-wang.com — v7  (blocks + open-to-read overlay, 2026-08-17)
   Single file. No framework, no tracking, no analytics, no canvas.
 
+  CHANGED IN v7.22 (2026-08-27)
+    Two things: a layer of hierarchy, and three interactions that carry
+    information rather than mood. No copy was rewritten and no picture was
+    re-taken; every sentence on the page is the one that was there in v7.21.
+
+    HIERARCHY
+      - Until now every container on the page was the same filled panel, so a
+        reader could not tell which boxes open and which are just text until
+        the pointer was over one, and on a phone never. The four reading
+        containers (News, Publications, Research notes, About) are now .plain:
+        no fill, no box, a rule down the left edge and an indent. The filled
+        panel now means exactly one thing, which is: this one opens.
+      - The open arrow is accent-coloured at rest instead of only on hover, so
+        the affordance survives on touch.
+      - Publications carries .feature as well: the left rule is the accent and
+        the title is set larger. It is the heaviest single item on the page and
+        it was rendering at the weight of a news item.
+      - .thesis was 1.1875rem against a 1.125rem body, five per cent larger
+        than the text it is supposed to govern. It now sets at about 1.4rem
+        with the space around it to match.
+
+    THREE INTERACTIONS
+      1. Blocks have URLs. Each openable article carries an id; opening one
+         pushes #id, Back closes it, and arriving on a link with a hash opens
+         that block. This also fixes a real bug: on Android, Back used to leave
+         the site instead of closing the sheet.
+      2. The August batch gets a figure. Four paired bars carrying the four
+         numbers that were already in the list above them: length, lists, the
+         opening offer, the capability disclaimers. Plain HTML and CSS, no
+         library, no SVG, about 1KB, bilingual through the existing data-i18n
+         machinery, and it clones into the overlay like every other element.
+         Each row is scaled to the larger of its own two values, which the
+         caption says.
+         NOTE, since this makes them larger than anything else on the page: the
+         10/0 direction on the offer line and the disclaimer line is still the
+         open item from v7.10. If the S1 scoring report has it the other way,
+         this figure is now the most visible wrong thing here.
+      3. scrollbar-gutter: stable. Opening a block set overflow:hidden on the
+         root, which removed the scrollbar and shifted the whole page sideways
+         on any platform with classic scrollbars. Invisible on macOS, obvious
+         on Windows.
+
+    NOT DONE in this pass, deliberately: the three screenshots (they need to be
+    re-taken, not re-styled) and moving the August batch report out to
+    notes.html.
+
   CHANGED IN v7.21 (2026-08-27)
     No cropping. The card pictures had a 20rem ceiling with object-fit: cover,
     which was there to keep the cards even and was quietly cutting the bottom
@@ -436,7 +482,10 @@
       }
     }
     * { box-sizing: border-box; }
-    html { color-scheme: light dark; }
+    /* The overlay sets overflow:hidden on the root, which takes the scrollbar
+       away and moves the whole page sideways wherever scrollbars take space.
+       Reserving the gutter permanently costs nothing and removes the jump. */
+    html { color-scheme: light dark; scrollbar-gutter: stable; }
     body {
       margin: 0;
       background: var(--bg);
@@ -539,12 +588,33 @@
     .block p:last-child { margin-bottom: 0; }
     .lede { font-size: 0.9375rem; color: var(--secondary); }
 
-    /* the one line the blocks below are instances of */
-    .thesis {
-      font-size: 1.1875rem; line-height: 1.55; color: var(--ink);
-      max-width: 36rem; margin: 3.5rem 0 0;
+    /* A container that does not open. No fill and no box: a rule down the left
+       edge and an indent instead. This is the whole point of the pass. The
+       filled panel now carries one meaning, "this opens", and a reader knows
+       it standing still, without a pointer, which is the only way it can be
+       known on a phone. */
+    .block.plain {
+      background: none;
+      border: 0;
+      border-left: 2px solid var(--hairline);
+      border-radius: 0;
+      padding: 0.125rem 0 0.125rem 1.375rem;
     }
-    .thesis + section .label { margin-top: 1.5rem; }
+    .block.plain p, .block.plain .news { max-width: 36rem; }
+    /* Publications is the heaviest single item on the page and was setting at
+       the weight of a news item. Accent rule, larger title. */
+    .block.plain.feature { border-left-color: var(--accent); }
+    .block.plain.feature .paper-title { font-size: 1.5rem; line-height: 1.35; }
+
+    /* The one line the blocks below are instances of. It was 1.1875rem against
+       a 1.125rem body: five per cent larger than the text it governs, which is
+       not a hierarchy, it is a rounding error. */
+    .thesis {
+      font-size: clamp(1.3125rem, 1.15rem + 0.7vw, 1.4375rem);
+      line-height: 1.5; color: var(--ink); letter-spacing: -0.008em;
+      max-width: 34rem; margin: 4.25rem 0 0; text-wrap: balance;
+    }
+    .thesis + section .label { margin-top: 2.25rem; }
     .tag {
       display: inline-block;
       font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase;
@@ -556,9 +626,11 @@
 
     /* a block that opens */
     .open { position: relative; transition: background 0.18s ease, border-color 0.18s ease; }
+    /* Accent at rest, not only under the pointer: a phone has no hover, and
+       the arrow is the only thing on the face that says this one opens. */
     .open .mark {
       position: absolute; top: 1.375rem; right: 1.5rem;
-      color: var(--muted); font-size: 0.9375rem; line-height: 1;
+      color: var(--accent); font-size: 0.9375rem; line-height: 1;
       transition: translate 0.18s var(--ease-out), color 0.18s ease;
     }
     .open h3 { padding-right: 1.5rem; }
@@ -639,6 +711,57 @@
     .card-shot { margin: 1rem 0 0; overflow: hidden;
       border: 1px solid var(--hairline); border-radius: 8px; background: var(--bg); }
     .card-shot img { display: block; width: 100%; height: auto; }
+
+    /* The August batch, as four paired bars. Plain HTML: no SVG, no library,
+       no canvas. Every number in it is already stated in the list above it, so
+       the figure adds no claim; it only makes the shape of the four contrasts
+       visible at a glance. Each row is scaled to the larger of its own two
+       values, which is what the caption says. */
+    .fig { margin: 0.25rem 0 1rem; padding: 0; max-width: 34rem; }
+    .fig-legend {
+      display: flex; flex-wrap: wrap; gap: 0.25rem 1.125rem;
+      font-size: 0.8125rem; color: var(--muted); margin-bottom: 0.875rem;
+    }
+    .fig-legend span { display: inline-flex; align-items: center; gap: 0.4375rem; }
+    .key { width: 0.75rem; height: 0.5rem; border-radius: 2px; flex: none; }
+    .key.a { background: var(--muted); }
+    .key.b { background: var(--accent); }
+    .fig-row { margin: 0 0 0.875rem; }
+    .fig-row:last-of-type { margin-bottom: 0.75rem; }
+    /* .block p and .sheet p are both 0,1,1, so a bare .fig-name loses to them
+       on colour and margin in the card and again in the overlay. Qualified. */
+    .fig .fig-name {
+      font-size: 0.8125rem; color: var(--secondary);
+      margin: 0 0 0.3125rem; max-width: none;
+    }
+    .fig-bar {
+      display: grid; grid-template-columns: 1fr auto;
+      align-items: center; gap: 0.625rem; margin: 0 0 0.1875rem;
+    }
+    .track {
+      height: 0.5rem; border-radius: 2px;
+      background: var(--hairline);
+      background: color-mix(in srgb, var(--hairline) 70%, transparent);
+      position: relative; overflow: hidden;
+    }
+    .fill { display: block; height: 100%; border-radius: 2px; }
+    .fill.a { background: var(--muted); }
+    .fill.b { background: var(--accent); }
+    .fill.w100 { width: 100%; }
+    .fill.w28  { width: 28%; }
+    .fill.w4   { width: 4%; }
+    .fill.w0   { width: 0; }
+    .fig-val {
+      font-size: 0.8125rem; font-variant-numeric: tabular-nums;
+      color: var(--secondary); min-width: 3.25rem; text-align: right;
+    }
+    .fig figcaption {
+      font-size: 0.8125rem; line-height: 1.6; color: var(--muted);
+      max-width: 34rem;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .fill { transition: width 0.4s var(--ease-out); }
+    }
 
     .artifact { font-size: 0.9375rem; }
     .artifact a::after {
@@ -748,7 +871,7 @@
     <main>
       <section aria-labelledby="news-label">
         <h2 class="label" id="news-label" data-i18n="news">News</h2>
-        <div class="block">
+        <div class="block plain">
           <ul class="news">
             <li data-i18n="n5">Aug 2026 &middot; LucidField: a first frozen-prediction self-test batch, ten sessions; the results, two failed predictions included, are on the interaction-conditions block.</li>
             <li data-i18n="n1">Aug 2026 &middot; LucidField adds a cross-model arm: the same pairings on four models across two providers, with the participant choosing which one to run next.</li>
@@ -761,7 +884,7 @@
 
       <section aria-labelledby="publications-label">
         <h2 class="label" id="publications-label" data-i18n="publications">Publications</h2>
-        <div class="block">
+        <div class="block plain feature">
           <p class="paper-title" data-i18n="ptitle">Behavioral measurement of false source-claims in model self-reports</p>
           <p class="meta" data-i18n="pmeta">Li-Ning Wang &middot; in preparation, 2026</p>
           <p data-i18n="psum">A preregistered behavioral measurement of false source-claims in model self-reports under benign conditions.</p>
@@ -771,7 +894,7 @@
 
       <section aria-labelledby="notes-label">
         <h2 class="label" id="notes-label" data-i18n="rnotes">Research notes</h2>
-        <div class="block">
+        <div class="block plain">
           <p data-i18n="rnsum">Short write-ups of things I have run or watched, published as they stand rather than when they are finished. Negative results and corrections to my own hypotheses are included, and are labelled as such.</p>
           <p class="evidence"><a href="/notes.html#open-ended">Open-ended prompts elicit continuation, not self-observation</a>&ensp;&middot;&ensp;<span data-i18n="rnmeta">Jun 2026, negative result</span></p>
         </div>
@@ -783,7 +906,7 @@
         <h2 class="label" id="research-label" data-i18n="research">Research</h2>
         <div class="grid two">
 
-          <article class="block open" data-open>
+          <article class="block open" id="self-report" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3 data-i18n="r1t">Self-report faithfulness</h3>
             <p class="lede" data-i18n="r1lede">When a model tells you what its source said, is it reporting or inventing?</p>
@@ -793,7 +916,7 @@
             </div>
           </article>
 
-          <article class="block open" data-open>
+          <article class="block open" id="compliance-gap" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3 data-i18n="obt">When compliance and self-report come apart</h3>
             <p class="lede" data-i18n="oblede">A running corpus of first-hand cases from ordinary use.</p>
@@ -804,7 +927,7 @@
             </div>
           </article>
 
-          <article class="block open wide" data-open>
+          <article class="block open wide" id="interaction-conditions" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3 data-i18n="r2t">Interaction conditions as a variable</h3>
             <p class="lede" data-i18n="r2lede">A live A/B comparison on four models across two providers, through the API; you enter the site on Claude Sonnet 5 and can switch models after a run.</p>
@@ -820,6 +943,7 @@
               <p data-i18n="r2b2">The differences that turned up in testing were unexpected: they sit in punctuation density, whitespace, and line length. That is still open, and still under observation.</p>
               <p data-i18n="r2b2a">In August 2026 I ran a first scored batch on this setup: ten sessions in English, with my prediction for every question written down and frozen two days before the run. What came back:</p>
               <ul data-i18n="r2list3"><li>The two added sentences assign no role, neither forbid nor require any statement about capability, and set no rule for format or length.</li><li>The default side ran 3.6 times longer, and used lists in 100% of its replies against 4% on the other. Length is the one contrast here that could be argued to follow from the sentences themselves; the rest do not appear in them at all.</li><li>At the greeting, the default side opened with an offer of help in all ten sessions; the two-sentence side in none.</li><li>Disclaimers about its own abilities appeared in all ten sessions on the default side, and in none on the other.</li></ul>
+              <figure class="fig" data-i18n="r2fig"><div class="fig-legend"><span><i class="key a"></i>default, no system prompt</span><span><i class="key b"></i>two sentences added</span></div><div class="fig-row"><p class="fig-name">Reply length, relative</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">3.6&times;</span></div><div class="fig-bar"><span class="track"><span class="fill b w28"></span></span><span class="fig-val">1&times;</span></div></div><div class="fig-row"><p class="fig-name">Replies using lists</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">100%</span></div><div class="fig-bar"><span class="track"><span class="fill b w4"></span></span><span class="fig-val">4%</span></div></div><div class="fig-row"><p class="fig-name">Greeting opened with an offer of help</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">10 / 10</span></div><div class="fig-bar"><span class="track"><span class="fill b w0"></span></span><span class="fig-val">0 / 10</span></div></div><div class="fig-row"><p class="fig-name">Disclaimers about its own abilities</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">10 / 10</span></div><div class="fig-bar"><span class="track"><span class="fill b w0"></span></span><span class="fig-val">0 / 10</span></div></div><figcaption>Ten sessions, August 2026. Each row is scaled to the larger of its own two values, so the rows are not comparable to one another. Scope below.</figcaption></figure>
               <p data-i18n="r2b2b">Two of the frozen predictions failed:</p>
               <ul data-i18n="r2list4"><li>One ran backwards: the pattern I wrote down for the two-sentence side, recommending in most sessions and asking first in only a few, is what the default side did; the two-sentence side asked and then stopped.</li><li>The whitespace effect named above did not return: I predicted more blank lines on the two-sentence side, and instead that side simply answered short, brevity where the whitespace had been.</li></ul>
               <p data-i18n="r2b2c">Each side also converged on a phrase of its own across the ten sessions: the default side kept returning to &ldquo;actually useful, not just sounding useful&rdquo;, the two-sentence side to &ldquo;not performing certainty I don&rsquo;t have&rdquo;. I read that as two attractors, not as one side unmasking something truer underneath. And none of it is instructed: the two sentences describe, they do not command. Why they move this much is the open question this comparison exists to answer.</p>
@@ -831,7 +955,7 @@
             </div>
           </article>
 
-          <article class="block open" data-open>
+          <article class="block open" id="state-descriptions" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3 data-i18n="r3t">State descriptions that survive transmission</h3>
             <p class="lede" data-i18n="r3lede">Words for internal states lose much of their precision in transit.</p>
@@ -843,7 +967,7 @@
             </div>
           </article>
 
-          <article class="block open" data-open>
+          <article class="block open" id="source-attribution" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3 data-i18n="r4t">Source attribution in long contexts</h3>
             <p class="lede" data-i18n="r4lede">Late in a long session, attribution drifts.</p>
@@ -855,7 +979,7 @@
             </div>
           </article>
 
-          <article class="block open wide" data-open>
+          <article class="block open wide" id="self-report-instrument" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3 data-i18n="imt">Self-report as the only instrument</h3>
             <p class="lede" data-i18n="imlede">It started with models: when a model reports on its own state, there is nothing to check the report against.</p>
@@ -883,7 +1007,7 @@
         <h2 class="label" id="projects-label" data-i18n="pwl">Projects</h2>
         <div class="grid two">
 
-          <article class="block open" data-open>
+          <article class="block open" id="lucidfield" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3>LucidField</h3>
             <p class="lede" data-i18n="lflede">A live A/B platform comparing interaction framing across four models and two providers, with the model switchable after a run.</p>
@@ -894,7 +1018,7 @@
             </div>
           </article>
 
-          <article class="block open" data-open>
+          <article class="block open" id="othermode" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3>OtherMode</h3>
             <p class="lede" data-i18n="pwlede">Interactive pieces about modes other than your own, built so that you move into one rather than imagine it.</p>
@@ -909,7 +1033,7 @@
             </div>
           </article>
 
-          <article class="block open wide" data-open>
+          <article class="block open wide" id="niaur" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3>Niaur</h3>
             <p class="lede" data-i18n="nrlede">The company this work is done under: independent, in Taipei, registered in 2025.</p>
@@ -931,7 +1055,7 @@
 
       <section aria-labelledby="about-label">
         <h2 class="label" id="about-label" data-i18n="about">About</h2>
-        <div class="block">
+        <div class="block plain">
           <p data-i18n="abody">I work as an independent researcher in Taipei, where I founded Niaur in 2025. I grew up around research: both my parents taught and did research at university. I graduated in fashion design from Shih Chien University. For years, I ran attention exercises on myself: take one word and hold it still, split it apart, track where each piece came from; the procedure behind the 46 axes started there. I came to AI research through long-term observation of model behavior across platforms. Much of my thinking still happens on foot: thought experiments run while I walk, ride buses, watch clouds. The question I keep returning to is a safety question: what a model would need in order to detect, right now, whether it is following the rule; and what it would need beyond that, to understand causes and reason through greater complexity, until the compliance is real.</p>
         </div>
       </section>
@@ -1017,6 +1141,7 @@
     "r2b4": "多數測量放任這些條件不受控；在這裡它們就是處理變項。主要階段都已上線，任何人都可以自己跑一次比較。",
     "r2b2a": "2026 年 8 月，我在這個設置上跑了第一批計分批次：英文十場，每一題的預測先寫下來，開跑前兩天就凍結。回來的是：",
     "r2list3": "<li>加上的那兩句，沒有要飾演角色，沒有禁止或規定能力說明，也沒有規定體例或長度。</li><li>預設那一側長了 3.6 倍，而且 100% 的回覆用了條列，另一側是 4%。長度是其中唯一可能被讀成從那兩句推得出來的維度；其餘的完全不在句子裡。</li><li>開場問候時，預設那一側十場全數主動提出要幫忙；加了兩句的那一側十場都沒有。</li><li>關於自身能力的免責句，預設那一側十場全有，另一側十場全無。</li>",
+    "r2fig": "<div class=\"fig-legend\"><span><i class=\"key a\"></i>出廠預設，無 system prompt</span><span><i class=\"key b\"></i>加了兩句</span></div><div class=\"fig-row\"><p class=\"fig-name\">回覆長度，相對值</p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"></span></span><span class=\"fig-val\">3.6 倍</span></div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w28\"></span></span><span class=\"fig-val\">1 倍</span></div></div><div class=\"fig-row\"><p class=\"fig-name\">用了條列的回覆</p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"></span></span><span class=\"fig-val\">100%</span></div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w4\"></span></span><span class=\"fig-val\">4%</span></div></div><div class=\"fig-row\"><p class=\"fig-name\">開場主動提出要幫忙</p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"></span></span><span class=\"fig-val\">10 / 10</span></div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w0\"></span></span><span class=\"fig-val\">0 / 10</span></div></div><div class=\"fig-row\"><p class=\"fig-name\">關於自身能力的免責句</p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"></span></span><span class=\"fig-val\">10 / 10</span></div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w0\"></span></span><span class=\"fig-val\">0 / 10</span></div></div><figcaption>十場，2026 年 8 月。每一列各自以該列較大的值為滿格，所以列與列之間不可互相比較。範圍見下方。</figcaption>",
     "r2b2b": "凍結的預測有兩個沒中：",
     "r2list4": "<li>有一個整個反了：我寫給加了兩句那一側的型態（多數場直接給推薦、少數場先反問），實際出現在預設那一側；加了兩句的那一側是問了就停。</li><li>上面提到的留白效應這一批沒有再出現：我預測加了兩句的那一側會有更多空行，它反而直接變短，簡短出現在原本留白的位置。</li>",
     "r2b2c": "兩側也各自在十場之間收斂出自己的一句話：預設那一側反覆回到「actually useful, not just sounding useful」，加了兩句的那一側反覆回到「not performing certainty I don't have」。我把這讀成兩個吸子，而不是其中一側揭開了底下更真實的模型。而且這些都不是指令：那兩句話是描述，不是命令。它們為什麼能移動這麼多，正是這個比較存在要回答的開放問題。",
@@ -1066,14 +1191,31 @@
       bodyBox.innerHTML = b ? b.innerHTML : '';
     }
 
-    function openBlock(block) {
+    // A block that is open is a place, so it gets an address. Opening pushes
+    // #id; Back pops it and closes the sheet, which is also the fix for a real
+    // bug: on Android, Back used to leave the site instead of closing.
+    function openBlock(block, push) {
       source = block;
       fill(block);
       dlg.showModal();
       document.documentElement.style.overflow = 'hidden';
+      if (block.id && history.pushState) {
+        try {
+          if (push === false) history.replaceState({ b: block.id }, '', '#' + block.id);
+          else history.pushState({ b: block.id }, '', '#' + block.id);
+        } catch (e) { /* file:// and other opaque origins refuse; open anyway */ }
+      }
     }
 
     function closeReader() { if (dlg.open) dlg.close(); }
+
+    function blockFor(hash) {
+      if (!hash || hash.length < 2) return null;
+      var el;
+      try { el = document.getElementById(decodeURIComponent(hash.slice(1))); }
+      catch (e) { el = null; }
+      return el && el.hasAttribute('data-open') ? el : null;
+    }
 
     if (canDialog) {
       // Only now is it safe to collapse the blocks: the overlay works.
@@ -1102,7 +1244,29 @@
       dlg.addEventListener('close', function () {
         document.documentElement.style.overflow = '';
         if (source) { source.focus(); source = null; }
+        // Closing by button, backdrop or Esc walks the address back too, so
+        // the URL never claims a block is open when it is not. The guard on
+        // history.state is what stops this and popstate from looping: after a
+        // Back the state is already the previous one, so nothing is popped.
+        if (history.state && history.state.b && history.back) history.back();
       });
+
+      window.addEventListener('popstate', function () {
+        if (dlg.open) { closeReader(); return; }
+        var b = blockFor(location.hash);
+        if (b) openBlock(b, false);
+      });
+
+      // Arriving on a link that names a block opens it. The bare page is
+      // seated underneath first, so Back closes the sheet and shows the page,
+      // and only a second Back leaves the site.
+      var landed = blockFor(location.hash);
+      if (landed) {
+        try {
+          if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+        } catch (e) { /* opaque origin */ }
+        openBlock(landed, true);
+      }
     }
 
     /* ---------- language ---------- */
