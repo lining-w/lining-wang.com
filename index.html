@@ -3,6 +3,35 @@
   lining-wang.com — v7  (blocks + open-to-read overlay, 2026-08-17)
   Single file. No framework, no tracking, no analytics, no canvas.
 
+  CHANGED IN v7.20 (2026-08-27)
+    Her ruling: the Niaur card takes the screenshot after all. shots/niaur.webp
+    is the capture she sent, resized to 1600 wide and saved as webp (49KB), and
+    the card gains the same "wide" class the two research cards carry, so it
+    spans the row rather than sitting at 330px in the two-up grid.
+    Deploy is now index.html plus shots/ with three files, about 154KB.
+    STANDING NOTE, since I raised it and she overruled it: the capture is of the
+    build that is not uploaded yet. Until niaur.com is updated, this page shows
+    a reader one page and the link sends them to another. Uploading the niaur
+    zip closes that; nothing here needs to change when it does.
+
+  CHANGED IN v7.19 (2026-08-27)
+    Niaur gets a link at the top and a card in Projects. Her ruling.
+      - Identifier row is now email, ORCID, niaur.com, lucidfield.ai: who I am,
+        where the work is done, what is live. GitHub and arXiv stay commented
+        out until the repos are public and the preprint has an id.
+      - The card says plainly that Niaur is the company the work is done under
+        rather than a third project, because Projects otherwise reads as though
+        the company were a peer of the two things it owns. The four lines are
+        the ones the niaur.com front page states, each tied to what on this page
+        it refers to, so a reader can check the claim against this page itself.
+      - The closing sentence is the reason a company belongs on a research page
+        at all: it is where the conflict-of-interest line has an address.
+      - No picture on this card. niaur.com is still serving the old version, so
+        a screenshot of the new build would show a reader something they cannot
+        go and see. Add it after the upload and it is one <figure>.
+    NOTE: this puts niaur.com on a public page. Whatever is live at that domain
+    when this deploys is what a reviewer will find.
+
   CHANGED IN v7.18 (2026-08-27)
     Her ruling: put the picture on the block that describes the thing, which is
     the research block, not the short pointer in Projects. So both pictures move
@@ -697,7 +726,7 @@
           <nav class="links" aria-label="Contact and profiles">
             <a href="mailto:lining.wang@niaur.com" id="email">lining.wang@niaur.com</a><span class="copied" role="status" aria-live="polite"></span><span class="sep" aria-hidden="true">&middot;</span><a href="https://orcid.org/0009-0002-9021-7694">ORCID</a><span class="sep" aria-hidden="true">&middot;</span><!-- restore on release day, once the repos are public and the preprint has an id:
             <a href="https://github.com/lining-w">GitHub</a><span class="sep" aria-hidden="true">&middot;</span><a href="https://arxiv.org/abs/XXXX.XXXXX">arXiv</a><span class="sep" aria-hidden="true">&middot;</span>
-            --><a href="https://lucidfield.ai">lucidfield.ai</a>
+            --><a href="https://niaur.com">niaur.com</a><span class="sep" aria-hidden="true">&middot;</span><a href="https://lucidfield.ai">lucidfield.ai</a>
           </nav>
         </div>
       </div>
@@ -867,6 +896,23 @@
             </div>
           </article>
 
+          <article class="block open wide" data-open>
+            <span class="mark" aria-hidden="true">&#8594;</span>
+            <h3>Niaur</h3>
+            <p class="lede" data-i18n="nrlede">The company this work is done under: independent, in Taipei, registered in 2025.</p>
+            <figure class="card-shot">
+              <img src="shots/niaur.webp" width="1600" height="809" loading="lazy" decoding="async"
+                   alt="The Niaur home page: three lines of large type reading Study what AI does, Build what helps, Explain what matters, above a short description of the company."
+                   aria-label="The Niaur home page: three lines of large type reading Study what AI does, Build what helps, Explain what matters, above a short description of the company."
+                   data-i18n-label="nralt">
+            </figure>
+            <div class="body">
+              <p data-i18n="nrb">The company this work is done under: independent, in Taipei, registered in 2025. It is one person at present.</p>
+              <ul data-i18n="nrlist"><li>Research into what models do across an interaction, which is what the blocks above are.</li><li>Experimental platforms, of which LucidField is the one that is live.</li><li>Practical tools, in development and not released.</li><li>Interactive public works, which is OtherMode.</li></ul>
+              <p data-i18n="nrb2">Naming it separately is not a claim of size. It is where the accounts, the trademarks and the conflict-of-interest line live, so that anything on this page that has money or ownership attached to it has somewhere to be stated.</p>
+              <p class="artifact"><a href="https://niaur.com" data-resolve>niaur.com</a></p>
+            </div>
+          </article>
         </div>
       </section>
 
@@ -976,6 +1022,11 @@
     "pwlinks": "心像牆：&ensp;<a href='https://othermode.ai/imagery?lang=zh' data-resolve>試試看</a>&ensp;·&ensp;<a href='https://othermode.ai/imagery/evidence?lang=zh' data-resolve>依據與更正</a>",
     "pwb3": "這個系列我給自己的規則：",
     "pwb4": "這些是與模型協作做出來的，而那個過程本身就是我在研究的東西之一。",
+    "nralt": "Niaur 首頁：三行大字寫著 Study what AI does、Build what helps、Explain what matters，下方是一段公司簡介。",
+    "nrlede": "這些工作所屬的公司：獨立、位在台北、2025 年登記。",
+    "nrb": "這些工作所屬的公司：獨立、位在台北、2025 年登記。目前只有一個人。",
+    "nrlist": "<li>研究模型在一段互動裡實際做了什麼，也就是上面那幾個區塊。</li><li>實驗平台，其中已經上線的是 LucidField。</li><li>實用工具，開發中，尚未發行。</li><li>互動式公開作品，也就是 OtherMode。</li>",
+    "nrb2": "把它單獨列出來不是在宣稱規模。帳戶、商標與利益揭露都掛在那裡，所以這一頁上任何牽涉到金錢或所有權的事，都有一個可以被交代的位置。",
     "lfalt": "兩段 AI 對話並排，各自有一個選擇偏好的按鍵，上方是一張人與機器人看夕陽的照片。",
     "pwalt": "深色畫面上是任務說明與一個開始鍵。",
     "imlinks": "<a href='https://othermode.ai/imagery?lang=zh' data-resolve>去做那個心像實驗</a>&ensp;·&ensp;<a href='https://othermode.ai/imagery/evidence?lang=zh' data-resolve>依據與更正</a>"
