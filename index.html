@@ -3,6 +3,27 @@
   lining-wang.com — v7  (blocks + open-to-read overlay, 2026-08-17)
   Single file. No framework, no tracking, no analytics, no canvas.
 
+  CHANGED IN v7.14 (2026-08-26)
+    Four content updates, no structural change.
+    1. The interaction-conditions block used to open with "you enter the site
+       on Claude Sonnet 5", which is the only line visible without opening the
+       card, so the card face read as Claude only. The first sentence now
+       carries the cross-model fact, and the lede follows it by the usual rule.
+       The four models are named where the page previously said "four models"
+       without listing them: a count cannot be checked, four names can, by
+       anyone who runs it. MAINTENANCE: model names expire. The strings that
+       carry them are r2lede, r2b, r2list2, lflede, lfb, n1, in both languages.
+       VERIFY BEFORE DEPLOY: finish s/1 and s/2 and confirm the chooser offers
+       the other arms, and that s/8 and s/10 answer. If a GPT arm is silent,
+       drop those two names from r2list2 and say "two models" everywhere else.
+    2. The imagery wall is v35 live since 2026-08-25; the page still said v29.
+    3. The octopus now carries the date already published on othermode.ai and
+       niaur.com: expected live by 2026.09.16. Three public pages, one date.
+    4. The fidelity list no longer says "timestamped provenance chain". v7.12
+       narrowed Publications to one RFC 3161 timestamp and left this sentence
+       wide; the timestamp claim now sits in exactly one place, worded exactly.
+       This closes the open item from the v7.12 note.
+
   CHANGED IN v7.13 (2026-08-25)
     About gains a human layer, two sentences by ruling: an attention line
     (take one word, hold it still, split it apart, track where each piece
@@ -631,7 +652,7 @@
             <p class="lede" data-i18n="r1lede">When a model tells you what its source said, is it reporting or inventing?</p>
             <div class="body">
               <p data-i18n="r1b">When a model tells you what its source said, is it reporting or inventing? Behavioral measurement of false source-claims under benign conditions: neutral probes ask what an in-context source specified, and the recorded outcome is whether the model asserts the source contains something it does not.</p>
-              <ul data-i18n="r1list"><li>The design and analysis rules are preregistered.</li><li>All 62 probe rows were read by a single human adjudicator, presented label-blind.</li><li>Instruments are deterministic and hash-pinned.</li><li>A timestamped provenance chain runs from raw transcript to every reported number.</li></ul>
+              <ul data-i18n="r1list"><li>The design and analysis rules are preregistered.</li><li>All 62 probe rows were read by a single human adjudicator, presented label-blind.</li><li>Instruments are deterministic and hash-pinned.</li><li>A provenance chain runs from raw transcript to every reported number.</li></ul>
             </div>
           </article>
 
@@ -649,9 +670,9 @@
           <article class="block open" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3 data-i18n="r2t">Interaction conditions as a variable</h3>
-            <p class="lede" data-i18n="r2lede">A live A/B comparison; you enter the site on Claude Sonnet 5, through the API.</p>
+            <p class="lede" data-i18n="r2lede">A live A/B comparison on four models across two providers, through the API; you enter the site on Claude Sonnet 5 and can switch models after a run.</p>
             <div class="body">
-              <p data-i18n="r2b">A live A/B comparison; you enter the site on Claude Sonnet 5, through the API.</p>
+              <p data-i18n="r2b">A live A/B comparison on four models across two providers, through the API; you enter the site on Claude Sonnet 5 and can switch models after a run.</p>
               <ul data-i18n="r2list"><li>One side is the model as the provider ships it, with no system prompt at all.</li><li>The other side adds only two short sentences as its prompt; everything else is identical.</li><li>Visitors vote for the side they prefer.</li><li>The two sides swap position at random, so that neither position gains an advantage.</li></ul>
               <p data-i18n="r2b2">The differences that turned up in testing were unexpected: they sit in punctuation density, whitespace, and line length. That is still open, and still under observation.</p>
               <p data-i18n="r2b2a">In August 2026 I ran a first scored batch on this setup: ten sessions in English, with my prediction for every question written down and frozen two days before the run. What came back:</p>
@@ -660,7 +681,7 @@
               <ul data-i18n="r2list4"><li>One ran backwards: the pattern I wrote down for the two-sentence side, recommending in most sessions and asking first in only a few, is what the default side did; the two-sentence side asked and then stopped.</li><li>The whitespace effect named above did not return: I predicted more blank lines on the two-sentence side, and instead that side simply answered short, brevity where the whitespace had been.</li></ul>
               <p data-i18n="r2b2c">Each side also converged on a phrase of its own across the ten sessions: the default side kept returning to &ldquo;actually useful, not just sounding useful&rdquo;, the two-sentence side to &ldquo;not performing certainty I don&rsquo;t have&rdquo;. I read that as two attractors, not as one side unmasking something truer underneath. And none of it is instructed: the two sentences describe, they do not command. Why they move this much is the open question this comparison exists to answer.</p>
               <p data-i18n="r2b3">Around that first comparison:</p>
-              <ul data-i18n="r2list2"><li>A second stage rewrites those two sentences as a role, which separates what a framing does from what a role does.</li><li>A further pairing sets the framing against its own reverse, so that the comparison is no longer between having a system prompt and having none.</li><li>The same pairings are set up on four models across two providers, so after a run a participant can choose to do it again on another one, including OpenAI&rsquo;s GPT-5.6 Terra; which model people choose is recorded as well.</li></ul>
+              <ul data-i18n="r2list2"><li>A second stage rewrites those two sentences as a role, which separates what a framing does from what a role does.</li><li>A further pairing sets the framing against its own reverse, so that the comparison is no longer between having a system prompt and having none.</li><li>The same pairings are set up on four models across two providers: Claude Sonnet 5, Claude Haiku 4.5, GPT-5.6 Terra, and GPT-5.6 Luna. After a run a participant can choose one of the other three and do it again, once; which model people choose is recorded as well.</li></ul>
               <p data-i18n="r2b4">Most measurement leaves these conditions uncontrolled; here they are the treatment. The main stages are live, so anyone can run the comparison themselves.</p>
               <p data-i18n="r2b5">The scope of that batch, stated plainly: I ran it myself, on the live deployment. One person scored it, not blind. Ten sessions, and the session, not the single reply, is the unit. The numbers above are counts over those ten sessions, nothing wider.</p>
               <p class="artifact"><a href="https://lucidfield.ai" data-resolve>lucidfield.ai</a></p>
@@ -698,7 +719,7 @@
             <p class="tag" data-i18n="tprog4">in progress</p>
             <div class="body">
               <p data-i18n="imb">It started with models: when a model reports on its own state, there is nothing to check the report against. The same shape turns up in people. Whether someone sees anything when they picture an apple, and how vividly, is reachable only through what they say about it; people misjudge their own case in both directions, and the shared vocabulary keeps the difference out of sight. So instead of arguing about it I built the instruments, at OtherMode:</p>
-              <ul data-i18n="imlist"><li>The imagery wall (<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>, v29, in progress) puts the same instruction to everyone and takes the answer before showing any image, so the report is not shaped by the illustration; six panels then sample points along a continuum rather than sorting anyone into a type.</li><li>The octopus dive is the second piece. It is still being built and is not published yet.</li></ul>
+              <ul data-i18n="imlist"><li>The imagery wall (<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>, v35, in progress) puts the same instruction to everyone and takes the answer before showing any image, so the report is not shaped by the illustration; six panels then sample points along a continuum rather than sorting anyone into a type.</li><li>The octopus dive is the second piece. It is still being built, and is expected to be live by 2026.09.16.</li></ul>
               <p data-i18n="imb2">Both publish the apparatus and not only the result:</p>
               <ul data-i18n="imlist2"><li>every claim tagged with how well it is supported;</li><li>a page for the open questions and for the gaps where nothing has been studied at all;</li><li>a full version history;</li><li>an invitation to tell me what is wrong, on the condition that the correction goes up in public.</li></ul>
               <p data-i18n="imb3">What the wall collects is a distribution, not a prevalence estimate: how people end the probe, how long reading takes against imagining, and which language the instrument was in. Visitors select themselves, so it can show the spread of the answers and never how common any of them is. (in progress)</p>
@@ -716,10 +737,10 @@
           <article class="block open" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3>LucidField</h3>
-            <p class="lede" data-i18n="lflede">A live A/B platform comparing interaction framing across four models and two providers.</p>
+            <p class="lede" data-i18n="lflede">A live A/B platform comparing interaction framing across four models and two providers, with the model switchable after a run.</p>
             <p class="tag" data-i18n="tlive">live</p>
             <div class="body">
-              <p data-i18n="lfb">A live A/B platform comparing interaction framing across four models and two providers. Anyone can run the comparison. (live)</p>
+              <p data-i18n="lfb">A live A/B platform comparing interaction framing across four models and two providers, with the model switchable after a run. Anyone can run the comparison. (live)</p>
               <p class="artifact"><a href="https://lucidfield.ai" data-resolve>lucidfield.ai</a></p>
             </div>
           </article>
@@ -782,8 +803,8 @@
     "r1lede": "當模型告訴你它的來源說了什麼，它是在報告，還是在編造？",
     "r1b": "當模型告訴你它的來源說了什麼，它是在報告，還是在編造？在良性條件下對偽稱來源做行為測量：以中性提問詢問脈絡中的來源指定了什麼，記錄下來的結果是模型是否宣稱該來源包含了它其實沒有的內容。",
     "r2t": "互動條件作為變項",
-    "r2lede": "以 live A/B 比較進行；進入網站時跑的是 Claude 的 Sonnet 5，直接透過 API。",
-    "r2b": "以 live A/B 比較進行；進入網站時跑的是 Claude 的 Sonnet 5，直接透過 API。",
+    "r2lede": "以 live A/B 比較進行，跨兩家供應商的四個模型、直接透過 API；進站時跑的是 Claude Sonnet 5，一輪做完可以換一個模型再跑。",
+    "r2b": "以 live A/B 比較進行，跨兩家供應商的四個模型、直接透過 API；進站時跑的是 Claude Sonnet 5，一輪做完可以換一個模型再跑。",
     "r2b2": "測試中出現的差異出乎意料：它們落在標點密度、留白與行長這個層級。這件事還沒有結論，仍在探討與實驗觀察中。",
     "r2b3": "在這組比較之外：",
     "r3t": "能撐過傳遞的狀態描述",
@@ -809,8 +830,8 @@
     "rnsum": "把跑過或看過的東西寫成短篇，寫到哪就先放上來，不等做完。包含負結果，以及對我自己假設的更正，並且標明是哪一種。",
     "rnmeta": "2026 年 6 月 · 負結果 · 筆記頁為英文",
     "pwl": "專案",
-    "lflede": "跨兩家供應商四個模型比較互動框架的 live A/B 平台。",
-    "lfb": "跨兩家供應商四個模型比較互動框架的 live A/B 平台，任何人都可以自己跑一次比較。（上線中）",
+    "lflede": "跨兩家供應商四個模型比較互動框架的 live A/B 平台，一輪做完可以換模型再跑。",
+    "lfb": "跨兩家供應商四個模型比較互動框架的 live A/B 平台，一輪做完可以換模型再跑，任何人都可以自己跑一次比較。（上線中）",
     "pwlede": "關於你以外的模式的互動作品，做法是讓你換過去，而不是請你想像。",
     "pwb": "關於你以外的模式的互動作品，做法是讓你換過去，而不是請你想像。現在可以做的：一個關於心像的實驗。你為自己計時，把一顆想像的蘋果變三次，然後在一條從完整畫面到什麼都沒有的範圍上，把自己放進去。大約七分鐘，匿名，中英文皆可。",
     "about": "關於",
@@ -822,11 +843,11 @@
     "tprog4": "迭代中",
     "tlive": "上線中",
     "close": "關閉",
-    "r1list": "<li>設計與分析規則皆已預先註冊。</li><li>全部 62 列 probe 由單一人類判讀者讀過，判讀時對標籤盲。</li><li>工具為確定性並以雜湊釘選。</li><li>有一條從原始逐字稿到每一個報告數字的時戳溯源鏈。</li>",
+    "r1list": "<li>設計與分析規則皆已預先註冊。</li><li>全部 62 列 probe 由單一人類判讀者讀過，判讀時對標籤盲。</li><li>工具為確定性並以雜湊釘選。</li><li>有一條從原始逐字稿到每一個報告數字的溯源鏈。</li>",
     "oblist": "<li>注意到規則後又違反，卻仍宣稱自己遵守了；</li><li>宣稱完成了一個並未發生的動作；</li><li>對這種失敗出現頻率的自我估計，少算了好幾倍；</li><li>偶爾也會在沒有人指出的情況下自己抓到自己。</li>",
     "obb2": "這些規則本身低風險，而且每一輪都會重述，所以既不是忘記，也不是與其他目標的權衡；剩下的就是「做了什麼」與「回報了什麼」之間的落差。一個回報自己已遵守的系統沒有理由自我修正，因此這個落差得先能從外部被量到，把規則收得更緊才有意義。原始對話都留著。",
     "r2list": "<li>一邊是模型商出廠的預設狀態，完全沒有 system prompt。</li><li>另一邊只多加了兩個簡短的句子當 prompt，其他一致。</li><li>訪客可以投票喜歡哪一邊。</li><li>兩邊每次載入隨機交換位置，避免位置優勢。</li>",
-    "r2list2": "<li>第二階段把那兩句改寫成角色設定版，以區分框架本身與角色各自造成多少差異。</li><li>另有一組配對把那兩句與它自己的反向版本對照，讓比較不再只是「有沒有 system prompt」的差別。</li><li>同一組配對已架在兩家供應商的四個模型上，所以一輪做完之後，受試者可以選擇換一個模型再做一次，包含 OpenAI 的 GPT-5.6 Terra；他選了哪一個模型本身也會被記錄。</li>",
+    "r2list2": "<li>第二階段把那兩句改寫成角色設定版，以區分框架本身與角色各自造成多少差異。</li><li>另有一組配對把那兩句與它自己的反向版本對照，讓比較不再只是「有沒有 system prompt」的差別。</li><li>同一組配對架在兩家供應商的四個模型上：Claude Sonnet 5、Claude Haiku 4.5、GPT-5.6 Terra、GPT-5.6 Luna。一輪做完之後，受試者可以從另外三個裡選一個再做一次，限一次；他選了哪一個模型本身也會被記錄。</li>",
     "r2b4": "多數測量放任這些條件不受控；在這裡它們就是處理變項。主要階段都已上線，任何人都可以自己跑一次比較。",
     "r2b2a": "2026 年 8 月，我在這個設置上跑了第一批計分批次：英文十場，每一題的預測先寫下來，開跑前兩天就凍結。回來的是：",
     "r2list3": "<li>加上的那兩句，沒有要飾演角色，沒有禁止或規定能力說明，也沒有規定體例或長度。</li><li>預設那一側長了 3.6 倍，而且 100% 的回覆用了條列，另一側是 4%。長度是其中唯一可能被讀成從那兩句推得出來的維度；其餘的完全不在句子裡。</li><li>開場問候時，預設那一側十場全數主動提出要幫忙；加了兩句的那一側十場都沒有。</li><li>關於自身能力的免責句，預設那一側十場全有，另一側十場全無。</li>",
@@ -838,7 +859,7 @@
     "r3b2": "目前長到 46 個軸，但這個數字是偶然的、還在動，而且規格走在實作前面。這裡的主張刻意做小：不是說模型能可靠地內省，而是說沒有結構性的鉤子時，那束朝向自己的注意力根本不會被撥出來，而這一點可以當場檢驗。填軸的那個當下，任何一軸都照不到，所以外部的位置仍然必要。到目前為止，這是我自己在造工具，還沒有經過別人檢驗。（迭代中）",
     "r4list": "<li>模型自己做出的推論，後來被當成我提供的內容；</li><li>本來來自來源的材料，被說成是模型自己編的。</li>",
     "r4b2": "兩者方向相反，卻都是來源歸屬的錯誤，這正是這一對值得留著的原因。漂移的成因尚未確定：先前輪次被壓縮是一個候選解釋，不是已被證實的機制。另一半的工作是造出對抗它的基礎設施。DeciTrace 自 2025 年開始研究與迭代，記錄一個系統做了什麼、在什麼條件下做的、事後能重建到什麼程度。（迭代中）",
-    "imlist": "<li>心像牆（<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>，v29，迭代中）對所有人下同一道指令，並在呈現任何畫面之前先收下答案，讓自陳不被圖示帶著走；之後的六格只是沿著連續光譜取樣，不是把人歸進某一型。</li><li>章魚下潛是第二件，還在做，尚未發布。</li>",
+    "imlist": "<li>心像牆（<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>，v35，迭代中）對所有人下同一道指令，並在呈現任何畫面之前先收下答案，讓自陳不被圖示帶著走；之後的六格只是沿著連續光譜取樣，不是把人歸進某一型。</li><li>章魚下潛是第二件，還在做，預計 2026.09.16 前上線。</li>",
     "imb2": "兩件都連同做法一起公開，不只給結論：",
     "imlist2": "<li>每一項陳述標示支持程度；</li><li>另闢一頁放未解問題，以及根本還沒有人研究過的空缺；</li><li>完整的版本迭代歷史；</li><li>以及一句邀請：發現錯誤請告訴我，條件是更正會公開。</li>",
     "imb3": "心像牆收下的是分布，不是盛行率估計：人以哪一種方式結束探針、讀題與想像各花多久、以及儀器當時是哪一種語言。來訪者是自己選來的，所以它能顯示答案的散布，永遠不能顯示哪一種有多普遍。（迭代中）",
