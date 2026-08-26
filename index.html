@@ -3,6 +3,64 @@
   lining-wang.com — v7  (blocks + open-to-read overlay, 2026-08-17)
   Single file. No framework, no tracking, no analytics, no canvas.
 
+  CHANGED IN v7.18 (2026-08-27)
+    Her ruling: put the picture on the block that describes the thing, which is
+    the research block, not the short pointer in Projects. So both pictures move
+    up: LucidField onto "Interaction conditions as a variable", the wall onto
+    "Self-report as the only instrument". Projects goes back to two columns and
+    back to being text.
+      - A card carrying a picture now spans the whole row of the two-up research
+        grid, so the picture is about 670px wide instead of 330px. Everything
+        else in that grid stays two up.
+      - Each picture still appears exactly once on the page.
+      - The wall followed LucidField for consistency; she named only LucidField.
+        To put the wall back on the OtherMode card in Projects, move its <figure>
+        and drop the "wide" class from that research article.
+    Deploy unchanged: index.html plus shots/ with two files.
+
+  CHANGED IN v7.17 (2026-08-27)
+    The pictures merge into the cards, which is what she asked: the strip was
+    listing LucidField and OtherMode immediately above two cards that said the
+    same two things, so the page carried each of them twice in a row.
+      - The strip is gone. Each Projects card now carries its own picture, under
+        the status tag rather than above the title, because the open arrow is
+        pinned to that corner and would have sat on the picture.
+      - Projects drops from two columns to one, so a card face is wide enough
+        that a screenshot of an interface can actually be read. Two cards, one
+        to a row, which is the shape she asked for in v7.16.
+      - The OtherMode card takes THE WALL, not the OtherMode home page. Its own
+        text says the live piece is the imagery experiment, so the wall is the
+        truer picture, and it shows something a reader can do rather than a
+        wordmark. shots/othermode.webp is dropped from the deploy; put it back
+        by swapping the src on that card, and the wall shot then has no home.
+      - Clicking a card opens the block, as every other card on this page does.
+        The link out to the live site is inside, where it already was. The strip
+        used to jump straight out; that inconsistency goes with it.
+    Deploy is now index.html plus shots/ with TWO files, about 105KB.
+
+  CHANGED IN v7.16 (2026-08-27)
+    The screenshots move out of the blocks and into one place.
+    In v7.15 they sat inside the block bodies, which are collapsed until a
+    reader opens them, so nothing changed on the surface of the page. Her
+    ruling: she wants to see them without clicking, gathered, one to a row.
+    They are now a three-row strip directly under the Projects heading:
+    LucidField, The Imagery Wall, OtherMode. Each row is the picture, the name,
+    and one line, and the whole row links to the live thing.
+      - One picture, one home. The <figure> elements inside r2, im and pw are
+        gone, and so are the six caption keys that went with them.
+      - The captures are three different shapes (2.03:1, 1.32:1, 2.09:1). A
+        shared 22rem ceiling with object-fit: cover keeps the rows even; the
+        crop is from the top, which is the half that identifies each screen.
+        Nothing is cropped in a way that changes what the picture claims.
+      - Still lazy, still no new JavaScript, still bilingual through the
+        existing data-i18n and data-i18n-label machinery.
+      - The rows leave the site rather than opening the block that describes
+        the same thing. That is deliberate: the blocks are the reading layer
+        and the strip is the going-and-looking layer.
+    Stacked one to a row rather than three across, because three across in a
+    48rem column is 240px each, which is too small to read a UI screenshot.
+    If you want them side by side anyway it is one grid-template-columns.
+
   CHANGED IN v7.15 (2026-08-27)
     Three screenshots, and the wall's English name.
     1. A shot each for LucidField, the wall, and the OtherMode home page, taken
@@ -526,15 +584,18 @@
        takes the text width; nothing sits beside it and nothing can be
        stranded. Hidden with its block until the reader opens it, which is
        also why the bytes are not paid by anyone who does not. */
-    .shot { margin: 1.125rem 0 1rem; }
-    .shot img {
+    /* a card face that carries its own picture. It sits under the status tag,
+       not above the title, because the open arrow is pinned to that corner.
+       The two captures are different shapes, so a shared ceiling keeps the two
+       cards even; the crop is from the top, which is the identifying half. */
+    /* a card that carries a picture takes the whole row of the two-up grid, so
+       the picture is wide enough that an interface can be read on the face */
+    @media (min-width: 46rem) { .grid.two > .wide { grid-column: 1 / -1; } }
+    .card-shot { margin: 1rem 0 0; overflow: hidden;
+      border: 1px solid var(--hairline); border-radius: 8px; background: var(--bg); }
+    .card-shot img {
       display: block; width: 100%; height: auto;
-      border: 1px solid var(--hairline); border-radius: 3px;
-      background: var(--panel);
-    }
-    .shot figcaption {
-      margin: 0.5rem 0 0; font-size: 0.8125rem; line-height: 1.55;
-      color: var(--muted); max-width: 34rem;
+      max-height: 20rem; object-fit: cover; object-position: top center;
     }
 
     .artifact { font-size: 0.9375rem; }
@@ -701,10 +762,16 @@
             </div>
           </article>
 
-          <article class="block open" data-open>
+          <article class="block open wide" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3 data-i18n="r2t">Interaction conditions as a variable</h3>
             <p class="lede" data-i18n="r2lede">A live A/B comparison on four models across two providers, through the API; you enter the site on Claude Sonnet 5 and can switch models after a run.</p>
+            <figure class="card-shot">
+              <img src="shots/lucidfield.webp" width="1600" height="788" loading="lazy" decoding="async"
+                   alt="Two AI conversations side by side, each with a button to prefer that side, beneath a photograph of a person and a robot watching a sunset."
+                   aria-label="Two AI conversations side by side, each with a button to prefer that side, beneath a photograph of a person and a robot watching a sunset."
+                   data-i18n-label="lfalt">
+            </figure>
             <div class="body">
               <p data-i18n="r2b">A live A/B comparison on four models across two providers, through the API; you enter the site on Claude Sonnet 5 and can switch models after a run.</p>
               <ul data-i18n="r2list"><li>One side is the model as the provider ships it, with no system prompt at all.</li><li>The other side adds only two short sentences as its prompt; everything else is identical.</li><li>Visitors vote for the side they prefer.</li><li>The two sides swap position at random, so that neither position gains an advantage.</li></ul>
@@ -718,13 +785,6 @@
               <ul data-i18n="r2list2"><li>A second stage rewrites those two sentences as a role, which separates what a framing does from what a role does.</li><li>A further pairing sets the framing against its own reverse, so that the comparison is no longer between having a system prompt and having none.</li><li>The same pairings are set up on four models across two providers: Claude Sonnet 5, Claude Haiku 4.5, GPT-5.6 Terra, and GPT-5.6 Luna. After a run a participant can choose one of the other three and do it again, once; which model people choose is recorded as well.</li></ul>
               <p data-i18n="r2b4">Most measurement leaves these conditions uncontrolled; here they are the treatment. The main stages are live, so anyone can run the comparison themselves.</p>
               <p data-i18n="r2b5">The scope of that batch, stated plainly: I ran it myself, on the live deployment. One person scored it, not blind. Ten sessions, and the session, not the single reply, is the unit. The numbers above are counts over those ten sessions, nothing wider.</p>
-              <figure class="shot">
-                <img src="shots/lucidfield.webp" width="1600" height="788" loading="lazy" decoding="async"
-                     alt="Two AI conversations side by side, each with a button to prefer that side, beneath a photograph of a person and a robot watching a sunset."
-                     aria-label="Two AI conversations side by side, each with a button to prefer that side, beneath a photograph of a person and a robot watching a sunset."
-                     data-i18n-label="r2figalt">
-                <figcaption data-i18n="r2fig">The comparison screen. Both sides answer the same question; which side carries which condition is randomised, and is not shown until after you have voted.</figcaption>
-              </figure>
               <p class="artifact"><a href="https://lucidfield.ai" data-resolve>lucidfield.ai</a></p>
             </div>
           </article>
@@ -753,10 +813,16 @@
             </div>
           </article>
 
-          <article class="block open" data-open>
+          <article class="block open wide" data-open>
             <span class="mark" aria-hidden="true">&#8594;</span>
             <h3 data-i18n="imt">Self-report as the only instrument</h3>
             <p class="lede" data-i18n="imlede">It started with models: when a model reports on its own state, there is nothing to check the report against.</p>
+            <figure class="card-shot">
+              <img src="shots/imagery-wall.webp" width="1100" height="835" loading="lazy" decoding="async"
+                   alt="A dark screen carrying the task and a start button."
+                   aria-label="A dark screen carrying the task and a start button."
+                   data-i18n-label="pwalt">
+            </figure>
             <p class="tag" data-i18n="tprog4">in progress</p>
             <div class="body">
               <p data-i18n="imb">It started with models: when a model reports on its own state, there is nothing to check the report against. The same shape turns up in people. Whether someone sees anything when they picture an apple, and how vividly, is reachable only through what they say about it; people misjudge their own case in both directions, and the shared vocabulary keeps the difference out of sight. So instead of arguing about it I built the instruments, at OtherMode:</p>
@@ -764,13 +830,6 @@
               <p data-i18n="imb2">Both publish the apparatus and not only the result:</p>
               <ul data-i18n="imlist2"><li>every claim tagged with how well it is supported;</li><li>a page for the open questions and for the gaps where nothing has been studied at all;</li><li>a full version history;</li><li>an invitation to tell me what is wrong, on the condition that the correction goes up in public.</li></ul>
               <p data-i18n="imb3">What the wall collects is a distribution, not a prevalence estimate: how people end the probe, how long reading takes against imagining, and which language the instrument was in. Visitors select themselves, so it can show the spread of the answers and never how common any of them is. (in progress)</p>
-              <figure class="shot">
-                <img src="shots/imagery-wall.webp" width="1100" height="835" loading="lazy" decoding="async"
-                     alt="A dark screen carrying the task and a start button."
-                     aria-label="A dark screen carrying the task and a start button."
-                     data-i18n-label="imfigalt">
-                <figcaption data-i18n="imfig">The wall before you start: the task, and the clock that records it.</figcaption>
-              </figure>
               <p class="artifact" data-i18n="imlinks"><a href='https://othermode.ai/imagery' data-resolve>Try the imagery experiment</a>&ensp;&middot;&ensp;<a href='https://othermode.ai/imagery/evidence' data-resolve>Sources and corrections</a></p>
             </div>
           </article>
@@ -802,13 +861,6 @@
               <p data-i18n="pwb">Interactive pieces about modes other than your own, built so that you move into one rather than imagine it. Live now: an experiment on mental imagery. You time yourself changing an imagined apple, then place yourself on a range that runs from a full picture to none at all. About seven minutes, anonymous, in English or Chinese.</p>
               <p class="artifact" data-i18n="pwlinks">The Imagery Wall:&ensp;<a href='https://othermode.ai/imagery' data-resolve>Try it</a>&ensp;&middot;&ensp;<a href='https://othermode.ai/imagery/evidence' data-resolve>Sources and corrections</a></p>
               <p data-i18n="pwb2">(26 August: a deep-sea octopus dive is expected. It is at v39, still being checked and revised.)</p>
-              <figure class="shot">
-                <img src="shots/othermode.webp" width="1600" height="764" loading="lazy" decoding="async"
-                     alt="The OtherMode home page: the wordmark over a dark to light gradient, above the opening text."
-                     aria-label="The OtherMode home page: the wordmark over a dark to light gradient, above the opening text."
-                     data-i18n-label="pwfigalt">
-                <figcaption data-i18n="pwfig">The series home page.</figcaption>
-              </figure>
               <p data-i18n="pwb3">Rules I hold the series to:</p>
               <ul data-i18n="pwlist"><li>Every claim carries its status (established, hypothesis, speculation) and its source.</li><li>Open questions get their own page.</li><li>Parameters tuned for visual effect are disclosed rather than hidden.</li><li>Corrections are published rather than quietly made.</li></ul>
               <p data-i18n="pwb4">These are built in collaboration with models, and that process is itself one of the things I study.</p>
@@ -924,12 +976,8 @@
     "pwlinks": "心像牆：&ensp;<a href='https://othermode.ai/imagery?lang=zh' data-resolve>試試看</a>&ensp;·&ensp;<a href='https://othermode.ai/imagery/evidence?lang=zh' data-resolve>依據與更正</a>",
     "pwb3": "這個系列我給自己的規則：",
     "pwb4": "這些是與模型協作做出來的，而那個過程本身就是我在研究的東西之一。",
-    "r2fig": "比較畫面。兩側回答同一個問題；哪一側帶哪一種條件是隨機決定的，在你投票之前不會顯示。",
-    "r2figalt": "兩段 AI 對話並排，各自有一個選擇偏好的按鍵，上方是一張人與機器人看夕陽的照片。",
-    "imfig": "心像牆，開始之前：任務本身，以及記錄它的碼表。",
-    "imfigalt": "深色畫面上是任務說明與一個開始鍵。",
-    "pwfig": "這個系列的首頁。",
-    "pwfigalt": "OtherMode 首頁：字標壓在由深到淺的漸層上，下方是開場文字。",
+    "lfalt": "兩段 AI 對話並排，各自有一個選擇偏好的按鍵，上方是一張人與機器人看夕陽的照片。",
+    "pwalt": "深色畫面上是任務說明與一個開始鍵。",
     "imlinks": "<a href='https://othermode.ai/imagery?lang=zh' data-resolve>去做那個心像實驗</a>&ensp;·&ensp;<a href='https://othermode.ai/imagery/evidence?lang=zh' data-resolve>依據與更正</a>"
   }
 }
