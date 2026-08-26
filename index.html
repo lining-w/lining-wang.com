@@ -3,6 +3,19 @@
   lining-wang.com — v7  (blocks + open-to-read overlay, 2026-08-17)
   Single file. No framework, no tracking, no analytics, no canvas.
 
+  CHANGED IN v7.21 (2026-08-27)
+    No cropping. The card pictures had a 20rem ceiling with object-fit: cover,
+    which was there to keep the cards even and was quietly cutting the bottom
+    off each capture: about 6% of the Niaur one, which took the Study / Build /
+    Explain row with it, and about 37% of the wall, which took the start button.
+    The ceiling is gone. Each picture now renders at its own shape:
+      LucidField  1600x788  about 330px tall in the card
+      Niaur       1600x809  about 339px
+      the wall    1100x835  about 508px
+    So the three are no longer the same height. That is the cost, and it is the
+    smaller one: a row of even pictures is not worth cutting the bottom off any
+    of them, least of all off a capture whose whole content is text.
+
   CHANGED IN v7.20 (2026-08-27)
     Her ruling: the Niaur card takes the screenshot after all. shots/niaur.webp
     is the capture she sent, resized to 1600 wide and saved as webp (49KB), and
@@ -618,14 +631,14 @@
        The two captures are different shapes, so a shared ceiling keeps the two
        cards even; the crop is from the top, which is the identifying half. */
     /* a card that carries a picture takes the whole row of the two-up grid, so
-       the picture is wide enough that an interface can be read on the face */
+       the picture is wide enough that an interface can be read on the face.
+       Nothing is cropped: each capture keeps its own shape, which means the
+       three are not the same height. Her ruling, and the right one; an even
+       row of pictures is not worth cutting the bottom off any of them. */
     @media (min-width: 46rem) { .grid.two > .wide { grid-column: 1 / -1; } }
     .card-shot { margin: 1rem 0 0; overflow: hidden;
       border: 1px solid var(--hairline); border-radius: 8px; background: var(--bg); }
-    .card-shot img {
-      display: block; width: 100%; height: auto;
-      max-height: 20rem; object-fit: cover; object-position: top center;
-    }
+    .card-shot img { display: block; width: 100%; height: auto; }
 
     .artifact { font-size: 0.9375rem; }
     .artifact a::after {
