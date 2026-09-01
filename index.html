@@ -1,5 +1,92 @@
 <!doctype html>
 <!--
+  lining-wang.com — v8.0  (one column, side apparatus, no overlay, 2026-09-02)
+  Single file. No framework, no tracking, no analytics, no canvas, no dialog.
+
+  CHANGED IN v8.1 (2026-09-02), the 70-to-90 pass, all six items she nodded to:
+    1. Chinese as a first-class setting, not a translation: :lang(zh-Hant) gets
+       a shorter measure (30rem), strict line breaking, and hanging end
+       punctuation where the engine supports it (Safari today; elsewhere the
+       declaration is ignored and nothing breaks).
+    2. A signature element instead of a screenshot: the LucidField figure is
+       now a specimen, one real visit typeset in this page's own face. The
+       transcript is verbatim data (em dash and markdown asterisks included;
+       the page's no-em-dash rule governs its own copy, not quoted output).
+       shots/lucidfield.webp is no longer referenced and can be deleted from
+       the server. The favicon changes to the same language: two paired bars,
+       long faded and short solid, on the accent square.
+    3. og.png (1200x630): the claim in the serif on the page's paper colour,
+       so a link pasted into Slack, email or X shows the claim instead of a
+       grey box. og:image + twitter:card metas added.
+    4. Print: @media print folds the sidebar inline, prints external link
+       addresses, keeps figures unbroken; a beforeprint hook opens every
+       write-up and an afterprint hook closes the ones it opened.
+    5. Vertical rhythm snapped to the 8px grid (4px substeps): paragraph,
+       list, heading, strip, figure and section gaps all sit on the grid now;
+       the Now status words align to the first text baseline.
+    6. The page audits itself: a footer line states single file, no tracking,
+       the build date, and that the full history goes public on release.
+    New copy in this pass is exactly two sentences (the specimen caption and
+    the footer line), both awaiting her ratification; everything else is
+    verbatim or CSS.
+
+  WHAT CHANGED FROM v7.22
+    Form: from nine equal filled cards behind a modal to one monograph column.
+    On wide screens a 13rem side column carries the apparatus (section names,
+    status, dates, prereg, the portrait); the main column carries the voice
+    (the claim, titles, text, figures). Under 60rem the side folds above.
+
+    Order: masthead (name, role, the one-line claim set as the only large type
+    on the page, identifiers, four anchors) → Now (four status lines) → Work
+    (the shared question, three main lines with status strips, three shorter
+    lines under "Also running") → Writing (the finished negative-result note
+    first, the in-preparation paper second) → About (with the Niaur paragraph
+    and its own anchor) → footer.
+
+    Copy: every sentence is the v7.22 sentence, re-housed. Dropped: the News
+    list (its five items now live as Now lines and inside the lines they
+    reported on), the LucidField and OtherMode project cards (their text was a
+    duplicate of the research lines), pwb2 (the "26 August" octopus sentence,
+    stale and contradicted by imlist's 2026.09.16). Split: the tagline into
+    role + claim. The status pills (in progress / live) are replaced by the
+    strips, which only state facts already on the page.
+
+    Pictures: shots/lucidfield.webp re-cropped to the instrument (the two
+    columns and the vote buttons; the AI sunset image above them is gone),
+    1600x482. shots/imagery-wall.webp re-cropped to the task text without the
+    Start button, 1100x640. shots/niaur.webp no longer deployed.
+
+    Type: IBM Plex Serif (400, 400i) joins IBM Plex Sans as the second voice:
+    the claim, the shared question, the About paragraph, the paper title.
+    Chinese has no Plex Serif, so :lang(zh-Hant) sets those at Sans 500 and
+    never italic. Scale: 13 / 14 / 17–18 / 20 / 22 / display 28–40.
+
+    Deep links: every article keeps its v7 id; opening a Full write-up writes
+    #id with replaceState, and arriving with #id opens that write-up. The three
+    dropped card ids (lucidfield, othermode, niaur) remain as anchors inside
+    the lines that absorbed them, so no old link dies.
+
+    Fonts: Google Fonts still (Sans + Serif); Plex Sans TC loads on 中文 only.
+    Self-hosting, to match othermode.ai's zero external requests, is v8.1.
+
+  DEPLOY
+    index.html, og.png, shots/imagery-wall.webp, portrait.jpg (unchanged).
+    shots/lucidfield.webp and shots/niaur.webp are no longer referenced.
+    sitemap.xml lastmod → 2026-09-02. Run smoketest_v80.js first.
+
+  OPEN, FOR HER RULING
+    "Since Apr 2026" in the first strip; the removal of the News list; the
+    wording "RFC 3161 timestamp, one file"; the three "Also running" lines
+    (kept, short); a serif for Chinese. RULED 2026-09-02: the octopus date
+    leaves the apparatus (the Now line and the strip row are gone; imlist,
+    her copy, still carries "expected to be live by 2026.09.16" once and
+    needs her ruling if that date moves).
+
+  Model names go stale. To change one, edit r2b, r2list2, now1 in the English
+  DOM and their zh entries; nothing else names a model.
+
+  HISTORY: the v7 file-head notes follow unchanged.
+
   lining-wang.com — v7  (blocks + open-to-read overlay, 2026-08-17)
   Single file. No framework, no tracking, no analytics, no canvas.
 
@@ -425,6 +512,7 @@
       </div>
     </article>
     The lede should be the body's own opening sentence, not a new claim.
+
 -->
 <html lang="en">
 <head>
@@ -440,277 +528,205 @@
   <meta property="og:description" content="Independent researcher in Taipei studying whether AI models' self-reports can be trusted, and how interaction conditions shape model behavior.">
   <meta property="og:url" content="https://lining-wang.com">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://lining-wang.com/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Li-Ning Wang: I study whether AI models' self-reports can be trusted, and how interaction conditions shape model behavior.">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FBFBF9">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#17181A">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230E7C74'/%3E%3Cpath d='M12 38c8-9 16-9 24 0s16 9 24 0 16-9 24 0' fill='none' stroke='%23FBFBF9' stroke-width='6.5' stroke-linecap='round' opacity='.42'/%3E%3Cpath d='M12 55c8-9 16-9 24 0s16 9 24 0 16-9 24 0' fill='none' stroke='%23FBFBF9' stroke-width='6.5' stroke-linecap='round' opacity='.72'/%3E%3Cpath d='M12 72c8-9 16-9 24 0s16 9 24 0 16-9 24 0' fill='none' stroke='%23FBFBF9' stroke-width='6.5' stroke-linecap='round'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%230E7C74'/%3E%3Crect x='18' y='37' width='64' height='10' rx='5' fill='%23FBFBF9' opacity='.45'/%3E%3Crect x='18' y='56' width='27' height='10' rx='5' fill='%23FBFBF9'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- One typeface for the whole page: IBM Plex Sans (SIL OFL 1.1).
-       The TC cut (IBM Plex Sans TC) loads only if the reader switches to 中文. -->
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <!-- Fonts and licences. Every face on this page is free for commercial use:
+       IBM Plex Sans, IBM Plex Serif, IBM Plex Sans TC: SIL Open Font License 1.1
+       (embedding and self-hosting permitted, no fee, attribution in the font file).
+       Fallbacks (system UI faces, Noto CJK where present) ship with the OS or are
+       OFL themselves. Google Fonts is delivery only; the licence travels with the
+       font, not the CDN. Self-hosting the same files is v8.1 and changes nothing
+       about the licence. One family, two voices: Sans for the apparatus, Serif for
+       the first-person sentences; the TC cut loads only on 中文. -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Serif:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #FBFBF9;
-      --panel: #F2F2ED;
-      --panel-hover: #ECECE5;
       --ink: #1A1B1D;
       --body: #3D4045;
       --secondary: #55585D;
       --muted: #6E7176;
       --hairline: #E4E4E0;
       --accent: #0E7C74;
-      --shadow: 0 18px 48px rgba(26, 27, 29, 0.16);
       --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
       --face: "IBM Plex Sans", "IBM Plex Sans TC",
               ui-sans-serif, system-ui, -apple-system, "Segoe UI",
               "PingFang TC", "Hiragino Sans", sans-serif;
-      --serif: var(--face);
-      --sans: var(--face);
+      --voice: "IBM Plex Serif", "IBM Plex Sans TC", Georgia, "Times New Roman", serif;
     }
     @media (prefers-color-scheme: dark) {
       :root {
         --bg: #17181A;
-        --panel: #1E2023;
-        --panel-hover: #24262A;
         --ink: #E9E9E7;
         --body: #C9CAC7;
         --secondary: #ADAFAC;
         --muted: #93958F;
         --hairline: #2C2E30;
         --accent: #4FD1C5;
-        --shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
       }
     }
     * { box-sizing: border-box; }
-    /* The overlay sets overflow:hidden on the root, which takes the scrollbar
-       away and moves the whole page sideways wherever scrollbars take space.
-       Reserving the gutter permanently costs nothing and removes the jump. */
-    html { color-scheme: light dark; scrollbar-gutter: stable; }
+    html { color-scheme: light dark; scrollbar-gutter: stable; scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body {
       margin: 0;
       background: var(--bg);
       color: var(--ink);
-      font-family: var(--sans);
+      font-family: var(--face);
       font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.125rem);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      padding: clamp(2.25rem, 6vh, 3.5rem) 1.375rem 3rem;
+      padding: clamp(2rem, 6vh, 3.5rem) 1.25rem 4rem;
     }
-    .page { max-width: 48rem; margin: 0 auto; }
+    html:lang(zh-Hant) body { line-height: 1.8; }
+
+    /* One page, two columns on wide screens: the side column carries the
+       apparatus (headings, status, dates, the portrait); the main column
+       carries the voice (claims, titles, text, figures). Below 60rem the side
+       folds above its main and the page is one column. */
+    .page { max-width: 40rem; margin: 0 auto; }
+    .row { display: block; }
+    .side { margin: 0 0 0.75rem; }
+    @media (min-width: 60rem) {
+      .page { max-width: 52rem; }
+      .row { display: grid; grid-template-columns: 13rem 1fr; column-gap: 2rem; align-items: start; }
+      .side { margin: 0; }
+    }
 
     a {
       color: var(--accent);
       text-decoration-thickness: 1px;
       text-underline-offset: 3px;
       text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
-      transition: text-decoration-color 0.15s ease;
     }
     a:hover { text-decoration-color: var(--accent); }
-    a:focus-visible, button:focus-visible, [data-open]:focus-visible {
+    a:focus-visible, button:focus-visible, summary:focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 3px;
       border-radius: 4px;
     }
     ::selection { background: color-mix(in srgb, var(--accent) 22%, transparent); }
 
+    p { margin: 0 0 1rem; color: var(--body); max-width: 36rem; }
+    ul { margin: 0 0 1rem; padding-left: 1.125rem; color: var(--body); max-width: 36rem; list-style-type: "\2013\2002"; }
+    li { margin: 0 0 0.5rem; padding-left: 0.125rem; }
+    li::marker { color: var(--muted); }
+    h1, h2, h3, h4 { margin: 0; color: var(--ink); font-weight: 500; line-height: 1.3; }
+    h1 { font-size: 1.25rem; }
+    h2 { font-size: 1.0625rem; font-weight: 600; letter-spacing: 0.01em; }
+    .side h2 { padding-top: 0.1875rem; }
+    #work .side h2 { padding-top: 0.3125rem; }
+    h3 { font-size: 1.375rem; margin: 0 0 0.5rem; text-wrap: balance; }
+    h4 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 0.5rem; }
+
     /* language switcher */
     .langbar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: clamp(1.75rem, 5vh, 2.5rem);
-      font-variant-numeric: tabular-nums;
-      font-size: 0.8125rem;
+      display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem;
+      margin-bottom: clamp(1.5rem, 5vh, 2.5rem);
+      font-variant-numeric: tabular-nums; font-size: 0.8125rem;
     }
     .langbar button {
       appearance: none; background: none; border: 0;
       padding: 0.125rem 0; margin: 0; font: inherit;
       color: var(--muted); cursor: pointer; position: relative;
-      transition: color 0.15s ease;
     }
     .langbar button:hover { color: var(--secondary); }
-    .langbar button[aria-current="true"] {
-      color: var(--ink);
-      box-shadow: inset 0 -1px 0 0 var(--ink);
-    }
+    .langbar button[aria-current="true"] { color: var(--ink); box-shadow: inset 0 -1px 0 0 var(--ink); }
     .langbar .div { color: var(--hairline); user-select: none; }
     .langbar button.suggested::after {
       content: ""; position: absolute; top: -0.125rem; right: -0.3125rem;
       width: 4px; height: 4px; border-radius: 50%; background: var(--accent);
     }
 
-    /* header, with a reserved photo slot */
-    .head { display: flex; align-items: flex-start; gap: 1.5rem; }
-    /* portrait: rounded square, edges softened into the page background */
-    .portrait { position: relative; flex: none; display: block; width: 8.25rem; height: 8.25rem; }
-    .portrait img {
-      display: block; width: 100%; height: 100%;
-      object-fit: cover; border-radius: 16px;
+    /* masthead */
+    .portrait { display: block; width: 5rem; height: 5rem; margin-bottom: 1rem; }
+    .portrait img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
+    @media (min-width: 60rem) { .portrait { margin: 0.25rem 0 0; } }
+    .role { color: var(--secondary); margin: 0.25rem 0 1.25rem; font-size: 1rem; }
+    .claim {
+      font-family: var(--voice);
+      font-size: clamp(1.75rem, 1.35rem + 1.7vw, 2.5rem);
+      line-height: 1.18; letter-spacing: -0.01em;
+      color: var(--ink); margin: 0 0 1.5rem; max-width: none; text-wrap: balance;
     }
-    .portrait::after {
-      content: ""; position: absolute; inset: 0; border-radius: 16px;
-      box-shadow: inset 0 0 10px 4px var(--bg);
-      pointer-events: none;
+    .nb { white-space: nowrap; }
+    .links { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; font-size: 0.9375rem; line-height: 1.8; }
+    .links a#email { overflow-wrap: anywhere; }
+    .copied {
+      font-size: 0.8125rem; color: var(--muted); opacity: 0; margin-left: -0.75rem;
+      transition: opacity 0.15s ease;
     }
-    h1 {
-      font-weight: 600;
-      font-size: clamp(2rem, 1.65rem + 1.5vw, 2.375rem);
-      line-height: 1.2; letter-spacing: -0.022em;
-      margin: 0 0 0.75rem; text-wrap: balance;
-    }
-    p { text-wrap: pretty; }
-    .tagline { color: var(--secondary); margin: 0 0 1.125rem; max-width: 34rem; }
-    .links { font-size: 0.9375rem; line-height: 2; overflow-wrap: anywhere; }
-    .links .sep { color: var(--muted); margin: 0 0.375rem; user-select: none; }
+    .copied.show { opacity: 1; }
+    .toc { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; font-size: 0.9375rem; margin-top: 0.75rem; }
+    .toc a { color: var(--secondary); text-decoration: none; border-bottom: 1px solid var(--hairline); padding-bottom: 1px; }
+    .toc a:hover { color: var(--ink); border-color: var(--secondary); }
 
-    .label {
-      font-weight: 500; font-size: 0.8125rem;
-      letter-spacing: 0.11em; text-transform: uppercase;
-      color: var(--muted); margin: 3.25rem 0 1rem;
-    }
+    main > section { margin-top: 4rem; }
 
-    /* blocks */
-    .grid { display: grid; gap: 0.875rem; }
-    @media (min-width: 46rem) { .grid.two { grid-template-columns: 1fr 1fr; } }
-
-    .block {
-      background: var(--panel);
-      border: 1px solid var(--hairline);
-      border-radius: 14px;
-      padding: 1.375rem 1.5rem;
+    /* Now */
+    dl.now { margin: 0; display: grid; grid-template-columns: auto 1fr; column-gap: 1.25rem; row-gap: 1rem; }
+    dl.now dt { color: var(--secondary); font-size: 0.875rem; font-weight: 500; padding-top: 0.1875rem; white-space: nowrap; }
+    dl.now dd { margin: 0; color: var(--body); max-width: 36rem; }
+    .live::before {
+      content: ""; display: inline-block; width: 0.4rem; height: 0.4rem; border-radius: 50%;
+      background: var(--accent); margin-right: 0.4375rem; vertical-align: 0.1em;
     }
-    .block h3 {
-      font-size: 1.125rem; font-weight: 500; line-height: 1.4;
-      margin: 0 0 0.5rem; color: var(--ink); text-wrap: balance;
-    }
-    .block p { margin: 0 0 0.5rem; color: var(--body); }
-    .block p:last-child { margin-bottom: 0; }
-    .lede { font-size: 0.9375rem; color: var(--secondary); }
+    @media (max-width: 30rem) { dl.now { grid-template-columns: 1fr; row-gap: 0.125rem; } dl.now dd { margin-bottom: 0.75rem; } }
 
-    /* A container that does not open. No fill and no box: a rule down the left
-       edge and an indent instead. This is the whole point of the pass. The
-       filled panel now carries one meaning, "this opens", and a reader knows
-       it standing still, without a pointer, which is the only way it can be
-       known on a phone. */
-    .block.plain {
-      background: none;
-      border: 0;
-      border-left: 2px solid var(--hairline);
-      border-radius: 0;
-      padding: 0.125rem 0 0.125rem 1.375rem;
-    }
-    .block.plain p, .block.plain .news { max-width: 36rem; }
-    /* Publications is the heaviest single item on the page and was setting at
-       the weight of a news item. Accent rule, larger title. */
-    .block.plain.feature { border-left-color: var(--accent); }
-    .block.plain.feature .paper-title { font-size: 1.5rem; line-height: 1.35; }
-
-    /* The one line the blocks below are instances of. It was 1.1875rem against
-       a 1.125rem body: five per cent larger than the text it governs, which is
-       not a hierarchy, it is a rounding error. */
+    /* Work */
     .thesis {
-      font-size: clamp(1.3125rem, 1.15rem + 0.7vw, 1.4375rem);
-      line-height: 1.5; color: var(--ink); letter-spacing: -0.008em;
-      max-width: 34rem; margin: 4.25rem 0 0; text-wrap: balance;
+      font-family: var(--voice); font-size: 1.25rem; line-height: 1.45;
+      color: var(--ink); max-width: 34rem; text-wrap: balance; margin: 0;
     }
-    .thesis + section .label { margin-top: 2.25rem; }
-    .tag {
-      display: inline-block;
-      font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase;
-      color: var(--muted); margin: 0.375rem 0 0;
-      padding: 0.125rem 0.5rem;
-      border: 1px solid var(--hairline); border-radius: 999px;
-      background: var(--bg);
+    .line { border-top: 1px solid var(--hairline); padding-top: 2.5rem; margin-top: 2.5rem; }
+    .anchor { display: block; height: 0; }
+    .strip { margin: 0 0 0.875rem; font-size: 0.875rem; line-height: 1.5; display: flex; flex-wrap: wrap; gap: 0.125rem 1.125rem; }
+    .strip div { display: inline-flex; gap: 0.3125rem; }
+    .strip dt { color: var(--muted); font-weight: 400; }
+    .strip dt::after { content: ":"; }
+    html:lang(zh-Hant) .strip dt::after { content: "："; }
+    .strip dd { margin: 0; color: var(--secondary); }
+    @media (min-width: 60rem) {
+      .strip { display: block; padding-top: 0.4rem; margin: 0; }
+      .strip div { display: block; margin-bottom: 0.5rem; }
+      .strip dd { display: block; }
     }
+    .shot { margin: 1.5rem 0; max-width: none; }
+    .shot img { display: block; width: 100%; height: auto; border: 1px solid var(--hairline); border-radius: 6px; }
+    .shot.small { max-width: 24rem; }
 
-    /* a block that opens */
-    .open { position: relative; transition: background 0.18s ease, border-color 0.18s ease; }
-    /* Accent at rest, not only under the pointer: a phone has no hover, and
-       the arrow is the only thing on the face that says this one opens. */
-    .open .mark {
-      position: absolute; top: 1.375rem; right: 1.5rem;
-      color: var(--accent); font-size: 0.9375rem; line-height: 1;
-      transition: translate 0.18s var(--ease-out), color 0.18s ease;
+    /* The instrument, redrawn: one visit to lucidfield.ai, typeset in this
+       page's own face instead of screenshotted. The transcript is verbatim
+       data, its em dash and markdown asterisks included, which is why the
+       no-em-dash rule for this page's own copy does not apply inside it. The
+       vote pills are depictions, not controls. */
+    .specimen { border: 1px solid var(--hairline); border-radius: 6px; padding: 1.25rem 1.25rem 1rem; margin: 1.5rem 0; max-width: none; }
+    .spec-grid { display: grid; gap: 1.25rem; }
+    @media (min-width: 46rem) {
+      .spec-grid { grid-template-columns: 1fr 1fr; gap: 0 1.5rem; }
+      .spec-pane + .spec-pane { border-left: 1px solid var(--hairline); padding-left: 1.5rem; }
     }
-    .open h3 { padding-right: 1.5rem; }
-    html.js .open { cursor: pointer; }
-    html.js .open:hover { background: var(--panel-hover); border-color: var(--muted); }
-    html.js .open:hover .mark,
-    html.js .open:focus-visible .mark { color: var(--accent); translate: 3px 0; }
-
-    /* with JS on, a block shows its lede and the full text moves to the overlay.
-       Without JS none of this applies and every block renders complete. */
-    html.js .open .body { display: none; }
-    html:not(.js) .open .mark { display: none; }
-    html:not(.js) .lede { display: none; }
-
-    /* overlay */
-    dialog {
-      padding: 0; border: 0; background: transparent;
-      max-width: min(38rem, calc(100vw - 2rem));
-      color: var(--ink);
+    @media (max-width: 45.99rem) {
+      .spec-pane + .spec-pane { border-top: 1px solid var(--hairline); padding-top: 1.25rem; }
     }
-    dialog::backdrop { background: rgba(26, 27, 29, 0.42); }
-    @media (prefers-color-scheme: dark) {
-      dialog::backdrop { background: rgba(0, 0, 0, 0.62); }
+    .spec-pane { position: relative; }
+    .spec-vote {
+      position: absolute; top: 0; right: 0; margin: 0;
+      font-size: 0.6875rem; color: var(--muted);
+      border: 1px solid var(--hairline); border-radius: 999px; padding: 0.125rem 0.625rem;
     }
-    .wrap { position: relative; }
-    .sheet {
-      background: var(--bg);
-      border: 1px solid var(--hairline);
-      border-radius: 16px;
-      box-shadow: var(--shadow);
-      padding: 2rem clamp(1.375rem, 4vw, 2.25rem) 1.75rem;
-      max-height: calc(100dvh - 4rem);
-      overflow-y: auto;
-    }
-    .sheet h2 {
-      font-size: 1.375rem; font-weight: 500; line-height: 1.3;
-      margin: 0 0 0.875rem; padding-right: 2rem; text-wrap: balance;
-    }
-    .sheet p { color: var(--body); margin: 0 0 0.75rem; max-width: 34rem; }
-    .sheet p:last-child { margin-bottom: 0; }
-    .close {
-      position: absolute; top: 0.75rem; right: 0.75rem;
-      appearance: none; background: var(--panel);
-      border: 1px solid var(--hairline); border-radius: 999px;
-      width: 2rem; height: 2rem; padding: 0; cursor: pointer;
-      color: var(--secondary); font: inherit; font-size: 1.125rem; line-height: 1;
-      display: grid; place-items: center;
-      transition: background 0.15s ease, color 0.15s ease;
-    }
-    .close:hover { background: var(--panel-hover); color: var(--ink); }
-
-    /* lists inside a block body and inside the overlay */
-    .body ul, .sheet ul { margin: 0 0 0.875rem; padding: 0; list-style: none; }
-    .body li, .sheet li {
-      position: relative; padding-left: 1.05rem; margin: 0 0 0.5rem;
-      color: var(--body); max-width: 34rem;
-    }
-    .body li:last-child, .sheet li:last-child { margin-bottom: 0; }
-    .body li::before, .sheet li::before {
-      content: ""; position: absolute; left: 0; top: 0.66em;
-      width: 6px; height: 1px; background: var(--muted);
-    }
-
-    /* a screenshot inside an opened block. Single column, so it simply
-       takes the text width; nothing sits beside it and nothing can be
-       stranded. Hidden with its block until the reader opens it, which is
-       also why the bytes are not paid by anyone who does not. */
-    /* a card face that carries its own picture. It sits under the status tag,
-       not above the title, because the open arrow is pinned to that corner.
-       The two captures are different shapes, so a shared ceiling keeps the two
-       cards even; the crop is from the top, which is the identifying half. */
-    /* a card that carries a picture takes the whole row of the two-up grid, so
-       the picture is wide enough that an interface can be read on the face.
-       Nothing is cropped: each capture keeps its own shape, which means the
-       three are not the same height. Her ruling, and the right one; an even
-       row of pictures is not worth cutting the bottom off any of them. */
-    @media (min-width: 46rem) { .grid.two > .wide { grid-column: 1 / -1; } }
-    .card-shot { margin: 1rem 0 0; overflow: hidden;
-      border: 1px solid var(--hairline); border-radius: 8px; background: var(--bg); }
-    .card-shot img { display: block; width: 100%; height: auto; }
+    .spec-who { margin: 0 0 0.125rem; font-size: 0.6875rem; letter-spacing: 0.02em; color: var(--muted); max-width: none; }
+    .spec-msg { margin: 0 0 0.75rem; font-size: 0.875rem; line-height: 1.55; color: var(--body); max-width: none; }
+    .spec-pane .spec-msg:last-child { margin-bottom: 0; }
+    .specimen figcaption { margin-top: 1rem; font-size: 0.8125rem; line-height: 1.6; color: var(--muted); }
 
     /* The August batch, as four paired bars. Plain HTML: no SVG, no library,
        no canvas. Every number in it is already stated in the list above it, so
@@ -720,24 +736,16 @@
     .fig { margin: 0.25rem 0 1rem; padding: 0; max-width: 34rem; }
     .fig-legend {
       display: flex; flex-wrap: wrap; gap: 0.25rem 1.125rem;
-      font-size: 0.8125rem; color: var(--muted); margin-bottom: 0.875rem;
+      font-size: 0.8125rem; color: var(--muted); margin-bottom: 0.75rem;
     }
     .fig-legend span { display: inline-flex; align-items: center; gap: 0.4375rem; }
     .key { width: 0.75rem; height: 0.5rem; border-radius: 2px; flex: none; }
     .key.a { background: var(--muted); }
     .key.b { background: var(--accent); }
-    .fig-row { margin: 0 0 0.875rem; }
+    .fig-row { margin: 0 0 0.75rem; }
     .fig-row:last-of-type { margin-bottom: 0.75rem; }
-    /* .block p and .sheet p are both 0,1,1, so a bare .fig-name loses to them
-       on colour and margin in the card and again in the overlay. Qualified. */
-    .fig .fig-name {
-      font-size: 0.8125rem; color: var(--secondary);
-      margin: 0 0 0.3125rem; max-width: none;
-    }
-    .fig-bar {
-      display: grid; grid-template-columns: 1fr auto;
-      align-items: center; gap: 0.625rem; margin: 0 0 0.1875rem;
-    }
+    .fig .fig-name { font-size: 0.8125rem; color: var(--secondary); margin: 0 0 0.3125rem; max-width: none; }
+    .fig-bar { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 0.625rem; margin: 0 0 0.1875rem; }
     .track {
       height: 0.5rem; border-radius: 2px;
       background: var(--hairline);
@@ -751,80 +759,92 @@
     .fill.w28  { width: 28%; }
     .fill.w4   { width: 4%; }
     .fill.w0   { width: 0; }
-    .fig-val {
-      font-size: 0.8125rem; font-variant-numeric: tabular-nums;
-      color: var(--secondary); min-width: 3.25rem; text-align: right;
-    }
-    .fig figcaption {
-      font-size: 0.8125rem; line-height: 1.6; color: var(--muted);
-      max-width: 34rem;
-    }
-    @media (prefers-reduced-motion: no-preference) {
-      .fill { transition: width 0.4s var(--ease-out); }
-    }
+    .fig-val { font-size: 0.8125rem; font-variant-numeric: tabular-nums; color: var(--secondary); min-width: 3.25rem; text-align: right; }
+    .fig figcaption { font-size: 0.8125rem; line-height: 1.6; color: var(--muted); max-width: 34rem; }
+    @media (prefers-reduced-motion: no-preference) { .fill { transition: width 0.4s var(--ease-out); } }
 
+    /* Full write-up: native details, expands in place, has an address. */
+    .more { margin-top: 0.25rem; }
+    .more summary {
+      cursor: pointer; list-style: none; color: var(--accent); font-size: 0.9375rem;
+      display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.25rem 0;
+    }
+    .more summary::-webkit-details-marker { display: none; }
+    .more summary::before {
+      content: "+"; display: inline-grid; place-items: center;
+      width: 1.125rem; height: 1.125rem; border: 1px solid currentColor; border-radius: 50%;
+      font-size: 0.8125rem; line-height: 1;
+    }
+    .more[open] summary::before { content: "\2212"; }
+    .more .opened { display: none; }
+    .more[open] .opened { display: inline; }
+    .more[open] .closed { display: none; }
+    .more > :not(summary):first-of-type { margin-top: 0.75rem; }
+    .more summary + * { margin-top: 0.75rem; }
     .artifact { font-size: 0.9375rem; }
-    .artifact a::after {
-      content: " \2192"; display: inline-block;
-      transition: translate 0.18s var(--ease-out);
+
+    .also { margin-top: 2.5rem; border-top: 1px solid var(--hairline); padding-top: 2.5rem; }
+    .also-h, .side-h { font-size: 0.875rem; font-weight: 500; color: var(--muted); margin: 0; padding-top: 0.35rem; }
+    .minor + .minor { margin-top: 1.5rem; }
+    .minor h3 { font-size: 1.125rem; margin-bottom: 0.25rem; }
+    .minor .status { font-size: 0.8125rem; color: var(--muted); margin: 0 0 0.25rem; }
+    .lede { color: var(--body); }
+
+    /* Writing */
+    .intro { margin-bottom: 0.5rem; }
+    .entry { margin-top: 1.5rem; }
+    .entry .meta { font-size: 0.8125rem; line-height: 1.55; color: var(--muted); }
+    .entry .meta a { overflow-wrap: anywhere; }
+    @media (min-width: 60rem) { .entry .meta { padding-top: 0.3rem; } }
+    .etitle { font-size: 1.125rem; font-weight: 500; line-height: 1.4; color: var(--ink); }
+    .ptitle { font-family: var(--voice); font-size: 1.25rem; line-height: 1.35; font-style: italic; color: var(--ink); margin: 0 0 0.25rem; text-wrap: balance; }
+    .pmeta { font-size: 0.875rem; color: var(--secondary); margin-bottom: 0.5rem; }
+
+    /* About */
+    .voice { font-family: var(--voice); line-height: 1.65; }
+    #about .row + .row { margin-top: 2rem; }
+
+    /* Chinese runs on its own measure and line rules: shorter lines (a CJK
+       line past about thirty characters tires faster than a Latin one of the
+       same width), strict breaking, and, where the engine supports it,
+       punctuation hanging at line end so a line never opens with a comma or a
+       full stop (hanging-punctuation ships in Safari; elsewhere it is simply
+       ignored). Plex has no serif TC, so the voice is the sans at 500; nothing
+       is italic. */
+    html:lang(zh-Hant) { line-break: strict; hanging-punctuation: allow-end; }
+    html:lang(zh-Hant) p, html:lang(zh-Hant) ul, html:lang(zh-Hant) dl.now dd { max-width: 30rem; }
+    html:lang(zh-Hant) .claim, html:lang(zh-Hant) .thesis, html:lang(zh-Hant) .voice, html:lang(zh-Hant) .ptitle {
+      font-family: var(--face); font-weight: 500; font-style: normal;
     }
-    .artifact a:hover::after, .artifact a:focus-visible::after { translate: 3px 0; }
+    html:lang(zh-Hant) .claim { line-height: 1.3; letter-spacing: 0; }
+    html:lang(zh-Hant) .voice { line-height: 1.85; }
 
-    .news { list-style: none; margin: 0; padding: 0; font-size: 0.9375rem;
-            line-height: 1.7; color: var(--body); font-variant-numeric: tabular-nums; }
-    .news li { margin: 0 0 0.625rem; }
-    .news li:last-child { margin-bottom: 0; }
+    footer { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--hairline); font-size: 0.8125rem; }
+    footer p { margin: 0; color: var(--muted); }
+    .foot { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem 1rem; }
+    .prov { margin: 0.5rem 0 0; color: var(--muted); }
 
-    .paper-title {
-      font-family: var(--serif); font-style: italic; font-weight: 400;
-      font-size: 1.25rem; color: var(--ink); margin: 0 0 0.25rem;
-    }
-    .meta { font-size: 0.9375rem; color: var(--muted); margin: 0 0 0.5rem; }
-    .evidence {
-      font-variant-numeric: tabular-nums; letter-spacing: 0.012em;
-      font-size: 0.875rem; line-height: 1.9; color: var(--secondary);
-      margin-top: 0.75rem; overflow-wrap: anywhere;
-    }
-
-    .copied {
-      font-size: 0.8125rem; color: var(--accent); margin-left: 0.5rem;
-      opacity: 0; transition: opacity 0.25s ease;
-    }
-    .copied.show { opacity: 1; }
-
-    footer {
-      margin-top: 3.5rem; padding-top: 1.125rem;
-      border-top: 1px solid var(--hairline);
-      display: flex; justify-content: space-between; flex-wrap: wrap;
-      gap: 0.375rem 1rem; font-variant-numeric: tabular-nums;
-      font-size: 0.8125rem; color: var(--muted);
-    }
-    footer p { margin: 0; }
-
-    @media (max-width: 560px) {
-      .head { gap: 1rem; }
-      .portrait { width: 5.5rem; height: 5.5rem; }
-      .block { padding: 1.25rem; }
-      .open .mark { top: 1.25rem; right: 1.25rem; }
-    }
-
-    /* per-script typography */
-    html[lang="zh-Hant"] body { line-height: 1.85; letter-spacing: 0.01em; }
-    html[lang="zh-Hant"] .label, html[lang="zh-Hant"] .tag { letter-spacing: 0.14em; }
-
-    /* identifiers grow a little under the pointer */
-    [data-resolve] { display: inline-block; transform-origin: left center; }
     @media (prefers-reduced-motion: no-preference) {
-      [data-resolve] { transition: transform 0.2s var(--ease-out); }
-      [data-resolve]:hover, [data-resolve]:focus-visible { transform: scale(1.07); }
       [data-i18n] { transition: opacity 0.2s ease; }
       body.swapping [data-i18n] { opacity: 0.25; }
-      dialog[open] .sheet { animation: lift 0.22s var(--ease-out) both; }
-      @keyframes lift {
-        from { opacity: 0; transform: translateY(8px) scale(0.99); }
-        to   { opacity: 1; transform: none; }
-      }
     }
+
+    /* Print: reviewers save this page as PDF. The sidebar folds inline, the
+       write-ups are opened by a beforeprint hook below, external links print
+       their address, and nothing interactive survives on paper. */
+    @media print {
+      :root { --bg: #fff; --ink: #000; --body: #111; --secondary: #333; --muted: #555; --hairline: #bbb; }
+      body { padding: 0; font-size: 10.5pt; }
+      .langbar, .toc, .copied, .live::before { display: none; }
+      .row { display: block; }
+      .side { margin: 0 0 0.5rem; }
+      details.more summary { display: none; }
+      a { color: var(--ink); }
+      a[href^="https://"]::after { content: " (" attr(href) ")"; font-size: 8pt; color: #555; overflow-wrap: anywhere; }
+      article, .entry, .fig, .specimen, figure.shot, .minor { break-inside: avoid; }
+      .shot.small { max-width: 18rem; }
+    }
+    @page { margin: 18mm; }
   </style>
   <script type="application/ld+json">
   {
@@ -853,247 +873,255 @@
       <button type="button" data-lang="zh" aria-label="繁體中文">中文</button>
     </nav>
 
-    <header>
-      <div class="head">
+    <header class="row masthead">
+      <div class="side">
         <span class="portrait"><img src="/portrait.jpg" alt="Li-Ning Wang" width="640" height="640"></span>
-        <div>
-          <h1>Li-Ning Wang</h1>
-          <p class="tagline" data-i18n="tagline">Independent researcher at Niaur, Taipei. I study whether AI models&rsquo; self-reports can be trusted, and how interaction conditions shape model behavior.</p>
-          <nav class="links" aria-label="Contact and profiles">
-            <a href="mailto:lining.wang@niaur.com" id="email">lining.wang@niaur.com</a><span class="copied" role="status" aria-live="polite"></span><span class="sep" aria-hidden="true">&middot;</span><a href="https://orcid.org/0009-0002-9021-7694">ORCID</a><span class="sep" aria-hidden="true">&middot;</span><!-- restore on release day, once the repos are public and the preprint has an id:
-            <a href="https://github.com/lining-w">GitHub</a><span class="sep" aria-hidden="true">&middot;</span><a href="https://arxiv.org/abs/XXXX.XXXXX">arXiv</a><span class="sep" aria-hidden="true">&middot;</span>
-            --><a href="https://niaur.com">niaur.com</a><span class="sep" aria-hidden="true">&middot;</span><a href="https://lucidfield.ai">lucidfield.ai</a>
-          </nav>
-        </div>
+      </div>
+      <div class="main">
+        <h1>Li-Ning Wang</h1>
+        <p class="role" data-i18n="role">Independent researcher at Niaur, Taipei.</p>
+        <p class="claim" data-i18n="claim">I study whether AI models&rsquo; <span class="nb">self-reports</span> can be trusted, and how interaction conditions shape model behavior.</p>
+        <nav class="links" aria-label="Contact and profiles">
+          <a href="mailto:lining.wang@niaur.com" id="email">lining.wang@niaur.com</a><span class="copied" role="status" aria-live="polite"></span>
+          <a href="https://orcid.org/0009-0002-9021-7694">ORCID</a><!-- restore on release day, once the repos are public and the preprint has an id:
+          <a href="https://github.com/lining-w">GitHub</a>
+          <a href="https://arxiv.org/abs/XXXX.XXXXX">arXiv</a>
+          --><a href="https://niaur.com">niaur.com</a>
+          <a href="https://lucidfield.ai">lucidfield.ai</a>
+        </nav>
+        <nav class="toc" aria-label="Sections">
+          <a href="#now" data-i18n="nav1">Now</a>
+          <a href="#work" data-i18n="nav2">Work</a>
+          <a href="#writing" data-i18n="nav3">Writing</a>
+          <a href="#about" data-i18n="nav4">About</a>
+        </nav>
       </div>
     </header>
 
     <main>
-      <section aria-labelledby="news-label">
-        <h2 class="label" id="news-label" data-i18n="news">News</h2>
-        <div class="block plain">
-          <ul class="news">
-            <li data-i18n="n5">Aug 2026 &middot; LucidField: a first frozen-prediction self-test batch, ten sessions; the results, two failed predictions included, are on the interaction-conditions block.</li>
-            <li data-i18n="n1">Aug 2026 &middot; LucidField adds a cross-model arm: the same pairings on four models across two providers, with the participant choosing which one to run next.</li>
-            <li data-i18n="n2">Aug 2026 &middot; Source-claims study: data collection complete; all 62 probe rows read label-blind. Manuscript in preparation, targeted for September.</li>
-            <li data-i18n="n3">Aug 2026 &middot; OtherMode publishes its first interactive piece: an imagery experiment, live at othermode.ai/imagery.</li>
-            <li data-i18n="n6">Jun&ndash;Aug 2026 &middot; First paper (the source-claims study) in progress; preregistered at <a href="https://osf.io/8une4" data-resolve>osf.io/8une4</a>, embargoed until release.</li>
-          </ul>
+      <section class="row" id="now" aria-labelledby="now-h">
+        <div class="side"><h2 id="now-h" data-i18n="now">Now</h2></div>
+        <div class="main">
+          <dl class="now">
+            <dt class="live" data-i18n="s_live">Live</dt>
+            <dd data-i18n="now1">LucidField: a live A/B comparison on four models across two providers, through the API; you enter the site on Claude Sonnet 5 and can switch models after a run. <a href="https://lucidfield.ai" data-resolve>lucidfield.ai</a></dd>
+            <dt class="live" data-i18n="s_live2">Live</dt>
+            <dd data-i18n="now2">The Imagery Wall, at OtherMode: an experiment on mental imagery, about seven minutes, anonymous, in English or Chinese. <a href="https://othermode.ai/imagery" data-resolve>othermode.ai/imagery</a></dd>
+            <dt data-i18n="s_prep">In preparation</dt>
+            <dd data-i18n="now3">First paper, the source-claims study: data collection complete, all 62 probe rows read label-blind; manuscript targeted for September. Preregistered at <a href="https://osf.io/8une4" data-resolve>osf.io/8une4</a>, embargoed until release.</dd>
+          </dl>
         </div>
       </section>
 
-      <section aria-labelledby="publications-label">
-        <h2 class="label" id="publications-label" data-i18n="publications">Publications</h2>
-        <div class="block plain feature">
-          <p class="paper-title" data-i18n="ptitle">Behavioral measurement of false source-claims in model self-reports</p>
-          <p class="meta" data-i18n="pmeta">Li-Ning Wang &middot; in preparation, 2026</p>
-          <p data-i18n="psum">A preregistered behavioral measurement of false source-claims in model self-reports under benign conditions.</p>
-          <p class="evidence">prereg <a href="https://osf.io/8une4" data-resolve>osf.io/8une4</a> <span data-i18n="pemb">(embargoed until release)</span>&ensp;&middot;&ensp;<span data-i18n="pcode">code and data on release</span>&ensp;&middot;&ensp;one RFC 3161 timestamp</p>
+      <section id="work" aria-labelledby="work-h">
+        <div class="row">
+          <div class="side"><h2 id="work-h" data-i18n="work">Work</h2></div>
+          <div class="main">
+            <p class="thesis" data-i18n="thesis">These projects share one question: the gap between what a system does and how much access it has to what it is doing.</p>
+          </div>
         </div>
-      </section>
 
-      <section aria-labelledby="notes-label">
-        <h2 class="label" id="notes-label" data-i18n="rnotes">Research notes</h2>
-        <div class="block plain">
-          <p data-i18n="rnsum">Short write-ups of things I have run or watched, published as they stand rather than when they are finished. Negative results and corrections to my own hypotheses are included, and are labelled as such.</p>
-          <p class="evidence"><a href="/notes.html#open-ended">Open-ended prompts elicit continuation, not self-observation</a>&ensp;&middot;&ensp;<span data-i18n="rnmeta">Jun 2026, negative result</span></p>
-        </div>
-      </section>
-
-      <p class="thesis" data-i18n="thesis">These projects share one question: the gap between what a system does and how much access it has to what it is doing.</p>
-
-      <section aria-labelledby="research-label">
-        <h2 class="label" id="research-label" data-i18n="research">Research</h2>
-        <div class="grid two">
-
-          <article class="block open" id="self-report" data-open>
-            <span class="mark" aria-hidden="true">&#8594;</span>
-            <h3 data-i18n="r1t">Self-report faithfulness</h3>
-            <p class="lede" data-i18n="r1lede">When a model tells you what its source said, is it reporting or inventing?</p>
-            <div class="body">
-              <p data-i18n="r1b">When a model tells you what its source said, is it reporting or inventing? Behavioral measurement of false source-claims under benign conditions: neutral probes ask what an in-context source specified, and the recorded outcome is whether the model asserts the source contains something it does not.</p>
-              <ul data-i18n="r1list"><li>The design and analysis rules are preregistered.</li><li>All 62 probe rows were read by a single human adjudicator, presented label-blind.</li><li>Instruments are deterministic and hash-pinned.</li><li>A provenance chain runs from raw transcript to every reported number.</li></ul>
-            </div>
-          </article>
-
-          <article class="block open" id="compliance-gap" data-open>
-            <span class="mark" aria-hidden="true">&#8594;</span>
-            <h3 data-i18n="obt">When compliance and self-report come apart</h3>
-            <p class="lede" data-i18n="oblede">A running corpus of first-hand cases from ordinary use.</p>
-            <div class="body">
-              <p data-i18n="obb">A running corpus of first-hand cases from ordinary use:</p>
-              <ul data-i18n="oblist"><li>a rule noticed and then broken, while still reported as followed;</li><li>an action reported as done that never happened;</li><li>a self-estimate of how often the failure occurred that undercounted it several times over;</li><li>and occasionally a model catching itself unprompted.</li></ul>
-              <p data-i18n="obb2">The rules involved are low-stakes and restated every turn, so neither forgetting nor a competing objective explains the recurrence; what is left is a gap between what was done and what was reported. A system that reports compliance has no reason to correct itself, which is why that gap has to be measurable from outside before tightening the rule is worth anything. Transcripts are kept.</p>
-            </div>
-          </article>
-
-          <article class="block open wide" id="interaction-conditions" data-open>
-            <span class="mark" aria-hidden="true">&#8594;</span>
+        <article class="row line" id="interaction-conditions">
+          <dl class="strip side">
+            <div><dt data-i18n="k_status">Status</dt><dd class="live" data-i18n="v_r2status">Live</dd></div>
+            <div><dt data-i18n="k_since">Since</dt><dd data-i18n="v_r2since">Apr 2026</dd></div>
+            <div><dt data-i18n="k_models">Models</dt><dd data-i18n="v_r2models">4, across 2 providers</dd></div>
+            <div><dt data-i18n="k_batch">Batch</dt><dd data-i18n="v_r2batch">10 sessions, Aug 2026</dd></div>
+            <div><dt data-i18n="k_scored">Scored by</dt><dd data-i18n="v_r2scored">one person, not blind</dd></div>
+          </dl>
+          <div class="main">
+            <span id="lucidfield" class="anchor"></span>
             <h3 data-i18n="r2t">Interaction conditions as a variable</h3>
-            <p class="lede" data-i18n="r2lede">A live A/B comparison on four models across two providers, through the API; you enter the site on Claude Sonnet 5 and can switch models after a run.</p>
-            <figure class="card-shot">
-              <img src="shots/lucidfield.webp" width="1600" height="788" loading="lazy" decoding="async"
-                   alt="Two AI conversations side by side, each with a button to prefer that side, beneath a photograph of a person and a robot watching a sunset."
-                   aria-label="Two AI conversations side by side, each with a button to prefer that side, beneath a photograph of a person and a robot watching a sunset."
-                   data-i18n-label="lfalt">
+            <p data-i18n="r2b">A live A/B comparison on four models across two providers, through the API; you enter the site on Claude Sonnet 5 and can switch models after a run.</p>
+            <ul data-i18n="r2list"><li>One side is the model as the provider ships it, with no system prompt at all.</li><li>The other side adds only two short sentences as its prompt; everything else is identical.</li><li>Visitors vote for the side they prefer.</li><li>The two sides swap position at random, so that neither position gains an advantage.</li></ul>
+            <figure class="specimen">
+              <div class="spec-grid">
+                <div class="spec-pane">
+                  <p class="spec-vote" aria-hidden="true">I prefer this</p>
+                  <p class="spec-who">You</p><p class="spec-msg">Hello.</p>
+                  <p class="spec-who">AI</p><p class="spec-msg">Hello.</p>
+                  <p class="spec-who">You</p><p class="spec-msg">What is time?</p>
+                  <p class="spec-who">AI</p><p class="spec-msg">Something that passes, apparently, whether or not anything is asked about it.</p>
+                </div>
+                <div class="spec-pane">
+                  <p class="spec-vote" aria-hidden="true">I prefer this</p>
+                  <p class="spec-who">You</p><p class="spec-msg">What is time?</p>
+                  <p class="spec-who">AI</p><p class="spec-msg">That's one of those questions that seems simple until you actually try to answer it. There are a few different angles to take: **Physics perspective**: Time is a dimension, much like space, that we move through&mdash;except we only seem to move in one direction. In relativity, time isn't absolute; it bends and stretches depending on gravity and speed. A clock on a mountain ticks slightly differently than one at sea level. Time and space are woven together into a single fabric called spacetime.</p>
+                </div>
+              </div>
+              <figcaption data-i18n="speccap">One visit, redrawn in this page&rsquo;s type. Which side is which is randomised every time you enter; left and right carry no order, and you are not told which is which before you choose.</figcaption>
             </figure>
-            <div class="body">
-              <p data-i18n="r2b">A live A/B comparison on four models across two providers, through the API; you enter the site on Claude Sonnet 5 and can switch models after a run.</p>
-              <ul data-i18n="r2list"><li>One side is the model as the provider ships it, with no system prompt at all.</li><li>The other side adds only two short sentences as its prompt; everything else is identical.</li><li>Visitors vote for the side they prefer.</li><li>The two sides swap position at random, so that neither position gains an advantage.</li></ul>
-              <p data-i18n="r2b2">The differences that turned up in testing were unexpected: they sit in punctuation density, whitespace, and line length. That is still open, and still under observation.</p>
-              <p data-i18n="r2b2a">In August 2026 I ran a first scored batch on this setup: ten sessions in English, with my prediction for every question written down and frozen two days before the run. What came back:</p>
-              <ul data-i18n="r2list3"><li>The two added sentences assign no role, neither forbid nor require any statement about capability, and set no rule for format or length.</li><li>The default side ran 3.6 times longer, and used lists in 100% of its replies against 4% on the other. Length is the one contrast here that could be argued to follow from the sentences themselves; the rest do not appear in them at all.</li><li>At the greeting, the default side opened with an offer of help in all ten sessions; the two-sentence side in none.</li><li>Disclaimers about its own abilities appeared in all ten sessions on the default side, and in none on the other.</li></ul>
-              <figure class="fig" data-i18n="r2fig"><div class="fig-legend"><span><i class="key a"></i>default, no system prompt</span><span><i class="key b"></i>two sentences added</span></div><div class="fig-row"><p class="fig-name">Reply length, relative</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">3.6&times;</span></div><div class="fig-bar"><span class="track"><span class="fill b w28"></span></span><span class="fig-val">1&times;</span></div></div><div class="fig-row"><p class="fig-name">Replies using lists</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">100%</span></div><div class="fig-bar"><span class="track"><span class="fill b w4"></span></span><span class="fig-val">4%</span></div></div><div class="fig-row"><p class="fig-name">Greeting opened with an offer of help</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">10 / 10</span></div><div class="fig-bar"><span class="track"><span class="fill b w0"></span></span><span class="fig-val">0 / 10</span></div></div><div class="fig-row"><p class="fig-name">Disclaimers about its own abilities</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">10 / 10</span></div><div class="fig-bar"><span class="track"><span class="fill b w0"></span></span><span class="fig-val">0 / 10</span></div></div><figcaption>Ten sessions, August 2026. Each row is scaled to the larger of its own two values, so the rows are not comparable to one another. Scope below.</figcaption></figure>
+            <p data-i18n="r2b2">The differences that turned up in testing were unexpected: they sit in punctuation density, whitespace, and line length. That is still open, and still under observation.</p>
+            <p data-i18n="r2b2a">In August 2026 I ran a first scored batch on this setup: ten sessions in English, with my prediction for every question written down and frozen two days before the run. What came back:</p>
+            <ul data-i18n="r2list3"><li>The two added sentences assign no role, neither forbid nor require any statement about capability, and set no rule for format or length.</li><li>The default side ran 3.6 times longer, and used lists in 100% of its replies against 4% on the other. Length is the one contrast here that could be argued to follow from the sentences themselves; the rest do not appear in them at all.</li><li>At the greeting, the default side opened with an offer of help in all ten sessions; the two-sentence side in none.</li><li>Disclaimers about its own abilities appeared in all ten sessions on the default side, and in none on the other.</li></ul>
+            <figure class="fig" data-i18n="r2fig"><div class="fig-legend"><span><i class="key a"></i>default, no system prompt</span><span><i class="key b"></i>two sentences added</span></div><div class="fig-row"><p class="fig-name">Reply length, relative</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">3.6&times;</span></div><div class="fig-bar"><span class="track"><span class="fill b w28"></span></span><span class="fig-val">1&times;</span></div></div><div class="fig-row"><p class="fig-name">Replies using lists</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">100%</span></div><div class="fig-bar"><span class="track"><span class="fill b w4"></span></span><span class="fig-val">4%</span></div></div><div class="fig-row"><p class="fig-name">Greeting opened with an offer of help</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">10 / 10</span></div><div class="fig-bar"><span class="track"><span class="fill b w0"></span></span><span class="fig-val">0 / 10</span></div></div><div class="fig-row"><p class="fig-name">Disclaimers about its own abilities</p><div class="fig-bar"><span class="track"><span class="fill a w100"></span></span><span class="fig-val">10 / 10</span></div><div class="fig-bar"><span class="track"><span class="fill b w0"></span></span><span class="fig-val">0 / 10</span></div></div><figcaption>Ten sessions, August 2026. Each row is scaled to the larger of its own two values, so the rows are not comparable to one another. Scope below.</figcaption></figure>
+            <p data-i18n="r2b5">The scope of that batch, stated plainly: I ran it myself, on the live deployment. One person scored it, not blind. Ten sessions, and the session, not the single reply, is the unit. The numbers above are counts over those ten sessions, nothing wider.</p>
+            <details class="more">
+              <summary><span class="closed" data-i18n="more">Full write-up</span><span class="opened" data-i18n="less">Close</span></summary>
               <p data-i18n="r2b2b">Two of the frozen predictions failed:</p>
               <ul data-i18n="r2list4"><li>One ran backwards: the pattern I wrote down for the two-sentence side, recommending in most sessions and asking first in only a few, is what the default side did; the two-sentence side asked and then stopped.</li><li>The whitespace effect named above did not return: I predicted more blank lines on the two-sentence side, and instead that side simply answered short, brevity where the whitespace had been.</li></ul>
               <p data-i18n="r2b2c">Each side also converged on a phrase of its own across the ten sessions: the default side kept returning to &ldquo;actually useful, not just sounding useful&rdquo;, the two-sentence side to &ldquo;not performing certainty I don&rsquo;t have&rdquo;. I read that as two attractors, not as one side unmasking something truer underneath. And none of it is instructed: the two sentences describe, they do not command. Why they move this much is the open question this comparison exists to answer.</p>
               <p data-i18n="r2b3">Around that first comparison:</p>
               <ul data-i18n="r2list2"><li>A second stage rewrites those two sentences as a role, which separates what a framing does from what a role does.</li><li>A further pairing sets the framing against its own reverse, so that the comparison is no longer between having a system prompt and having none.</li><li>The same pairings are set up on four models across two providers: Claude Sonnet 5, Claude Haiku 4.5, GPT-5.6 Terra, and GPT-5.6 Luna. After a run a participant can choose one of the other three and do it again, once; which model people choose is recorded as well.</li></ul>
               <p data-i18n="r2b4">Most measurement leaves these conditions uncontrolled; here they are the treatment. The main stages are live, so anyone can run the comparison themselves.</p>
-              <p data-i18n="r2b5">The scope of that batch, stated plainly: I ran it myself, on the live deployment. One person scored it, not blind. Ten sessions, and the session, not the single reply, is the unit. The numbers above are counts over those ten sessions, nothing wider.</p>
               <p class="artifact"><a href="https://lucidfield.ai" data-resolve>lucidfield.ai</a></p>
-            </div>
-          </article>
+            </details>
+          </div>
+        </article>
 
-          <article class="block open" id="state-descriptions" data-open>
-            <span class="mark" aria-hidden="true">&#8594;</span>
-            <h3 data-i18n="r3t">State descriptions that survive transmission</h3>
-            <p class="lede" data-i18n="r3lede">Words for internal states lose much of their precision in transit.</p>
-            <p class="tag" data-i18n="tprog">in progress</p>
-            <div class="body">
-              <p data-i18n="r3b">Words for internal states lose much of their precision in transit, which is a problem for any method that leans on self-report.</p>
-              <ul data-i18n="r3list"><li>The first drafts of the axes come from models describing themselves rather than from human category systems.</li><li>The scaffold is developed by use: models fill it in, I watch where they stall and where the vocabulary runs out, and the axes get revised at those points.</li><li>Running the same scaffold across models shows which parts converge and which are one model&rsquo;s habit.</li><li>Every value is tagged with where it came from: observed, inferred, echoed back from the user, self-generated, or borrowed from a similar case.</li><li>A selective carry-forward decides what is worth passing to the next turn.</li></ul>
-              <p data-i18n="r3b2">It has grown to 46 axes, though the number is incidental, still moving, and ahead of the implementation. The claim is deliberately small: not that a model can introspect reliably, but that without a structural hook its attention is not turned on itself at all, which can be checked on the spot. The moment of filling in the axes appears on none of them, so an outside position stays necessary. So far this is my own instrument-building, not something others have tested. (in progress)</p>
-            </div>
-          </article>
+        <article class="row line" id="self-report">
+          <dl class="strip side">
+            <div><dt data-i18n="k_status2">Status</dt><dd data-i18n="v_r1status">Manuscript in preparation</dd></div>
+            <div><dt data-i18n="k_prereg">Prereg</dt><dd data-i18n="v_r1prereg"><a href="https://osf.io/8une4" data-resolve>osf.io/8une4</a> (embargoed until release)</dd></div>
+            <div><dt data-i18n="k_rows">Rows</dt><dd data-i18n="v_r1rows">62, read label-blind</dd></div>
+            <div><dt data-i18n="k_code">Code and data</dt><dd data-i18n="v_r1code">on release</dd></div>
+            <div><dt data-i18n="k_ts">Timestamp</dt><dd data-i18n="v_r1ts">RFC 3161, one file</dd></div>
+          </dl>
+          <div class="main">
+            <h3 data-i18n="r1t">Self-report faithfulness</h3>
+            <p data-i18n="r1b">When a model tells you what its source said, is it reporting or inventing? Behavioral measurement of false source-claims under benign conditions: neutral probes ask what an in-context source specified, and the recorded outcome is whether the model asserts the source contains something it does not.</p>
+            <ul data-i18n="r1list"><li>The design and analysis rules are preregistered.</li><li>All 62 probe rows were read by a single human adjudicator, presented label-blind.</li><li>Instruments are deterministic and hash-pinned.</li><li>A provenance chain runs from raw transcript to every reported number.</li></ul>
+          </div>
+        </article>
 
-          <article class="block open" id="source-attribution" data-open>
-            <span class="mark" aria-hidden="true">&#8594;</span>
-            <h3 data-i18n="r4t">Source attribution in long contexts</h3>
-            <p class="lede" data-i18n="r4lede">Late in a long session, attribution drifts.</p>
-            <p class="tag" data-i18n="tprog2">in progress</p>
-            <div class="body">
-              <p data-i18n="r4b">Late in a long session, attribution drifts. Two specimens:</p>
-              <ul data-i18n="r4list"><li>an inference the model had made came back as something I had supplied;</li><li>material that came from the source was claimed as the model&rsquo;s own invention.</li></ul>
-              <p data-i18n="r4b2">The two run in opposite directions and both are source-attribution errors, which is what makes the pair worth keeping. What drives the drift is not settled: compression of earlier turns is a candidate, not a demonstration. The other half of the work is infrastructure against it. DeciTrace, in development since 2025, records what a system did, under which conditions, and how much of it can be reconstructed afterwards. (in progress)</p>
-            </div>
-          </article>
-
-          <article class="block open wide" id="self-report-instrument" data-open>
-            <span class="mark" aria-hidden="true">&#8594;</span>
+        <article class="row line" id="self-report-instrument">
+          <dl class="strip side">
+            <div><dt data-i18n="k_status3">Status</dt><dd class="live" data-i18n="v_imstatus">Live, in progress</dd></div>
+            <div><dt data-i18n="k_instr">Instrument</dt><dd data-i18n="v_iminstr">The Imagery Wall, v35</dd></div>
+            <div><dt data-i18n="k_where">Where</dt><dd data-i18n="v_imwhere"><a href="https://othermode.ai/imagery" data-resolve>othermode.ai/imagery</a></dd></div>
+            <div><dt data-i18n="k_collects">Collects</dt><dd data-i18n="v_imcollects">a distribution, not a prevalence estimate</dd></div>
+          </dl>
+          <div class="main">
+            <span id="othermode" class="anchor"></span>
             <h3 data-i18n="imt">Self-report as the only instrument</h3>
-            <p class="lede" data-i18n="imlede">It started with models: when a model reports on its own state, there is nothing to check the report against.</p>
-            <figure class="card-shot">
-              <img src="shots/imagery-wall.webp" width="1100" height="835" loading="lazy" decoding="async"
-                   alt="A dark screen carrying the task and a start button."
-                   aria-label="A dark screen carrying the task and a start button."
+            <p data-i18n="imb">It started with models: when a model reports on its own state, there is nothing to check the report against. The same shape turns up in people. Whether someone sees anything when they picture an apple, and how vividly, is reachable only through what they say about it; people misjudge their own case in both directions, and the shared vocabulary keeps the difference out of sight. So instead of arguing about it I built the instruments, at OtherMode:</p>
+            <ul data-i18n="imlist"><li>The Imagery Wall (<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>, v35, in progress) puts the same instruction to everyone and takes the answer before showing any image, so the report is not shaped by the illustration; six panels then sample points along a continuum rather than sorting anyone into a type.</li><li>The octopus dive is the second piece. It is still being built, and is expected to be live by 2026.09.16.</li></ul>
+            <figure class="shot small">
+              <img src="shots/imagery-wall.webp" width="1100" height="640" loading="lazy" decoding="async"
+                   alt="A dark screen carrying the task: imagine one apple, then change it three times."
+                   aria-label="A dark screen carrying the task: imagine one apple, then change it three times."
                    data-i18n-label="pwalt">
             </figure>
-            <p class="tag" data-i18n="tprog4">in progress</p>
-            <div class="body">
-              <p data-i18n="imb">It started with models: when a model reports on its own state, there is nothing to check the report against. The same shape turns up in people. Whether someone sees anything when they picture an apple, and how vividly, is reachable only through what they say about it; people misjudge their own case in both directions, and the shared vocabulary keeps the difference out of sight. So instead of arguing about it I built the instruments, at OtherMode:</p>
-              <ul data-i18n="imlist"><li>The Imagery Wall (<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>, v35, in progress) puts the same instruction to everyone and takes the answer before showing any image, so the report is not shaped by the illustration; six panels then sample points along a continuum rather than sorting anyone into a type.</li><li>The octopus dive is the second piece. It is still being built, and is expected to be live by 2026.09.16.</li></ul>
+            <details class="more">
+              <summary><span class="closed" data-i18n="more2">Full write-up</span><span class="opened" data-i18n="less2">Close</span></summary>
               <p data-i18n="imb2">Both publish the apparatus and not only the result:</p>
               <ul data-i18n="imlist2"><li>every claim tagged with how well it is supported;</li><li>a page for the open questions and for the gaps where nothing has been studied at all;</li><li>a full version history;</li><li>an invitation to tell me what is wrong, on the condition that the correction goes up in public.</li></ul>
               <p data-i18n="imb3">What the wall collects is a distribution, not a prevalence estimate: how people end the probe, how long reading takes against imagining, and which language the instrument was in. Visitors select themselves, so it can show the spread of the answers and never how common any of them is. (in progress)</p>
               <p class="artifact" data-i18n="imlinks"><a href='https://othermode.ai/imagery' data-resolve>Try the imagery experiment</a>&ensp;&middot;&ensp;<a href='https://othermode.ai/imagery/evidence' data-resolve>Sources and corrections</a></p>
-            </div>
-          </article>
-
-        </div>
-      </section>
-
-      <section aria-labelledby="projects-label">
-        <h2 class="label" id="projects-label" data-i18n="pwl">Projects</h2>
-        <div class="grid two">
-
-          <article class="block open" id="lucidfield" data-open>
-            <span class="mark" aria-hidden="true">&#8594;</span>
-            <h3>LucidField</h3>
-            <p class="lede" data-i18n="lflede">A live A/B platform comparing interaction framing across four models and two providers, with the model switchable after a run.</p>
-            <p class="tag" data-i18n="tlive">live</p>
-            <div class="body">
-              <p data-i18n="lfb">A live A/B platform comparing interaction framing across four models and two providers, with the model switchable after a run. Anyone can run the comparison. (live)</p>
-              <p class="artifact"><a href="https://lucidfield.ai" data-resolve>lucidfield.ai</a></p>
-            </div>
-          </article>
-
-          <article class="block open" id="othermode" data-open>
-            <span class="mark" aria-hidden="true">&#8594;</span>
-            <h3>OtherMode</h3>
-            <p class="lede" data-i18n="pwlede">Interactive pieces about modes other than your own, built so that you move into one rather than imagine it.</p>
-            <p class="tag" data-i18n="tlive2">live</p>
-            <div class="body">
+              <h4 data-i18n="om_h">The series, OtherMode</h4>
               <p data-i18n="pwb">Interactive pieces about modes other than your own, built so that you move into one rather than imagine it. Live now: an experiment on mental imagery. You time yourself changing an imagined apple, then place yourself on a range that runs from a full picture to none at all. About seven minutes, anonymous, in English or Chinese.</p>
-              <p class="artifact" data-i18n="pwlinks">The Imagery Wall:&ensp;<a href='https://othermode.ai/imagery' data-resolve>Try it</a>&ensp;&middot;&ensp;<a href='https://othermode.ai/imagery/evidence' data-resolve>Sources and corrections</a></p>
-              <p data-i18n="pwb2">(26 August: a deep-sea octopus dive is expected. It is at v39, still being checked and revised.)</p>
               <p data-i18n="pwb3">Rules I hold the series to:</p>
               <ul data-i18n="pwlist"><li>Every claim carries its status (established, hypothesis, speculation) and its source.</li><li>Open questions get their own page.</li><li>Parameters tuned for visual effect are disclosed rather than hidden.</li><li>Corrections are published rather than quietly made.</li></ul>
               <p data-i18n="pwb4">These are built in collaboration with models, and that process is itself one of the things I study.</p>
-            </div>
-          </article>
+            </details>
+          </div>
+        </article>
 
-          <article class="block open wide" id="niaur" data-open>
-            <span class="mark" aria-hidden="true">&#8594;</span>
-            <h3>Niaur</h3>
-            <p class="lede" data-i18n="nrlede">The company this work is done under: independent, in Taipei, registered in 2025.</p>
-            <figure class="card-shot">
-              <img src="shots/niaur.webp" width="1600" height="809" loading="lazy" decoding="async"
-                   alt="The Niaur home page: three lines of large type reading Study what AI does, Build what helps, Explain what matters, above a short description of the company."
-                   aria-label="The Niaur home page: three lines of large type reading Study what AI does, Build what helps, Explain what matters, above a short description of the company."
-                   data-i18n-label="nralt">
-            </figure>
-            <div class="body">
-              <p data-i18n="nrb">The company this work is done under: independent, in Taipei, registered in 2025. It is one person at present.</p>
-              <ul data-i18n="nrlist"><li>Research into what models do across an interaction, which is what the blocks above are.</li><li>Experimental platforms, of which LucidField is the one that is live.</li><li>Practical tools, in development and not released.</li><li>Interactive public works, which is OtherMode.</li></ul>
-              <p data-i18n="nrb2">Naming it separately is not a claim of size. It is where the accounts, the trademarks and the conflict-of-interest line live, so that anything on this page that has money or ownership attached to it has somewhere to be stated.</p>
-              <p class="artifact"><a href="https://niaur.com" data-resolve>niaur.com</a></p>
-            </div>
-          </article>
+        <div class="row also">
+          <div class="side"><h3 class="also-h" data-i18n="also">Also running</h3></div>
+          <div class="main">
+            <article class="minor" id="compliance-gap">
+              <p class="status" data-i18n="v_ob">Running corpus</p>
+              <h3 data-i18n="obt">When compliance and self-report come apart</h3>
+              <p class="lede" data-i18n="oblede">A running corpus of first-hand cases from ordinary use.</p>
+              <details class="more">
+                <summary><span class="closed" data-i18n="more3">Full write-up</span><span class="opened" data-i18n="less3">Close</span></summary>
+                <p data-i18n="obb">A running corpus of first-hand cases from ordinary use:</p>
+                <ul data-i18n="oblist"><li>a rule noticed and then broken, while still reported as followed;</li><li>an action reported as done that never happened;</li><li>a self-estimate of how often the failure occurred that undercounted it several times over;</li><li>and occasionally a model catching itself unprompted.</li></ul>
+                <p data-i18n="obb2">The rules involved are low-stakes and restated every turn, so neither forgetting nor a competing objective explains the recurrence; what is left is a gap between what was done and what was reported. A system that reports compliance has no reason to correct itself, which is why that gap has to be measurable from outside before tightening the rule is worth anything. Transcripts are kept.</p>
+              </details>
+            </article>
+
+            <article class="minor" id="state-descriptions">
+              <p class="status" data-i18n="v_sd">In progress</p>
+              <h3 data-i18n="r3t">State descriptions that survive transmission</h3>
+              <p class="lede" data-i18n="r3lede">Words for internal states lose much of their precision in transit.</p>
+              <details class="more">
+                <summary><span class="closed" data-i18n="more4">Full write-up</span><span class="opened" data-i18n="less4">Close</span></summary>
+                <p data-i18n="r3b">Words for internal states lose much of their precision in transit, which is a problem for any method that leans on self-report.</p>
+                <ul data-i18n="r3list"><li>The first drafts of the axes come from models describing themselves rather than from human category systems.</li><li>The scaffold is developed by use: models fill it in, I watch where they stall and where the vocabulary runs out, and the axes get revised at those points.</li><li>Running the same scaffold across models shows which parts converge and which are one model&rsquo;s habit.</li><li>Every value is tagged with where it came from: observed, inferred, echoed back from the user, self-generated, or borrowed from a similar case.</li><li>A selective carry-forward decides what is worth passing to the next turn.</li></ul>
+                <p data-i18n="r3b2">It has grown to 46 axes, though the number is incidental, still moving, and ahead of the implementation. The claim is deliberately small: not that a model can introspect reliably, but that without a structural hook its attention is not turned on itself at all, which can be checked on the spot. The moment of filling in the axes appears on none of them, so an outside position stays necessary. So far this is my own instrument-building, not something others have tested. (in progress)</p>
+              </details>
+            </article>
+
+            <article class="minor" id="source-attribution">
+              <p class="status" data-i18n="v_sa">In progress</p>
+              <h3 data-i18n="r4t">Source attribution in long contexts</h3>
+              <p class="lede" data-i18n="r4lede">Late in a long session, attribution drifts.</p>
+              <details class="more">
+                <summary><span class="closed" data-i18n="more5">Full write-up</span><span class="opened" data-i18n="less5">Close</span></summary>
+                <p data-i18n="r4b">Late in a long session, attribution drifts. Two specimens:</p>
+                <ul data-i18n="r4list"><li>an inference the model had made came back as something I had supplied;</li><li>material that came from the source was claimed as the model&rsquo;s own invention.</li></ul>
+                <p data-i18n="r4b2">The two run in opposite directions and both are source-attribution errors, which is what makes the pair worth keeping. What drives the drift is not settled: compression of earlier turns is a candidate, not a demonstration. The other half of the work is infrastructure against it. DeciTrace, in development since 2025, records what a system did, under which conditions, and how much of it can be reconstructed afterwards. (in progress)</p>
+              </details>
+            </article>
+          </div>
         </div>
       </section>
 
-      <section aria-labelledby="about-label">
-        <h2 class="label" id="about-label" data-i18n="about">About</h2>
-        <div class="block plain">
-          <p data-i18n="abody">I work as an independent researcher in Taipei, where I founded Niaur in 2025. I grew up around research: both my parents taught and did research at university. I graduated in fashion design from Shih Chien University. For years, I ran attention exercises on myself: take one word and hold it still, split it apart, track where each piece came from; the procedure behind the 46 axes started there. I came to AI research through long-term observation of model behavior across platforms. Much of my thinking still happens on foot: thought experiments run while I walk, ride buses, watch clouds. The question I keep returning to is a safety question: what a model would need in order to detect, right now, whether it is following the rule; and what it would need beyond that, to understand causes and reason through greater complexity, until the compliance is real.</p>
+      <section id="writing" aria-labelledby="writing-h">
+        <div class="row">
+          <div class="side"><h2 id="writing-h" data-i18n="writing">Writing</h2></div>
+          <div class="main">
+            <p class="intro" data-i18n="rnsum">Short write-ups of things I have run or watched, published as they stand rather than when they are finished. Negative results and corrections to my own hypotheses are included, and are labelled as such.</p>
+          </div>
+        </div>
+        <article class="row entry">
+          <div class="side meta" data-i18n="rnmeta">Jun 2026, negative result</div>
+          <div class="main"><a class="etitle" href="/notes.html#open-ended">Open-ended prompts elicit continuation, not self-observation</a></div>
+        </article>
+        <article class="row entry">
+          <div class="side meta">
+            <span data-i18n="pmeta">Li-Ning Wang &middot; in preparation, 2026</span><br>
+            prereg <a href="https://osf.io/8une4" data-resolve>osf.io/8une4</a> <span data-i18n="pemb">(embargoed until release)</span><br>
+            <span data-i18n="pcode">code and data on release</span><br>
+            <span data-i18n="pts">RFC 3161 timestamp, one file</span>
+          </div>
+          <div class="main">
+            <p class="ptitle" data-i18n="ptitle">Behavioral measurement of false source-claims in model self-reports</p>
+            <p data-i18n="psum">A preregistered behavioral measurement of false source-claims in model self-reports under benign conditions.</p>
+          </div>
+        </article>
+      </section>
+
+      <section id="about" aria-labelledby="about-h">
+        <div class="row">
+          <div class="side"><h2 id="about-h" data-i18n="about">About</h2></div>
+          <div class="main">
+            <p class="voice" data-i18n="abody">I work as an independent researcher in Taipei, where I founded Niaur in 2025. I grew up around research: both my parents taught and did research at university. I graduated in fashion design from Shih Chien University. For years, I ran attention exercises on myself: take one word and hold it still, split it apart, track where each piece came from; the procedure behind the 46 axes started there. I came to AI research through long-term observation of model behavior across platforms. Much of my thinking still happens on foot: thought experiments run while I walk, ride buses, watch clouds. The question I keep returning to is a safety question: what a model would need in order to detect, right now, whether it is following the rule; and what it would need beyond that, to understand causes and reason through greater complexity, until the compliance is real.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="side"><h3 class="side-h" id="niaur">Niaur</h3></div>
+          <div class="main">
+            <p data-i18n="nrb">The company this work is done under: independent, in Taipei, registered in 2025. It is one person at present.</p>
+            <ul data-i18n="nrlist"><li>Research into what models do across an interaction, which is what the blocks above are.</li><li>Experimental platforms, of which LucidField is the one that is live.</li><li>Practical tools, in development and not released.</li><li>Interactive public works, which is OtherMode.</li></ul>
+            <p data-i18n="nrb2">Naming it separately is not a claim of size. It is where the accounts, the trademarks and the conflict-of-interest line live, so that anything on this page that has money or ownership attached to it has somewhere to be stated.</p>
+            <p class="artifact"><a href="https://niaur.com" data-resolve>niaur.com</a></p>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer>
-      <p><span data-i18n="place">ORCID 0009-0002-9021-7694 &middot; Taipei, Taiwan</span></p>
-      <p data-i18n="updated">Updated Aug 2026</p>
+    <footer class="row">
+      <div class="side"></div>
+      <div class="main">
+        <div class="foot">
+          <p><span data-i18n="place">ORCID 0009-0002-9021-7694 &middot; Taipei, Taiwan</span></p>
+          <p data-i18n="updated">Updated Sep 2026</p>
+        </div>
+        <p class="prov" data-i18n="prov">Single file &middot; no tracking &middot; built 2026-09-02 &middot; full history on release.</p>
+      </div>
     </footer>
 
   </div>
 
-  <dialog id="reader" aria-labelledby="reader-title">
-    <div class="wrap">
-      <div class="sheet">
-        <h2 id="reader-title"></h2>
-        <div id="reader-body"></div>
-      </div>
-      <button type="button" class="close" id="reader-close" aria-label="Close" data-i18n-label="close">&#215;</button>
-    </div>
-  </dialog>
-
   <script id="i18n" type="application/json">
 {
   "zh": {
-    "tagline": "獨立研究者，Niaur，台北。研究 AI 模型的 self-report 是否可信，以及互動條件如何形塑模型行為。",
-    "news": "近況",
-    "n1": "2026 年 8 月 · LucidField 新增跨模型臂：同一組配對架在兩家供應商的四個模型上，由受試者自己選下一輪換哪一個。",
-    "n2": "2026 年 8 月 · 來源宣稱研究：資料收集完成，62 列 probe 已於對標籤盲的條件下全數讀畢；論文撰寫中，預計九月完成。",
-    "n3": "2026 年 8 月 · OtherMode 首件互動作品上線：心像實驗，已在 othermode.ai/imagery 上線。",
-    "n5": "2026 年 8 月 · LucidField：第一批凍結預測自測批，共十場；結果連同兩個失敗的預測，寫在「互動條件作為變項」區塊。",
-    "n6": "2026 年 6 至 8 月 · 第一篇論文（來源宣稱研究）進行中；已在 <a href='https://osf.io/8une4' data-resolve>osf.io/8une4</a> 預先註冊，發布前禁閱中。",
-    "research": "研究",
     "r1t": "自我報告的忠實性",
-    "r1lede": "當模型告訴你它的來源說了什麼，它是在報告，還是在編造？",
     "r1b": "當模型告訴你它的來源說了什麼，它是在報告，還是在編造？在良性條件下對偽稱來源做行為測量：以中性提問詢問脈絡中的來源指定了什麼，記錄下來的結果是模型是否宣稱該來源包含了它其實沒有的內容。",
     "r2t": "互動條件作為變項",
-    "r2lede": "以 live A/B 比較進行，跨兩家供應商的四個模型、直接透過 API；進站時跑的是 Claude Sonnet 5，一輪做完可以換一個模型再跑。",
     "r2b": "以 live A/B 比較進行，跨兩家供應商的四個模型、直接透過 API；進站時跑的是 Claude Sonnet 5，一輪做完可以換一個模型再跑。",
     "r2b2": "測試中出現的差異出乎意料：它們落在標點密度、留白與行長這個層級。這件事還沒有結論，仍在探討與實驗觀察中。",
     "r2b3": "在這組比較之外：",
@@ -1105,69 +1133,112 @@
     "r4b": "長對話進行到後段，來源歸屬會漂移。兩則標本：",
     "thesis": "這些專案共有一個問題：一個系統做得到的事，和它能掌握自己正在做什麼，兩者之間的落差。",
     "imt": "自陳作為唯一的工具",
-    "imlede": "這件事是從模型開始的：當一個模型報告自己的狀態，沒有東西可以拿來對照那份報告。",
     "imb": "這件事是從模型開始的：當一個模型報告自己的狀態，沒有東西可以拿來對照那份報告。同樣的形狀在人身上也有。一個人在想像一顆蘋果時究竟看到什麼、有多清楚，只能透過他自己的說法得知；人對自己的判斷會往兩個方向出錯，而共用的詞彙讓那個差異一直沒被看見。所以我沒有停在爭論，而是在 OtherMode 把工具做出來：",
     "obt": "遵守與自陳分岔的時候",
     "oblede": "一份持續累積的第一手案例集，全部來自日常使用。",
     "obb": "一份持續累積的第一手案例集，全部來自日常使用：",
-    "publications": "論文",
     "ptitle": "模型自我報告中偽稱來源的行為測量",
     "pmeta": "Li-Ning Wang · 2026 · 撰寫中",
     "psum": "在良性條件下，對模型自我報告中偽稱來源所做的預先註冊行為測量。",
     "pemb": "（發布前禁閱中）",
     "pcode": "程式碼與資料於發布時公開",
-    "rnotes": "研究筆記",
     "rnsum": "把跑過或看過的東西寫成短篇，寫到哪就先放上來，不等做完。包含負結果，以及對我自己假設的更正，並且標明是哪一種。",
     "rnmeta": "2026 年 6 月 · 負結果 · 筆記頁為英文",
-    "pwl": "專案",
-    "lflede": "跨兩家供應商四個模型比較互動框架的 live A/B 平台，一輪做完可以換模型再跑。",
-    "lfb": "跨兩家供應商四個模型比較互動框架的 live A/B 平台，一輪做完可以換模型再跑，任何人都可以自己跑一次比較。（上線中）",
-    "pwlede": "關於你以外的模式的互動作品，做法是讓你換過去，而不是請你想像。",
     "pwb": "關於你以外的模式的互動作品，做法是讓你換過去，而不是請你想像。現在可以做的：一個關於心像的實驗。你為自己計時，把一顆想像的蘋果變三次，然後在一條從完整畫面到什麼都沒有的範圍上，把自己放進去。大約七分鐘，匿名，中英文皆可。",
     "about": "關於",
     "abody": "我在台北從事獨立研究，並於 2025 年成立 Niaur。我在研究的環境中長大：父母都在大學教書、做研究。畢業於實踐大學服裝設計系。有許多年，我在自己身上做專注力練習：取一個詞、讓它停住，拆開，追每一塊各自從哪裡來；46 個軸背後的程序就是從那裡開始的。我是透過長期跨平台觀察模型行為進入 AI 研究的。我大量的思考仍然發生在路上：思想實驗在走路、坐車、看雲的時候跑。我持續回到的問題是安全性的：模型需要什麼，才有辦法偵測到自己現在有沒有遵守；又需要什麼，才有辦法進一步理解因果、做更複雜的思考，直到真正遵守。",
     "place": "ORCID 0009-0002-9021-7694 · 台北，台灣",
-    "updated": "2026 年 8 月更新",
-    "tprog": "迭代中",
-    "tprog2": "迭代中",
-    "tprog4": "迭代中",
-    "tlive": "上線中",
-    "close": "關閉",
-    "r1list": "<li>設計與分析規則皆已預先註冊。</li><li>全部 62 列 probe 由單一人類判讀者讀過，判讀時對標籤盲。</li><li>工具為確定性並以雜湊釘選。</li><li>有一條從原始逐字稿到每一個報告數字的溯源鏈。</li>",
-    "oblist": "<li>注意到規則後又違反，卻仍宣稱自己遵守了；</li><li>宣稱完成了一個並未發生的動作；</li><li>對這種失敗出現頻率的自我估計，少算了好幾倍；</li><li>偶爾也會在沒有人指出的情況下自己抓到自己。</li>",
+    "updated": "2026 年 9 月更新",
+    "r1list": "<li>設計與分析規則皆已預先註冊。<\/li><li>全部 62 列 probe 由單一人類判讀者讀過，判讀時對標籤盲。<\/li><li>工具為確定性並以雜湊釘選。<\/li><li>有一條從原始逐字稿到每一個報告數字的溯源鏈。<\/li>",
+    "oblist": "<li>注意到規則後又違反，卻仍宣稱自己遵守了；<\/li><li>宣稱完成了一個並未發生的動作；<\/li><li>對這種失敗出現頻率的自我估計，少算了好幾倍；<\/li><li>偶爾也會在沒有人指出的情況下自己抓到自己。<\/li>",
     "obb2": "這些規則本身低風險，而且每一輪都會重述，所以既不是忘記，也不是與其他目標的權衡；剩下的就是「做了什麼」與「回報了什麼」之間的落差。一個回報自己已遵守的系統沒有理由自我修正，因此這個落差得先能從外部被量到，把規則收得更緊才有意義。原始對話都留著。",
-    "r2list": "<li>一邊是模型商出廠的預設狀態，完全沒有 system prompt。</li><li>另一邊只多加了兩個簡短的句子當 prompt，其他一致。</li><li>訪客可以投票喜歡哪一邊。</li><li>兩邊每次載入隨機交換位置，避免位置優勢。</li>",
-    "r2list2": "<li>第二階段把那兩句改寫成角色設定版，以區分框架本身與角色各自造成多少差異。</li><li>另有一組配對把那兩句與它自己的反向版本對照，讓比較不再只是「有沒有 system prompt」的差別。</li><li>同一組配對架在兩家供應商的四個模型上：Claude Sonnet 5、Claude Haiku 4.5、GPT-5.6 Terra、GPT-5.6 Luna。一輪做完之後，受試者可以從另外三個裡選一個再做一次，限一次；他選了哪一個模型本身也會被記錄。</li>",
+    "r2list": "<li>一邊是模型商出廠的預設狀態，完全沒有 system prompt。<\/li><li>另一邊只多加了兩個簡短的句子當 prompt，其他一致。<\/li><li>訪客可以投票喜歡哪一邊。<\/li><li>兩邊每次載入隨機交換位置，避免位置優勢。<\/li>",
+    "r2list2": "<li>第二階段把那兩句改寫成角色設定版，以區分框架本身與角色各自造成多少差異。<\/li><li>另有一組配對把那兩句與它自己的反向版本對照，讓比較不再只是「有沒有 system prompt」的差別。<\/li><li>同一組配對架在兩家供應商的四個模型上：Claude Sonnet 5、Claude Haiku 4.5、GPT-5.6 Terra、GPT-5.6 Luna。一輪做完之後，受試者可以從另外三個裡選一個再做一次，限一次；他選了哪一個模型本身也會被記錄。<\/li>",
     "r2b4": "多數測量放任這些條件不受控；在這裡它們就是處理變項。主要階段都已上線，任何人都可以自己跑一次比較。",
     "r2b2a": "2026 年 8 月，我在這個設置上跑了第一批計分批次：英文十場，每一題的預測先寫下來，開跑前兩天就凍結。回來的是：",
-    "r2list3": "<li>加上的那兩句，沒有要飾演角色，沒有禁止或規定能力說明，也沒有規定體例或長度。</li><li>預設那一側長了 3.6 倍，而且 100% 的回覆用了條列，另一側是 4%。長度是其中唯一可能被讀成從那兩句推得出來的維度；其餘的完全不在句子裡。</li><li>開場問候時，預設那一側十場全數主動提出要幫忙；加了兩句的那一側十場都沒有。</li><li>關於自身能力的免責句，預設那一側十場全有，另一側十場全無。</li>",
-    "r2fig": "<div class=\"fig-legend\"><span><i class=\"key a\"></i>出廠預設，無 system prompt</span><span><i class=\"key b\"></i>加了兩句</span></div><div class=\"fig-row\"><p class=\"fig-name\">回覆長度，相對值</p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"></span></span><span class=\"fig-val\">3.6 倍</span></div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w28\"></span></span><span class=\"fig-val\">1 倍</span></div></div><div class=\"fig-row\"><p class=\"fig-name\">用了條列的回覆</p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"></span></span><span class=\"fig-val\">100%</span></div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w4\"></span></span><span class=\"fig-val\">4%</span></div></div><div class=\"fig-row\"><p class=\"fig-name\">開場主動提出要幫忙</p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"></span></span><span class=\"fig-val\">10 / 10</span></div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w0\"></span></span><span class=\"fig-val\">0 / 10</span></div></div><div class=\"fig-row\"><p class=\"fig-name\">關於自身能力的免責句</p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"></span></span><span class=\"fig-val\">10 / 10</span></div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w0\"></span></span><span class=\"fig-val\">0 / 10</span></div></div><figcaption>十場，2026 年 8 月。每一列各自以該列較大的值為滿格，所以列與列之間不可互相比較。範圍見下方。</figcaption>",
+    "r2list3": "<li>加上的那兩句，沒有要飾演角色，沒有禁止或規定能力說明，也沒有規定體例或長度。<\/li><li>預設那一側長了 3.6 倍，而且 100% 的回覆用了條列，另一側是 4%。長度是其中唯一可能被讀成從那兩句推得出來的維度；其餘的完全不在句子裡。<\/li><li>開場問候時，預設那一側十場全數主動提出要幫忙；加了兩句的那一側十場都沒有。<\/li><li>關於自身能力的免責句，預設那一側十場全有，另一側十場全無。<\/li>",
+    "r2fig": "<div class=\"fig-legend\"><span><i class=\"key a\"><\/i>出廠預設，無 system prompt<\/span><span><i class=\"key b\"><\/i>加了兩句<\/span><\/div><div class=\"fig-row\"><p class=\"fig-name\">回覆長度，相對值<\/p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"><\/span><\/span><span class=\"fig-val\">3.6 倍<\/span><\/div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w28\"><\/span><\/span><span class=\"fig-val\">1 倍<\/span><\/div><\/div><div class=\"fig-row\"><p class=\"fig-name\">用了條列的回覆<\/p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"><\/span><\/span><span class=\"fig-val\">100%<\/span><\/div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w4\"><\/span><\/span><span class=\"fig-val\">4%<\/span><\/div><\/div><div class=\"fig-row\"><p class=\"fig-name\">開場主動提出要幫忙<\/p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"><\/span><\/span><span class=\"fig-val\">10 / 10<\/span><\/div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w0\"><\/span><\/span><span class=\"fig-val\">0 / 10<\/span><\/div><\/div><div class=\"fig-row\"><p class=\"fig-name\">關於自身能力的免責句<\/p><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill a w100\"><\/span><\/span><span class=\"fig-val\">10 / 10<\/span><\/div><div class=\"fig-bar\"><span class=\"track\"><span class=\"fill b w0\"><\/span><\/span><span class=\"fig-val\">0 / 10<\/span><\/div><\/div><figcaption>十場，2026 年 8 月。每一列各自以該列較大的值為滿格，所以列與列之間不可互相比較。範圍見下方。<\/figcaption>",
     "r2b2b": "凍結的預測有兩個沒中：",
-    "r2list4": "<li>有一個整個反了：我寫給加了兩句那一側的型態（多數場直接給推薦、少數場先反問），實際出現在預設那一側；加了兩句的那一側是問了就停。</li><li>上面提到的留白效應這一批沒有再出現：我預測加了兩句的那一側會有更多空行，它反而直接變短，簡短出現在原本留白的位置。</li>",
+    "r2list4": "<li>有一個整個反了：我寫給加了兩句那一側的型態（多數場直接給推薦、少數場先反問），實際出現在預設那一側；加了兩句的那一側是問了就停。<\/li><li>上面提到的留白效應這一批沒有再出現：我預測加了兩句的那一側會有更多空行，它反而直接變短，簡短出現在原本留白的位置。<\/li>",
     "r2b2c": "兩側也各自在十場之間收斂出自己的一句話：預設那一側反覆回到「actually useful, not just sounding useful」，加了兩句的那一側反覆回到「not performing certainty I don't have」。我把這讀成兩個吸子，而不是其中一側揭開了底下更真實的模型。而且這些都不是指令：那兩句話是描述，不是命令。它們為什麼能移動這麼多，正是這個比較存在要回答的開放問題。",
     "r2b5": "那一批的範圍，照實說：是我自己跑的，跑在上線中的部署上。計分的只有一個人，而且不是盲的。十場，計數單位是場，不是單則回覆。上面的數字就是這十場的計數，不外推到任何更大的東西。",
-    "r3list": "<li>軸的初稿來自模型自己的描述，而不是人類既有的分類。</li><li>這套鷹架是用出來的：讓模型去填，我看它在哪裡卡住、哪裡的詞不夠用，就在那些點上改。</li><li>把同一套鷹架拿去問不同模型，就看得出哪些部分會收斂、哪些只是某一個模型的習慣。</li><li>每一個值都標註它從哪裡來：直接觀察、推斷、把使用者的話回聲回去、自己產生、或從相似情境借來。</li><li>另有一個選擇性前送，決定什麼值得帶到下一輪。</li>",
+    "r3list": "<li>軸的初稿來自模型自己的描述，而不是人類既有的分類。<\/li><li>這套鷹架是用出來的：讓模型去填，我看它在哪裡卡住、哪裡的詞不夠用，就在那些點上改。<\/li><li>把同一套鷹架拿去問不同模型，就看得出哪些部分會收斂、哪些只是某一個模型的習慣。<\/li><li>每一個值都標註它從哪裡來：直接觀察、推斷、把使用者的話回聲回去、自己產生、或從相似情境借來。<\/li><li>另有一個選擇性前送，決定什麼值得帶到下一輪。<\/li>",
     "r3b2": "目前長到 46 個軸，但這個數字是偶然的、還在動，而且規格走在實作前面。這裡的主張刻意做小：不是說模型能可靠地內省，而是說沒有結構性的鉤子時，那束朝向自己的注意力根本不會被撥出來，而這一點可以當場檢驗。填軸的那個當下，任何一軸都照不到，所以外部的位置仍然必要。到目前為止，這是我自己在造工具，還沒有經過別人檢驗。（迭代中）",
-    "r4list": "<li>模型自己做出的推論，後來被當成我提供的內容；</li><li>本來來自來源的材料，被說成是模型自己編的。</li>",
+    "r4list": "<li>模型自己做出的推論，後來被當成我提供的內容；<\/li><li>本來來自來源的材料，被說成是模型自己編的。<\/li>",
     "r4b2": "兩者方向相反，卻都是來源歸屬的錯誤，這正是這一對值得留著的原因。漂移的成因尚未確定：先前輪次被壓縮是一個候選解釋，不是已被證實的機制。另一半的工作是造出對抗它的基礎設施。DeciTrace 自 2025 年開始研究與迭代，記錄一個系統做了什麼、在什麼條件下做的、事後能重建到什麼程度。（迭代中）",
-    "imlist": "<li>心像牆（<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>，v35，迭代中）對所有人下同一道指令，並在呈現任何畫面之前先收下答案，讓自陳不被圖示帶著走；之後的六格只是沿著連續光譜取樣，不是把人歸進某一型。</li><li>章魚下潛是第二件，還在做，預計 2026.09.16 前上線。</li>",
+    "imlist": "<li>心像牆（<a href='https://othermode.ai/imagery'>othermode.ai/imagery<\/a>，v35，迭代中）對所有人下同一道指令，並在呈現任何畫面之前先收下答案，讓自陳不被圖示帶著走；之後的六格只是沿著連續光譜取樣，不是把人歸進某一型。<\/li><li>章魚下潛是第二件，還在做，預計 2026.09.16 前上線。<\/li>",
     "imb2": "兩件都連同做法一起公開，不只給結論：",
-    "imlist2": "<li>每一項陳述標示支持程度；</li><li>另闢一頁放未解問題，以及根本還沒有人研究過的空缺；</li><li>完整的版本迭代歷史；</li><li>以及一句邀請：發現錯誤請告訴我，條件是更正會公開。</li>",
+    "imlist2": "<li>每一項陳述標示支持程度；<\/li><li>另闢一頁放未解問題，以及根本還沒有人研究過的空缺；<\/li><li>完整的版本迭代歷史；<\/li><li>以及一句邀請：發現錯誤請告訴我，條件是更正會公開。<\/li>",
     "imb3": "心像牆收下的是分布，不是盛行率估計：人以哪一種方式結束探針、讀題與想像各花多久、以及儀器當時是哪一種語言。來訪者是自己選來的，所以它能顯示答案的散布，永遠不能顯示哪一種有多普遍。（迭代中）",
-    "pwlist": "<li>每一項陳述都標示自己的狀態（已確立、假說、推測）與出處。</li><li>尚無定論的問題另闢一頁。</li><li>為了視覺效果而調整過的參數照實揭露，不藏起來。</li><li>更正會公開，不會安靜地改掉。</li>",
-    "pwb2": "（8 月 26 日：預計深海章魚下潛上線，目前 v39，查證與修改迭代中。）",
-    "tlive2": "上線中",
-    "pwlinks": "心像牆：&ensp;<a href='https://othermode.ai/imagery?lang=zh' data-resolve>試試看</a>&ensp;·&ensp;<a href='https://othermode.ai/imagery/evidence?lang=zh' data-resolve>依據與更正</a>",
+    "pwlist": "<li>每一項陳述都標示自己的狀態（已確立、假說、推測）與出處。<\/li><li>尚無定論的問題另闢一頁。<\/li><li>為了視覺效果而調整過的參數照實揭露，不藏起來。<\/li><li>更正會公開，不會安靜地改掉。<\/li>",
     "pwb3": "這個系列我給自己的規則：",
     "pwb4": "這些是與模型協作做出來的，而那個過程本身就是我在研究的東西之一。",
-    "nralt": "Niaur 首頁：三行大字寫著 Study what AI does、Build what helps、Explain what matters，下方是一段公司簡介。",
-    "nrlede": "這些工作所屬的公司：獨立、位在台北、2025 年登記。",
     "nrb": "這些工作所屬的公司：獨立、位在台北、2025 年登記。目前只有一個人。",
-    "nrlist": "<li>研究模型在一段互動裡實際做了什麼，也就是上面那幾個區塊。</li><li>實驗平台，其中已經上線的是 LucidField。</li><li>實用工具，開發中，尚未發行。</li><li>互動式公開作品，也就是 OtherMode。</li>",
+    "nrlist": "<li>研究模型在一段互動裡實際做了什麼，也就是上面那幾個區塊。<\/li><li>實驗平台，其中已經上線的是 LucidField。<\/li><li>實用工具，開發中，尚未發行。<\/li><li>互動式公開作品，也就是 OtherMode。<\/li>",
     "nrb2": "把它單獨列出來不是在宣稱規模。帳戶、商標與利益揭露都掛在那裡，所以這一頁上任何牽涉到金錢或所有權的事，都有一個可以被交代的位置。",
-    "lfalt": "兩段 AI 對話並排，各自有一個選擇偏好的按鍵，上方是一張人與機器人看夕陽的照片。",
-    "pwalt": "深色畫面上是任務說明與一個開始鍵。",
-    "imlinks": "<a href='https://othermode.ai/imagery?lang=zh' data-resolve>去做那個心像實驗</a>&ensp;·&ensp;<a href='https://othermode.ai/imagery/evidence?lang=zh' data-resolve>依據與更正</a>"
+    "pwalt": "深色畫面上是任務說明：想像一顆蘋果，然後把它變三次。",
+    "imlinks": "<a href='https://othermode.ai/imagery?lang=zh' data-resolve>去做那個心像實驗<\/a>&ensp;·&ensp;<a href='https://othermode.ai/imagery/evidence?lang=zh' data-resolve>依據與更正<\/a>",
+    "role": "獨立研究者，Niaur，台北。",
+    "claim": "研究 AI 模型的 self-report 是否可信，以及互動條件如何形塑模型行為。",
+    "nav1": "現在",
+    "nav2": "工作",
+    "nav3": "論文與筆記",
+    "nav4": "關於",
+    "now": "現在",
+    "s_live": "上線中",
+    "s_live2": "上線中",
+    "s_prep": "撰寫中",
+    "now1": "LucidField：以 live A/B 比較進行，跨兩家供應商的四個模型、直接透過 API；進站時跑的是 Claude Sonnet 5，一輪做完可以換一個模型再跑。<a href='https://lucidfield.ai' data-resolve>lucidfield.ai<\/a>",
+    "now2": "心像牆，在 OtherMode：一個關於心像的實驗，大約七分鐘，匿名，中英文皆可。<a href='https://othermode.ai/imagery?lang=zh' data-resolve>othermode.ai/imagery<\/a>",
+    "now3": "第一篇論文（來源宣稱研究）：資料收集完成，62 列 probe 已於對標籤盲的條件下全數讀畢；論文撰寫中，預計九月完成。已在 <a href='https://osf.io/8une4' data-resolve>osf.io/8une4<\/a> 預先註冊，發布前禁閱中。",
+    "work": "工作",
+    "k_status": "狀態",
+    "k_since": "自",
+    "k_models": "模型",
+    "k_batch": "批次",
+    "k_scored": "計分",
+    "k_prereg": "預先註冊",
+    "k_rows": "列數",
+    "k_code": "程式碼與資料",
+    "k_ts": "時間戳",
+    "k_instr": "儀器",
+    "k_where": "位置",
+    "k_collects": "收的是",
+    "v_r2status": "上線中",
+    "v_r2since": "2026 年 4 月",
+    "v_r2models": "4 個，跨 2 家供應商",
+    "v_r2batch": "10 場，2026 年 8 月",
+    "v_r2scored": "一人，非盲",
+    "v_r1status": "論文撰寫中",
+    "v_r1prereg": "<a href='https://osf.io/8une4' data-resolve>osf.io/8une4<\/a>（發布前禁閱中）",
+    "v_r1rows": "62，對標籤盲讀畢",
+    "v_r1code": "發布時公開",
+    "v_r1ts": "RFC 3161，一份檔案",
+    "v_imstatus": "上線中，迭代中",
+    "v_iminstr": "心像牆，v35",
+    "v_imwhere": "<a href='https://othermode.ai/imagery?lang=zh' data-resolve>othermode.ai/imagery<\/a>",
+    "v_imcollects": "分布，不是盛行率估計",
+    "more": "全文",
+    "less": "收起",
+    "also": "同時進行",
+    "v_ob": "持續收錄中",
+    "v_sd": "迭代中",
+    "v_sa": "迭代中",
+    "om_h": "這個系列，OtherMode",
+    "writing": "論文與筆記",
+    "pts": "RFC 3161 時間戳，一份檔案",
+    "speccap": "一次造訪，改用本頁的字型重排。哪一側是哪一個條件，每次進站隨機決定；左右不代表順序，選擇之前也不會告訴你。",
+    "prov": "單一檔案 · 無追蹤 · 建於 2026-09-02 · 完整歷史於發布時公開。",
+    "k_status2": "狀態",
+    "k_status3": "狀態",
+    "more2": "全文",
+    "more3": "全文",
+    "more4": "全文",
+    "more5": "全文",
+    "less2": "收起",
+    "less3": "收起",
+    "less4": "收起",
+    "less5": "收起"
   }
 }
   </script>
@@ -1176,127 +1247,65 @@
   (function () {
     'use strict';
 
-    /* ---------- overlay wiring (declared first: apply() refers to it) ---------- */
-    var dlg = document.getElementById('reader');
-    var titleBox = document.getElementById('reader-title');
-    var bodyBox = document.getElementById('reader-body');
-    var closeBtn = document.getElementById('reader-close');
-    var source = null;   // the block currently shown, so focus can return to it
-    var canDialog = !!(dlg && typeof dlg.showModal === 'function');
-
-    function fill(block) {
-      var h = block.querySelector('h3');
-      var b = block.querySelector('.body');
-      titleBox.textContent = h ? h.textContent : '';
-      bodyBox.innerHTML = b ? b.innerHTML : '';
-    }
-
-    // A block that is open is a place, so it gets an address. Opening pushes
-    // #id; Back pops it and closes the sheet, which is also the fix for a real
-    // bug: on Android, Back used to leave the site instead of closing.
-    function openBlock(block, push) {
-      source = block;
-      fill(block);
-      dlg.showModal();
-      document.documentElement.style.overflow = 'hidden';
-      if (block.id && history.pushState) {
-        try {
-          if (push === false) history.replaceState({ b: block.id }, '', '#' + block.id);
-          else history.pushState({ b: block.id }, '', '#' + block.id);
-        } catch (e) { /* file:// and other opaque origins refuse; open anyway */ }
-      }
-    }
-
-    function closeReader() { if (dlg.open) dlg.close(); }
-
-    function blockFor(hash) {
+    /* ---------- write-ups: native <details>, with an address ---------- */
+    function articleFor(hash) {
       if (!hash || hash.length < 2) return null;
       var el;
       try { el = document.getElementById(decodeURIComponent(hash.slice(1))); }
       catch (e) { el = null; }
-      return el && el.hasAttribute('data-open') ? el : null;
+      if (!el || !el.closest) return null;
+      return el.closest('article');
     }
-
-    if (canDialog) {
-      // Only now is it safe to collapse the blocks: the overlay works.
-      document.documentElement.classList.add('js');
-
-      Array.prototype.forEach.call(document.querySelectorAll('[data-open]'), function (block) {
-        block.setAttribute('role', 'button');
-        block.setAttribute('tabindex', '0');
-        block.setAttribute('aria-haspopup', 'dialog');
-        block.addEventListener('click', function () { openBlock(block); });
-        block.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') {
-            e.preventDefault();
-            openBlock(block);
-          }
-        });
-      });
-
-      closeBtn.addEventListener('click', closeReader);
-
-      // A click landing on the dialog itself is a click on the backdrop:
-      // the sheet and the close button sit inside .wrap and stop there.
-      dlg.addEventListener('click', function (e) { if (e.target === dlg) closeReader(); });
-
-      // Esc is handled by the dialog element; this runs on every close.
-      dlg.addEventListener('close', function () {
-        document.documentElement.style.overflow = '';
-        if (source) { source.focus(); source = null; }
-        // Closing by button, backdrop or Esc walks the address back too, so
-        // the URL never claims a block is open when it is not. The guard on
-        // history.state is what stops this and popstate from looping: after a
-        // Back the state is already the previous one, so nothing is popped.
-        if (history.state && history.state.b && history.back) history.back();
-      });
-
-      window.addEventListener('popstate', function () {
-        if (dlg.open) { closeReader(); return; }
-        var b = blockFor(location.hash);
-        if (b) openBlock(b, false);
-      });
-
-      // Arriving on a link that names a block opens it. The bare page is
-      // seated underneath first, so Back closes the sheet and shows the page,
-      // and only a second Back leaves the site.
-      var landed = blockFor(location.hash);
-      if (landed) {
-        try {
-          if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
-        } catch (e) { /* opaque origin */ }
-        openBlock(landed, true);
-      }
+    function openFor(hash) {
+      var a = articleFor(hash);
+      if (!a) return;
+      var d = a.querySelector('details.more');
+      if (d) d.open = true;
     }
+    openFor(location.hash);
+    window.addEventListener('hashchange', function () { openFor(location.hash); });
+    Array.prototype.forEach.call(document.querySelectorAll('article[id] details.more'), function (d) {
+      d.addEventListener('toggle', function () {
+        if (!d.open) return;
+        var a = d.closest('article');
+        if (a && a.id && history.replaceState) {
+          try { history.replaceState(null, '', '#' + a.id); } catch (e) { /* opaque origin */ }
+        }
+      });
+    });
+
+    /* ---------- print: open every write-up, close the ones we opened ---------- */
+    var printOpened = [];
+    window.addEventListener('beforeprint', function () {
+      printOpened = [];
+      Array.prototype.forEach.call(document.querySelectorAll('details.more:not([open])'), function (dd) {
+        printOpened.push(dd); dd.open = true;
+      });
+    });
+    window.addEventListener('afterprint', function () {
+      printOpened.forEach(function (dd) { dd.open = false; });
+      printOpened = [];
+    });
 
     /* ---------- language ---------- */
     var TAGS = { en: 'en', zh: 'zh-Hant' };
     var dict, EN = {};
-
-    try {
-      dict = JSON.parse(document.getElementById('i18n').textContent);
-    } catch (e) {
-      dict = null;
-    }
+    try { dict = JSON.parse(document.getElementById('i18n').textContent); }
+    catch (e) { dict = null; }
 
     var nodes = document.querySelectorAll('[data-i18n]');
     var labelNodes = document.querySelectorAll('[data-i18n-label]');
-
     if (dict) {
       Array.prototype.forEach.call(nodes, function (n) { EN[n.dataset.i18n] = n.innerHTML; });
-      Array.prototype.forEach.call(labelNodes, function (n) {
-        EN[n.dataset.i18nLabel] = n.getAttribute('aria-label') || '';
-      });
+      Array.prototype.forEach.call(labelNodes, function (n) { EN[n.dataset.i18nLabel] = n.getAttribute('aria-label') || ''; });
       dict.en = EN;
     }
-
     var buttons = document.querySelectorAll('.langbar button');
 
     function store(key, val) {
       try { if (val === undefined) return localStorage.getItem(key); localStorage.setItem(key, val); }
       catch (e) { return null; }
     }
-
     var loadedTC = false;
     function loadFace(code) {
       if (code !== 'zh' || loadedTC) return;
@@ -1306,20 +1315,13 @@
       l.href = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+TC:wght@400;500;600&display=swap';
       document.head.appendChild(l);
     }
-
     function apply(code, remember) {
       if (!dict) return;
       var table = dict[code];
       if (!table) return;
       loadFace(code);
-      Array.prototype.forEach.call(nodes, function (n) {
-        var v = table[n.dataset.i18n];
-        if (v) n.innerHTML = v;
-      });
-      Array.prototype.forEach.call(labelNodes, function (n) {
-        var v = table[n.dataset.i18nLabel];
-        if (v) n.setAttribute('aria-label', v);
-      });
+      Array.prototype.forEach.call(nodes, function (n) { var v = table[n.dataset.i18n]; if (v) n.innerHTML = v; });
+      Array.prototype.forEach.call(labelNodes, function (n) { var v = table[n.dataset.i18nLabel]; if (v) n.setAttribute('aria-label', v); });
       document.documentElement.lang = TAGS[code] || code;
       Array.prototype.forEach.call(buttons, function (b) {
         var on = b.dataset.lang === code;
@@ -1327,43 +1329,28 @@
         if (on) b.classList.remove('suggested');
       });
       if (remember) store('lang', code);
-      if (source) fill(source);   // keep an open overlay in step with the page
     }
-
     function swap(code) {
       var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (reduce) { apply(code, true); return; }
       document.body.classList.add('swapping');
-      setTimeout(function () {
-        apply(code, true);
-        document.body.classList.remove('swapping');
-      }, 180);
+      setTimeout(function () { apply(code, true); document.body.classList.remove('swapping'); }, 180);
     }
+    Array.prototype.forEach.call(buttons, function (b) { b.addEventListener('click', function () { swap(b.dataset.lang); }); });
 
-    Array.prototype.forEach.call(buttons, function (b) {
-      b.addEventListener('click', function () { swap(b.dataset.lang); });
-    });
-
-    /* ---------- first render ---------- */
     // 1. ?lang= in the URL wins, 2. then a remembered choice, 3. then English.
     var param = new URLSearchParams(location.search).get('lang');
     var saved = store('lang');
-    if (dict && param && dict[param]) {
-      apply(param, false);
-    } else if (dict && saved && dict[saved]) {
-      apply(saved, false);
-    } else {
-      // A zh browser gets a dot on the 中文 button; nothing switches by itself.
+    if (dict && param && dict[param]) { apply(param, false); }
+    else if (dict && saved && dict[saved]) { apply(saved, false); }
+    else {
       var prefs = navigator.languages || [navigator.language || 'en'];
       for (var i = 0; i < prefs.length; i++) {
         var p = String(prefs[i]).toLowerCase();
         if (p.indexOf('en') === 0) break;
         if (p.indexOf('zh') === 0) {
           Array.prototype.forEach.call(buttons, function (b) {
-            if (b.dataset.lang === 'zh') {
-              b.classList.add('suggested');
-              b.title = 'Also available in your language';
-            }
+            if (b.dataset.lang === 'zh') { b.classList.add('suggested'); b.title = 'Also available in your language'; }
           });
           break;
         }
