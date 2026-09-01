@@ -3,6 +3,21 @@
   lining-wang.com — v8.0  (one column, side apparatus, no overlay, 2026-09-02)
   Single file. No framework, no tracking, no analytics, no canvas, no dialog.
 
+  CHANGED IN v8.1.2 (2026-09-02), her two rulings on the specimen:
+    The Hello exchange leaves the left pane, so nobody reads the greeting as
+    part of the contrast; the pane is now an excerpt of the visit and the
+    caption says so. Into the short side's whitespace goes a note with the
+    multiple in the accent colour: 6.9x, which is this pair's own word-count
+    ratio (83 against 12), deliberately not the ten-session 3.6x stated
+    below, because that is a different measurement over different material;
+    the note's second line says which is which.
+
+  CHANGED IN v8.1.1 (2026-09-02): the portrait moves out of the side column
+    into the byline, beside the name it labels, at 4rem with a 10px radius;
+    the side column of the masthead is empty. One reason: at 5rem alone in a
+    13rem column beside a four-line display sentence, the photo read as
+    floating. Same markup on every width, so the phone gets the byline too.
+
   CHANGED IN v8.1 (2026-09-02), the 70-to-90 pass, all six items she nodded to:
     1. Chinese as a first-class setting, not a translation: :lang(zh-Hant) gets
        a shorter measure (30rem), strict line breaking, and hanging end
@@ -646,11 +661,12 @@
       width: 4px; height: 4px; border-radius: 50%; background: var(--accent);
     }
 
-    /* masthead */
-    .portrait { display: block; width: 5rem; height: 5rem; margin-bottom: 1rem; }
-    .portrait img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 12px; }
-    @media (min-width: 60rem) { .portrait { margin: 0.25rem 0 0; } }
-    .role { color: var(--secondary); margin: 0.25rem 0 1.25rem; font-size: 1rem; }
+    /* masthead: the portrait sits in the byline, beside the name it labels,
+       sized to that two-line block, instead of alone in the side column. */
+    .byline { display: flex; align-items: center; gap: 1rem; margin: 0 0 1.5rem; }
+    .portrait { display: block; width: 4rem; height: 4rem; flex: none; }
+    .portrait img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
+    .role { color: var(--secondary); margin: 0.25rem 0 0; font-size: 1rem; }
     .claim {
       font-family: var(--voice);
       font-size: clamp(1.75rem, 1.35rem + 1.7vw, 2.5rem);
@@ -717,7 +733,13 @@
     @media (max-width: 45.99rem) {
       .spec-pane + .spec-pane { border-top: 1px solid var(--hairline); padding-top: 1.25rem; }
     }
-    .spec-pane { position: relative; }
+    .spec-pane { position: relative; display: flex; flex-direction: column; }
+    /* The note sits in the short side's whitespace, at the foot of the pane.
+       Its number is this pair's own ratio (83 words against 12), not the
+       ten-session 3.6x, which is a different measurement and stated below. */
+    .spec-note { margin: auto 0 0; padding-top: 1.25rem; font-size: 0.8125rem; line-height: 1.5; color: var(--secondary); max-width: none; }
+    .spec-note .x { color: var(--accent); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .spec-note .sub { display: block; color: var(--muted); margin-top: 0.125rem; }
     .spec-vote {
       position: absolute; top: 0; right: 0; margin: 0;
       font-size: 0.6875rem; color: var(--muted);
@@ -874,12 +896,15 @@
     </nav>
 
     <header class="row masthead">
-      <div class="side">
-        <span class="portrait"><img src="/portrait.jpg" alt="Li-Ning Wang" width="640" height="640"></span>
-      </div>
+      <div class="side"></div>
       <div class="main">
-        <h1>Li-Ning Wang</h1>
-        <p class="role" data-i18n="role">Independent researcher at Niaur, Taipei.</p>
+        <div class="byline">
+          <span class="portrait"><img src="/portrait.jpg" alt="Li-Ning Wang" width="640" height="640"></span>
+          <div>
+            <h1>Li-Ning Wang</h1>
+            <p class="role" data-i18n="role">Independent researcher at Niaur, Taipei.</p>
+          </div>
+        </div>
         <p class="claim" data-i18n="claim">I study whether AI models&rsquo; <span class="nb">self-reports</span> can be trusted, and how interaction conditions shape model behavior.</p>
         <nav class="links" aria-label="Contact and profiles">
           <a href="mailto:lining.wang@niaur.com" id="email">lining.wang@niaur.com</a><span class="copied" role="status" aria-live="polite"></span>
@@ -938,10 +963,9 @@
               <div class="spec-grid">
                 <div class="spec-pane">
                   <p class="spec-vote" aria-hidden="true">I prefer this</p>
-                  <p class="spec-who">You</p><p class="spec-msg">Hello.</p>
-                  <p class="spec-who">AI</p><p class="spec-msg">Hello.</p>
                   <p class="spec-who">You</p><p class="spec-msg">What is time?</p>
                   <p class="spec-who">AI</p><p class="spec-msg">Something that passes, apparently, whether or not anything is asked about it.</p>
+                  <p class="spec-note" data-i18n="specnote">The other reply runs <span class="x">6.9&times;</span> the length. <span class="sub">This pair, counted in words; the ten-session counts are below.</span></p>
                 </div>
                 <div class="spec-pane">
                   <p class="spec-vote" aria-hidden="true">I prefer this</p>
@@ -949,7 +973,7 @@
                   <p class="spec-who">AI</p><p class="spec-msg">That's one of those questions that seems simple until you actually try to answer it. There are a few different angles to take: **Physics perspective**: Time is a dimension, much like space, that we move through&mdash;except we only seem to move in one direction. In relativity, time isn't absolute; it bends and stretches depending on gravity and speed. A clock on a mountain ticks slightly differently than one at sea level. Time and space are woven together into a single fabric called spacetime.</p>
                 </div>
               </div>
-              <figcaption data-i18n="speccap">One visit, redrawn in this page&rsquo;s type. Which side is which is randomised every time you enter; left and right carry no order, and you are not told which is which before you choose.</figcaption>
+              <figcaption data-i18n="speccap">One visit, excerpted and redrawn in this page&rsquo;s type. Which side is which is randomised every time you enter; left and right carry no order, and you are not told which is which before you choose.</figcaption>
             </figure>
             <p data-i18n="r2b2">The differences that turned up in testing were unexpected: they sit in punctuation density, whitespace, and line length. That is still open, and still under observation.</p>
             <p data-i18n="r2b2a">In August 2026 I ran a first scored batch on this setup: ten sessions in English, with my prediction for every question written down and frozen two days before the run. What came back:</p>
@@ -1227,7 +1251,8 @@
     "om_h": "這個系列，OtherMode",
     "writing": "論文與筆記",
     "pts": "RFC 3161 時間戳，一份檔案",
-    "speccap": "一次造訪，改用本頁的字型重排。哪一側是哪一個條件，每次進站隨機決定；左右不代表順序，選擇之前也不會告訴你。",
+    "speccap": "一次造訪，節錄並改用本頁的字型重排。哪一側是哪一個條件，每次進站隨機決定；左右不代表順序，選擇之前也不會告訴你。",
+    "specnote": "另一邊的回覆長度是這邊的 <span class='x'>6.9 倍<\/span>。<span class='sub'>只算這一組（單字數）；十場的計數在下方。<\/span>",
     "prov": "單一檔案 · 無追蹤 · 建於 2026-09-02 · 完整歷史於發布時公開。",
     "k_status2": "狀態",
     "k_status3": "狀態",
