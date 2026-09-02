@@ -3,6 +3,23 @@
   lining-wang.com — v8.0  (one column, side apparatus, no overlay, 2026-09-02)
   Single file. No framework, no tracking, no analytics, no canvas, no dialog.
 
+  CHANGED IN v8.1.5 (2026-09-02), her two notes on the card:
+    1. The almost screenshots she supplied now appear: one of the two is on
+       the page. shots/almost.webp is a crop of her second screenshot (the
+       opening of the seat paragraph): "word 1, only one seat", the When
+       hill and the a hill, a circle on each seat, the dashed path leaving
+       the frame toward word 3. 1100x989, 16KB, lazy. The first screenshot
+       (the scroll-highlight band around words 20 to 22) is unused; to run
+       both, add a second figure, but one per work is this page's pattern.
+    2. The interleaving she flagged is gone: the card no longer runs
+       wall text, octopus, almost text, wall picture. imlist returns to her
+       two items (wall, octopus), the wall picture follows its own text,
+       then a new paragraph (key amb, the former list item verbatim) and
+       the almost picture follow as their own pair. Reading order is now
+       wall text, wall picture, almost text, almost picture.
+    New keys amb + amalt (EN and zh). Now line unchanged. DEPLOY gains
+    shots/almost.webp. Run smoketest_v815.js.
+
   CHANGED IN v8.1.4 (2026-09-02), her ruling on the series:
     RULED: almost is the first piece of an AI series at OtherMode, which
     replaces v8.1.3's "third piece" framing (that ordinal was flagged as
@@ -122,9 +139,10 @@
     Self-hosting, to match othermode.ai's zero external requests, is v8.1.
 
   DEPLOY
-    index.html, og.png, shots/imagery-wall.webp, portrait.jpg (unchanged).
+    index.html, og.png, shots/imagery-wall.webp, shots/almost.webp,
+    portrait.jpg (unchanged).
     shots/lucidfield.webp and shots/niaur.webp are no longer referenced.
-    sitemap.xml lastmod → 2026-09-02. Run smoketest_v814.js first.
+    sitemap.xml lastmod → 2026-09-02. Run smoketest_v815.js first.
 
   OPEN, FOR HER RULING
     "Since Apr 2026" in the first strip; the removal of the News list; the
@@ -1065,12 +1083,19 @@
             <span id="othermode" class="anchor"></span>
             <h3 data-i18n="imt">Self-report as the only instrument</h3>
             <p data-i18n="imb">It started with models: when a model reports on its own state, there is nothing to check the report against. The same shape turns up in people. Whether someone sees anything when they picture an apple, and how vividly, is reachable only through what they say about it; people misjudge their own case in both directions, and the shared vocabulary keeps the difference out of sight. So instead of arguing about it I built the instruments, at OtherMode:</p>
-            <ul data-i18n="imlist"><li>The Imagery Wall (<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>, v35, in progress) puts the same instruction to everyone and takes the answer before showing any image, so the report is not shaped by the illustration; six panels then sample points along a continuum rather than sorting anyone into a type.</li><li>The octopus dive is the second piece. It is still being built, and is expected to be live by 2026.09.16.</li><li>almost, at <a href='https://othermode.ai/almost'>othermode.ai/almost</a>, opens an AI-themed line in the series, and is that line's first piece: one sentence drawn as terrain, a row per word; at every word the candidates stand as hills beside the one that took the seat, close and unseen. For now it is a demonstration: every number on the page is synthetic, and the page says so.</li></ul>
+            <ul data-i18n="imlist"><li>The Imagery Wall (<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>, v35, in progress) puts the same instruction to everyone and takes the answer before showing any image, so the report is not shaped by the illustration; six panels then sample points along a continuum rather than sorting anyone into a type.</li><li>The octopus dive is the second piece. It is still being built, and is expected to be live by 2026.09.16.</li></ul>
             <figure class="shot small">
               <img src="shots/imagery-wall.webp" width="1100" height="640" loading="lazy" decoding="async"
                    alt="A dark screen carrying the task: imagine one apple, then change it three times."
                    aria-label="A dark screen carrying the task: imagine one apple, then change it three times."
                    data-i18n-label="pwalt">
+            </figure>
+            <p data-i18n="amb">almost, at <a href='https://othermode.ai/almost'>othermode.ai/almost</a>, opens an AI-themed line in the series, and is that line's first piece: one sentence drawn as terrain, a row per word; at every word the candidates stand as hills beside the one that took the seat, close and unseen. For now it is a demonstration: every number on the page is synthetic, and the page says so.</p>
+            <figure class="shot small">
+              <img src="shots/almost.webp" width="1100" height="989" loading="lazy" decoding="async"
+                   alt="Two words of one sentence as terrain: candidates rise as hills, a circle on the one that took the seat, a dashed path linking the seats."
+                   aria-label="Two words of one sentence as terrain: candidates rise as hills, a circle on the one that took the seat, a dashed path linking the seats."
+                   data-i18n-label="amalt">
             </figure>
             <details class="more">
               <summary><span class="closed" data-i18n="more2">Full write-up</span><span class="opened" data-i18n="less2">Close</span></summary>
@@ -1236,7 +1261,7 @@
     "r3b2": "目前長到 46 個軸，但這個數字是偶然的、還在動，而且規格走在實作前面。這裡的主張刻意做小：不是說模型能可靠地內省，而是說沒有結構性的鉤子時，那束朝向自己的注意力根本不會被撥出來，而這一點可以當場檢驗。填軸的那個當下，任何一軸都照不到，所以外部的位置仍然必要。到目前為止，這是我自己在造工具，還沒有經過別人檢驗。（迭代中）",
     "r4list": "<li>模型自己做出的推論，後來被當成我提供的內容；<\/li><li>本來來自來源的材料，被說成是模型自己編的。<\/li>",
     "r4b2": "兩者方向相反，卻都是來源歸屬的錯誤，這正是這一對值得留著的原因。漂移的成因尚未確定：先前輪次被壓縮是一個候選解釋，不是已被證實的機制。另一半的工作是造出對抗它的基礎設施。DeciTrace 自 2025 年開始研究與迭代，記錄一個系統做了什麼、在什麼條件下做的、事後能重建到什麼程度。（迭代中）",
-    "imlist": "<li>心像牆（<a href='https://othermode.ai/imagery'>othermode.ai/imagery<\/a>，v35，迭代中）對所有人下同一道指令，並在呈現任何畫面之前先收下答案，讓自陳不被圖示帶著走；之後的六格只是沿著連續光譜取樣，不是把人歸進某一型。<\/li><li>章魚下潛是第二件，還在做，預計 2026.09.16 前上線。<\/li><li>almost（<a href='https://othermode.ai/almost'>othermode.ai\/almost<\/a>）開了系列裡 AI 主題的一條線，是這條線的第一件：一句話被畫成地形，一列一個字；每個字的候選各自成山，站在坐上位子的那一個旁邊，很近，只是沒被看見。目前是示範版：頁上所有數字皆為合成，頁面本身也這樣標示（頁面為英文）。<\/li>",
+    "imlist": "<li>心像牆（<a href='https://othermode.ai/imagery'>othermode.ai/imagery<\/a>，v35，迭代中）對所有人下同一道指令，並在呈現任何畫面之前先收下答案，讓自陳不被圖示帶著走；之後的六格只是沿著連續光譜取樣，不是把人歸進某一型。<\/li><li>章魚下潛是第二件，還在做，預計 2026.09.16 前上線。<\/li>",
     "imb2": "兩件都連同做法一起公開，不只給結論：",
     "imlist2": "<li>每一項陳述標示支持程度；<\/li><li>另闢一頁放未解問題，以及根本還沒有人研究過的空缺；<\/li><li>完整的版本迭代歷史；<\/li><li>以及一句邀請：發現錯誤請告訴我，條件是更正會公開。<\/li>",
     "imb3": "心像牆收下的是分布，不是盛行率估計：人以哪一種方式結束探針、讀題與想像各花多久、以及儀器當時是哪一種語言。來訪者是自己選來的，所以它能顯示答案的散布，永遠不能顯示哪一種有多普遍。（迭代中）",
@@ -1257,6 +1282,8 @@
     "now": "現在",
     "s_live": "上線中",
     "s_live2": "上線中",
+    "amb": "almost（<a href='https://othermode.ai/almost'>othermode.ai\/almost<\/a>）開了系列裡 AI 主題的一條線，是這條線的第一件：一句話被畫成地形，一列一個字；每個字的候選各自成山，站在坐上位子的那一個旁邊，很近，只是沒被看見。目前是示範版：頁上所有數字皆為合成，頁面本身也這樣標示（頁面為英文）。",
+    "amalt": "一句話的前兩個字畫成地形：候選各自成山，圈住坐上位子的那一個，虛線把位子連起來。",
     "s_demo": "示範版上線",
     "nowam": "almost，在 OtherMode，AI 系列的第一件：句子裡的每個字，都只有一個位子。一句話畫成地形，一列一個字，候選各自成山，圈住坐上位子的那一個。目前是示範版：頁上所有數字皆為合成，頁面本身也這樣標示；介面目前為英文。<a href='https://othermode.ai/almost' data-resolve>othermode.ai\/almost<\/a>",
     "s_prep": "撰寫中",
