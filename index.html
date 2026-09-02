@@ -3,6 +3,27 @@
   lining-wang.com — v8.0  (one column, side apparatus, no overlay, 2026-09-02)
   Single file. No framework, no tracking, no analytics, no canvas, no dialog.
 
+  CHANGED IN v8.2 (2026-09-02), her three rulings + the wire went hot:
+    1. Octopus off this page. The removed sentence, verbatim, for restore:
+       EN "The octopus dive is the second piece. It is still being built,
+       and is expected to be live by 2026.09.16." zh 「章魚下潛是第二件，
+       還在做，預計 2026.09.16 前上線。」 With it the one public date on
+       this page leaves; othermode.ai has carried no date since its v3.3.
+    2. The AI block moves above the wall inside the card. imb's colon now
+       introduces almost first, then the wall. imlist (down to one item)
+       becomes a plain paragraph, key imwall, her words unchanged.
+    3. New shot from her 2026-09-02 screenshot of the live page (v16 look,
+       circles on peaks): shots/almost.webp re-cut 1100x587, wider than
+       before; the misplaced word of the old crop is gone with it.
+    Consequential, not ordered but required by accuracy: /almost/ now runs
+    a real model (she wired gpt-5.6-luna today), so "every number is
+    synthetic" was no longer true. nowam, amb and s_demo now say: live;
+    the three built-in passages are synthetic; a typed sentence asks a
+    real model. No model name on this page (names go stale).
+    Now-line order unchanged (LucidField, wall, almost, paper); moving
+    almost above the wall there too is one swap if she wants it.
+    Run smoketest_v82.js.
+
   CHANGED IN v8.1.5 (2026-09-02), her two notes on the card:
     1. The almost screenshots she supplied now appear: one of the two is on
        the page. shots/almost.webp is a crop of her second screenshot (the
@@ -142,7 +163,7 @@
     index.html, og.png, shots/imagery-wall.webp, shots/almost.webp,
     portrait.jpg (unchanged).
     shots/lucidfield.webp and shots/niaur.webp are no longer referenced.
-    sitemap.xml lastmod → 2026-09-02. Run smoketest_v815.js first.
+    sitemap.xml lastmod → 2026-09-02. Run smoketest_v82.js first.
 
   OPEN, FOR HER RULING
     "Since Apr 2026" in the first strip; the removal of the News list; the
@@ -994,8 +1015,8 @@
             <dd data-i18n="now1">LucidField: a live A/B comparison on four models across two providers, through the API; you enter the site on Claude Sonnet 5 and can switch models after a run. <a href="https://lucidfield.ai" data-resolve>lucidfield.ai</a></dd>
             <dt class="live" data-i18n="s_live2">Live</dt>
             <dd data-i18n="now2">The Imagery Wall, at OtherMode: an experiment on mental imagery, about seven minutes, anonymous, in English or Chinese. <a href="https://othermode.ai/imagery" data-resolve>othermode.ai/imagery</a></dd>
-            <dt class="live" data-i18n="s_demo">Live demo</dt>
-            <dd data-i18n="nowam">almost, at OtherMode, the first piece of its AI series: every word in a sentence has only one seat. One sentence is drawn as terrain, a row per word, the candidates as hills, a circle on the one that took the seat. A demonstration for now: every number on the page is synthetic, and the page says so. <a href="https://othermode.ai/almost" data-resolve>othermode.ai/almost</a></dd>
+            <dt class="live" data-i18n="s_demo">Live</dt>
+            <dd data-i18n="nowam">almost, at OtherMode, the first piece of its AI series: every word in a sentence has only one seat. One sentence is drawn as terrain, a row per word, the candidates as hills, a circle on the one that took the seat. Live: the three built-in passages are synthetic; type a sentence of your own and a real model answers. <a href="https://othermode.ai/almost" data-resolve>othermode.ai/almost</a></dd>
             <dt data-i18n="s_prep">In preparation</dt>
             <dd data-i18n="now3">First paper, the source-claims study: data collection complete, all 62 probe rows read label-blind; manuscript targeted for September. Preregistered at <a href="https://osf.io/8une4" data-resolve>osf.io/8une4</a>, embargoed until release.</dd>
           </dl>
@@ -1083,20 +1104,21 @@
             <span id="othermode" class="anchor"></span>
             <h3 data-i18n="imt">Self-report as the only instrument</h3>
             <p data-i18n="imb">It started with models: when a model reports on its own state, there is nothing to check the report against. The same shape turns up in people. Whether someone sees anything when they picture an apple, and how vividly, is reachable only through what they say about it; people misjudge their own case in both directions, and the shared vocabulary keeps the difference out of sight. So instead of arguing about it I built the instruments, at OtherMode:</p>
-            <ul data-i18n="imlist"><li>The Imagery Wall (<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>, v35, in progress) puts the same instruction to everyone and takes the answer before showing any image, so the report is not shaped by the illustration; six panels then sample points along a continuum rather than sorting anyone into a type.</li><li>The octopus dive is the second piece. It is still being built, and is expected to be live by 2026.09.16.</li></ul>
+            <p data-i18n="amb">almost, at <a href='https://othermode.ai/almost'>othermode.ai/almost</a>, opens an AI-themed line in the series, and is that line's first piece: one sentence drawn as terrain, a row per word; at every word the candidates stand as hills beside the one that took the seat, close and unseen. It runs live: the three built-in passages are synthetic and say so on the page, and you can type a sentence of your own and watch a real model answer it, word by word.</p>
+            <figure class="shot small">
+              <img src="shots/almost.webp" width="1100" height="587" loading="lazy" decoding="async"
+                   alt="Two words of one sentence as terrain: candidates rise as hills, a circle on the one that took the seat, a dashed path linking the seats."
+                   aria-label="Two words of one sentence as terrain: candidates rise as hills, a circle on the one that took the seat, a dashed path linking the seats."
+                   data-i18n-label="amalt">
+            </figure>
+            <p data-i18n="imwall">The Imagery Wall (<a href='https://othermode.ai/imagery'>othermode.ai/imagery</a>, v35, in progress) puts the same instruction to everyone and takes the answer before showing any image, so the report is not shaped by the illustration; six panels then sample points along a continuum rather than sorting anyone into a type.</p>
             <figure class="shot small">
               <img src="shots/imagery-wall.webp" width="1100" height="640" loading="lazy" decoding="async"
                    alt="A dark screen carrying the task: imagine one apple, then change it three times."
                    aria-label="A dark screen carrying the task: imagine one apple, then change it three times."
                    data-i18n-label="pwalt">
             </figure>
-            <p data-i18n="amb">almost, at <a href='https://othermode.ai/almost'>othermode.ai/almost</a>, opens an AI-themed line in the series, and is that line's first piece: one sentence drawn as terrain, a row per word; at every word the candidates stand as hills beside the one that took the seat, close and unseen. For now it is a demonstration: every number on the page is synthetic, and the page says so.</p>
-            <figure class="shot small">
-              <img src="shots/almost.webp" width="1100" height="989" loading="lazy" decoding="async"
-                   alt="Two words of one sentence as terrain: candidates rise as hills, a circle on the one that took the seat, a dashed path linking the seats."
-                   aria-label="Two words of one sentence as terrain: candidates rise as hills, a circle on the one that took the seat, a dashed path linking the seats."
-                   data-i18n-label="amalt">
-            </figure>
+            
             <details class="more">
               <summary><span class="closed" data-i18n="more2">Full write-up</span><span class="opened" data-i18n="less2">Close</span></summary>
               <p data-i18n="imb2">Both publish the apparatus and not only the result:</p>
@@ -1261,7 +1283,7 @@
     "r3b2": "目前長到 46 個軸，但這個數字是偶然的、還在動，而且規格走在實作前面。這裡的主張刻意做小：不是說模型能可靠地內省，而是說沒有結構性的鉤子時，那束朝向自己的注意力根本不會被撥出來，而這一點可以當場檢驗。填軸的那個當下，任何一軸都照不到，所以外部的位置仍然必要。到目前為止，這是我自己在造工具，還沒有經過別人檢驗。（迭代中）",
     "r4list": "<li>模型自己做出的推論，後來被當成我提供的內容；<\/li><li>本來來自來源的材料，被說成是模型自己編的。<\/li>",
     "r4b2": "兩者方向相反，卻都是來源歸屬的錯誤，這正是這一對值得留著的原因。漂移的成因尚未確定：先前輪次被壓縮是一個候選解釋，不是已被證實的機制。另一半的工作是造出對抗它的基礎設施。DeciTrace 自 2025 年開始研究與迭代，記錄一個系統做了什麼、在什麼條件下做的、事後能重建到什麼程度。（迭代中）",
-    "imlist": "<li>心像牆（<a href='https://othermode.ai/imagery'>othermode.ai/imagery<\/a>，v35，迭代中）對所有人下同一道指令，並在呈現任何畫面之前先收下答案，讓自陳不被圖示帶著走；之後的六格只是沿著連續光譜取樣，不是把人歸進某一型。<\/li><li>章魚下潛是第二件，還在做，預計 2026.09.16 前上線。<\/li>",
+    "imwall": "心像牆（<a href='https://othermode.ai/imagery'>othermode.ai/imagery<\/a>，v35，迭代中）對所有人下同一道指令，並在呈現任何畫面之前先收下答案，讓自陳不被圖示帶著走；之後的六格只是沿著連續光譜取樣，不是把人歸進某一型。",
     "imb2": "兩件都連同做法一起公開，不只給結論：",
     "imlist2": "<li>每一項陳述標示支持程度；<\/li><li>另闢一頁放未解問題，以及根本還沒有人研究過的空缺；<\/li><li>完整的版本迭代歷史；<\/li><li>以及一句邀請：發現錯誤請告訴我，條件是更正會公開。<\/li>",
     "imb3": "心像牆收下的是分布，不是盛行率估計：人以哪一種方式結束探針、讀題與想像各花多久、以及儀器當時是哪一種語言。來訪者是自己選來的，所以它能顯示答案的散布，永遠不能顯示哪一種有多普遍。（迭代中）",
@@ -1282,10 +1304,10 @@
     "now": "現在",
     "s_live": "上線中",
     "s_live2": "上線中",
-    "amb": "almost（<a href='https://othermode.ai/almost'>othermode.ai\/almost<\/a>）開了系列裡 AI 主題的一條線，是這條線的第一件：一句話被畫成地形，一列一個字；每個字的候選各自成山，站在坐上位子的那一個旁邊，很近，只是沒被看見。目前是示範版：頁上所有數字皆為合成，頁面本身也這樣標示（頁面為英文）。",
+    "amb": "almost（<a href='https://othermode.ai/almost'>othermode.ai\/almost<\/a>）開了系列裡 AI 主題的一條線，是這條線的第一件：一句話被畫成地形，一列一個字；每個字的候選各自成山，站在坐上位子的那一個旁邊，很近，只是沒被看見。已經接上 live：內建的三段示例是合成的，頁面上有標示；你可以自己打一個句子，一個字一個字看真模型長出山（頁面為英文）。",
     "amalt": "一句話的前兩個字畫成地形：候選各自成山，圈住坐上位子的那一個，虛線把位子連起來。",
-    "s_demo": "示範版上線",
-    "nowam": "almost，在 OtherMode，AI 系列的第一件：句子裡的每個字，都只有一個位子。一句話畫成地形，一列一個字，候選各自成山，圈住坐上位子的那一個。目前是示範版：頁上所有數字皆為合成，頁面本身也這樣標示；介面目前為英文。<a href='https://othermode.ai/almost' data-resolve>othermode.ai\/almost<\/a>",
+    "s_demo": "上線中",
+    "nowam": "almost，在 OtherMode，AI 系列的第一件：句子裡的每個字，都只有一個位子。一句話畫成地形，一列一個字，候選各自成山，圈住坐上位子的那一個。已經接上 live：內建三段示例是合成的；你可以自己打一個句子，真模型當場回答。介面目前為英文。<a href='https://othermode.ai/almost' data-resolve>othermode.ai\/almost<\/a>",
     "s_prep": "撰寫中",
     "now1": "LucidField：以 live A/B 比較進行，跨兩家供應商的四個模型、直接透過 API；進站時跑的是 Claude Sonnet 5，一輪做完可以換一個模型再跑。<a href='https://lucidfield.ai' data-resolve>lucidfield.ai<\/a>",
     "now2": "心像牆，在 OtherMode：一個關於心像的實驗，大約七分鐘，匿名，中英文皆可。<a href='https://othermode.ai/imagery?lang=zh' data-resolve>othermode.ai/imagery<\/a>",
